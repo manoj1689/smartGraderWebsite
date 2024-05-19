@@ -6,7 +6,7 @@ import buttonRoundedTickImage from '../../assets/home/rounded-tick-icon.png';
 
 const cardVariants = {
   offscreen: {
-    y: 300,
+    y: 150,
     opacity: 0,
   },
   onscreen: {

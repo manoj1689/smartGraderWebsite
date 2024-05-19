@@ -10,9 +10,9 @@ import Password from "./components/signIn/password/Password";
 import ProtectedRoute from "./services/ProtectedRoute";
 import Dashboard from "./components/dashboards/Dashboard";
 import SelectInterest from "./components/signUp/selectInterest/SelectInterest";
-import QuestionPage from "./components/dashboards/userDashBoard/QuestionPage/QuestionPage";
+import QuestionPage from "./components/dashboards/userDashBoard/QuestionPage";
 import InterviewScreen from "./pages/InterviewPage";
-import GenerateQuestionsPage from "./pages/GenerateQuestionsPage";
+import GenerateQuestionsPage from "./pages/GenerateQuestionsPage"
 import ResultPage from "./pages/ResultPage";
 
 function App() {
@@ -32,11 +32,16 @@ function App() {
           <Route path="/signIn/password" element={<Password />} />
           <Route path="/signIn/dashboard" element={<ProtectedRoute />}>
             <Route path="/signIn/dashboard" element={<Dashboard />} />
+
             <Route
               path="/signIn/dashboard/question/:id"
               element={<QuestionPage />}
             />
           </Route>
+          <Route path="/signIn/dashboard/generatequestion" element={<GenerateQuestionsPage />} />
+          <Route path="/signIn/dashboard/result" element={<ResultPage />} />
+          <Route path="/signIn/dashboard/interviewscreen" element={<InterviewScreen />} />
+
         </Routes>
       </BrowserRouter>
 

@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex flex-row justify-between items-center py-4">
         <div className="text-lg basis-1/4 md:basis-1/3 font-semibold">
           <Link to="/">
-            <img src={logoImage} alt="Smart Grader Logo" className="h-8" /> {/* Adjust the path to your logo */}
+            <img src={logoImage} alt="Smart Grader Logo" className="h-11" /> {/* Adjust the path to your logo */}
           </Link>
         </div>
         

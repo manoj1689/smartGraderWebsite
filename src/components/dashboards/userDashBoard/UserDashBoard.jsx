@@ -1,17 +1,23 @@
 import React ,{useState,useEffect} from 'react'
 import { Link,useNavigate } from 'react-router-dom' 
 import smartLogo from "../../../assets/images/smart-logo.png"
+import LineScoreCard from './LineScoreCard';
+import CircleScoreCard from './CircleScoreCard';
 function UserDashBoard(props) {
   const [cardsData, setCardsData] = useState([]);
 
   const navigate = useNavigate();
   const [activeItem, setActiveItem] = useState('Dashboard');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleItemClick = (item) => {
     setActiveItem(item);
   };
   
-  
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,8 +53,8 @@ function UserDashBoard(props) {
   };
 
   return (
-    <div className="px-4 py-4 flex flex-row">
-      <div className="flex flex-col px-10 py-5 bg-white border-r border-solid border-black border-opacity-10">
+    <div className="flex flex-col md:flex-row px-4 py-4">
+      <div className="flex flex-col w-full md:w-1/6 px-10 py-5 bg-white border-r border-solid border-black border-opacity-10">
         <div className="flex  mb-8">
           <Link to ="/signIn/dashboard">
           <img className='h-11' src={smartLogo} alt="smart Grader" />
@@ -135,6 +141,9 @@ function UserDashBoard(props) {
             />
             <div className="flex-auto">Quick Access</div>
           </div>
+          <button onClick={handleLogout} type="button" className="bg-blue-400 text-white px-4 py-2 mt-4 rounded-lg hover:bg-blue-500 transition duration-300">
+          Logout
+        </button>
           <div className="shrink-0 self-start mt-96 h-px border border-solid bg-black bg-opacity-10 border-black border-opacity-10" />
           <div
             className={`flex gap-2 mt-12 ml-4 text-base leading-4 whitespace-nowrap cursor-pointer transition duration-300 ${
@@ -164,12 +173,27 @@ function UserDashBoard(props) {
             />
             <div className="flex-auto my-auto">Help & Support</div>
           </div>
-        </div></div>
-    <div >
-    <div>Hello {props.individualData.name}</div>
-        <button onClick={handleLogout} type='button' className='bg-red-400'>Logout</button>
         </div>
-        <div className="flex flex-wrap gap-4 justify-center mt-10">
+        </div>
+    <div className='w-full  px-4 md:px-10 md:py-10 py-4'>
+    <div className="flex gap-5 justify-between max-md:flex-wrap">
+      <div className="flex gap-3.5 px-5 my-auto max-md:flex-wrap">
+        <div className="grow text-2xl font-medium leading-8 text-sky-500">
+          <span className="">Hello!</span>{" "}
+          <span className="text-sky-500">{props.individualData.name}</span>
+        </div>
+        <div className="flex-auto my-auto text-base font-light leading-4 text-neutral-500">
+          Here's the current status for today!
+        </div>
+      </div>
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/eadc73067cac4b04fb39f7dbe19b7fbe82b827d24b0a929bddaf5d0ef961a267?"
+        className="shrink-0 w-6 aspect-[0.7]"
+      />
+    </div>
+        
+        <div className="flex flex-wrap gap-4 px-10 py-10 mt-10">
   {cardsData.map((card) => (
     <div key={card.id} className="flex flex-col p-4 h-2/5 bg-white rounded-md border border-solid border-black border-opacity-10 shadow-md hover:shadow-lg hover:border-slate-800 transition duration-300 ease-in-out w-64 font-light text-neutral-500 cursor-pointer" >
       <div className="flex flex-col justify-center text-xs leading-6 whitespace-nowrap bg-sky-50 rounded-md">
@@ -254,6 +278,90 @@ function UserDashBoard(props) {
     </div>
   ))}
 </div>
+<div className="pt-5 pl-8 bg-white rounded-md border border-solid border-black border-opacity-10 max-md:pl-5">
+      <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+        <div className="flex flex-col w-[23%] max-md:ml-0 max-md:w-full">
+          <div className="flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 max-md:mt-10">
+            <div className="font-medium text-slate-800">
+              Set Your Own Questions{" "}
+            </div>
+            <div className="flex gap-2.5 mt-7">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/20d2a63875396311f4b50decc038227ca619b39c52f074c4464499cf9280e641?"
+                className="shrink-0 aspect-square w-[29px]"
+              />
+              <div className="flex-auto my-auto">
+                Create by Selecting Domain
+              </div>
+            </div>
+            <div className="flex gap-2.5 mt-1.5">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/20d2a63875396311f4b50decc038227ca619b39c52f074c4464499cf9280e641?"
+                className="shrink-0 aspect-square w-[29px]"
+              />
+              <div className="flex-auto my-auto">Create by Writing JD</div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col ml-5 w-[26%] max-md:ml-0 max-md:w-full">
+          <div className="flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 max-md:mt-10">
+            <div className="flex gap-2.5">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/20d2a63875396311f4b50decc038227ca619b39c52f074c4464499cf9280e641?"
+                className="shrink-0 aspect-square w-[29px]"
+              />
+              <div className="flex-auto my-auto">
+                Create by Resume Uploading
+              </div>
+            </div>
+            <div className="flex gap-2.5 mt-2">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/20d2a63875396311f4b50decc038227ca619b39c52f074c4464499cf9280e641?"
+                className="shrink-0 aspect-square w-[29px]"
+              />
+              <div className="flex-auto my-auto">
+                Create by Your Own Questions
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-5 max-md:flex-col max-md:gap-0 justify-center items-center">
+      <button onClick={()=>navigate('/signIn/dashboard/generatequestion')} type="button" className="bg-blue-400 w-40 text-white px-4 py-2 mt-4 rounded-sm hover:bg-blue-500 transition duration-300">
+        Lets Get Started
+      </button>
+    </div>
+        <div className="flex flex-col ml-5 w-[51%] max-md:ml-0 max-md:w-full">
+          <div className="z-10 max-md:mt-10 max-md:max-w-full">
+            <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+              <div className="flex flex-col ml-5 w-[65%] max-md:ml-0 max-md:w-full">
+                <img
+                  loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/37f489cd18518afab1c8e928e892f7821b4d5c6ff6b2ee2ac0065288bf6ffc97?"
+                  className="grow w-full aspect-[1.56]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="flex flex-col md:flex-row  max-md:flex-col max-md:gap-0">
+      
+      
+        <div className="w-full md:w-1/2 cursor-pointer"onClick={()=>navigate('/signIn/dashboard/result')} >
+          <LineScoreCard />
+        </div>
+        <div className="w-full md:w-1/2">
+          <CircleScoreCard />
+        </div>
+      </div>
+
+        </div>
+        
 
 
 

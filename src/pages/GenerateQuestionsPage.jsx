@@ -8,13 +8,31 @@ import ExamSettings from "../components/GenerateQuestions/ExamSettings";
 import axiosInstance from "../axiosInstance";
 import { FaSpinner, FaCheckCircle } from "react-icons/fa";
 import { MdErrorOutline } from "react-icons/md";
+import {useNavigate } from "react-router-dom";
 
 const GenerateQuestionsPage = () => {
+  const navigate=useNavigate()
   const [loading, setLoading] = useState(false);
   const [questionSource, setQuestionSource] = useState('');
   const [generatedQuestions, setGeneratedQuestions] = useState([]);
   const [examTiming, setExamTiming] = useState(60);
   const [error, setError] = useState('');
+  const [isOpen, setIsOpen] = useState(true);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleConfirm = () => {
+    // Add your confirm logic here
+    navigate('/signIn/dashboard/interviewscreen')
+    closeModal();
+  };
+
 
   const handleGenerateQuestions = async (data) => {
     setLoading(true);
@@ -131,6 +149,30 @@ const GenerateQuestionsPage = () => {
           >
             {loading ? <FaSpinner className="animate-spin mr-2" /> : <FaCheckCircle className="mr-2" />} Save Question Set
           </button>
+          {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div className="bg-white w-96 p-6 rounded-md">
+            <div className="text-xl font-bold mb-4">Question Generated Sucessfully</div>
+            <div className="text-gray-700 mb-4">
+            Do you want to start the interview assessment?
+            </div>
+            <div className="flex justify-around">
+              <button
+                onClick={closeModal}
+                className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md mr-2"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                start 
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
         </>
       )}
     </div>
