@@ -37,10 +37,11 @@ function App() {
               path="/signIn/dashboard/question/:id"
               element={<QuestionPage />}
             />
-          </Route>
-          <Route path="/signIn/dashboard/generatequestion" element={<GenerateQuestionsPage />} />
+              <Route path="/signIn/dashboard/generatequestion" element={<GenerateQuestionsPage />} />
           <Route path="/signIn/dashboard/result" element={<ResultPage />} />
           <Route path="/signIn/dashboard/interviewscreen" element={<InterviewScreen />} />
+          </Route>
+        
 
         </Routes>
       </BrowserRouter>
