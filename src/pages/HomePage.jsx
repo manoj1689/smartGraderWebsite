@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../components/home/Navbar';
 import Hero from '../components/home/Hero';
 import Features from '../components/home/Features';
 import Pricing from '../components/home/Pricing';
@@ -12,7 +11,6 @@ import PersonaSection from '../components/home/PersonaSection';
 const HomePage = () => {
   return (
     <div>
-      <Navbar />
       <Hero />
       <Features />
       <PersonaSection />
