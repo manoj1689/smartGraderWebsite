@@ -1,0 +1,114 @@
+body {
+  @apply bg-white text-gray-800;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  @apply flex items-center justify-between bg-white px-4 py-2 shadow-md;
+}
+
+.navbar a {
+  @apply text-gray-800 no-underline;
+}
+
+.navbar a:hover {
+  @apply text-blue-500;
+}
+
+.hero h1 {
+  @apply text-5xl font-bold;
+}
+
+.hero p {
+  @apply text-xl mt-4;
+}
+
+.hero button {
+  @apply bg-blue-500 text-white px-6 py-3 mt-6 rounded-full;
+}
+
+.hero button:hover {
+  @apply bg-blue-700;
+}
+
+.features {
+  @apply py-16 bg-gray-50;
+}
+
+.features .feature-item {
+  @apply flex items-center mb-12;
+}
+
+.features .feature-item img {
+  @apply h-16 w-16 mr-4;
+}
+
+.features .feature-item h3 {
+  @apply text-xl font-semibold mb-2;
+}
+
+.features .feature-item p {
+  @apply text-gray-600;
+}
+
+.pricing {
+  @apply py-16 bg-white;
+}
+
+.pricing .pricing-card {
+  @apply bg-gray-100 p-6 rounded-lg shadow-md text-center;
+}
+
+.pricing .pricing-card h3 {
+  @apply text-2xl font-bold mb-4;
+}
+
+.pricing .pricing-card p {
+  @apply text-gray-600 mb-6;
+}
+
+.pricing .pricing-card button {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-full;
+}
+
+.pricing .pricing-card button:hover {
+  @apply bg-blue-700;
+}
+
+.testimonials {
+  @apply py-16 bg-gray-50;
+}
+
+.testimonials .testimonial-item {
+  @apply text-center mb-12;
+}
+
+.testimonials .testimonial-item img {
+  @apply h-24 w-24 rounded-full mx-auto mb-4;
+}
+
+.testimonials .testimonial-item p {
+  @apply text-gray-600 italic;
+}
+
+.footer {
+  @apply bg-gray-800 text-white py-8;
+}
+
+.footer .footer-links {
+  @apply flex justify-center mb-4;
+}
+
+.footer .footer-links a {
+  @apply mx-2 text-white no-underline;
+}
+
+.footer .footer-links a:hover {
+  @apply text-blue-500;
+}
+
+.footer p {
+  @apply text-center text-gray-400;
+}
