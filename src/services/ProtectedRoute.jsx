@@ -4,7 +4,7 @@ import SideBar from './SideBar'
 function ProtectedRoute() {
     const auth=localStorage.getItem("loggedIn")
   return auth ? <>   <div className="flex min-h-screen">
-  <div className="w-[350px]">
+  <div  >
     <SideBar />
   </div>
   <div className="flex-grow">
