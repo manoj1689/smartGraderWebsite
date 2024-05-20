@@ -8,7 +8,7 @@ function EducationalDashBoard(props) {
     }
   return (
     <div>
-        <div>Hello {(props.educationalData.name)}</div>
+        <div>Hello  {(props.educationalData.name)}</div>
         <button onClick={handleLogout} type='button' className='bg-red-400'>Logout</button>
     </div>
   )

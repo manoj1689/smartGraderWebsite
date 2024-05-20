@@ -45,7 +45,9 @@ const SignIn = () => {
         const accessToken = responseData.access_token;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("loggedIn",true)
-        navigate("/signIn/dashboard"); 
+        navigate('/signUp/selectInterest',{state:{activeTab}})
+        
+       // navigate("/signIn/dashboard"); 
         // Handle successful sign-in, such as redirecting to another page
       } else {
         alert("Sign-in failed. Please check your credentials.");
