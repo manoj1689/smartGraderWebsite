@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useLocation,useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import smartLogo from "../../assets/images/smart-logo.png"
+import { FiArrowUpRight } from "react-icons/fi";
+import educationSticker from "../../assets/persons/education-sticker.png"
+import organisationSticker from "../../assets/persons/organisation-sticker.png"
+import individualSticker from "../../assets/persons/individul-sticker.png"
 const SignUp = () => {
   const navigate = useNavigate();
   const [isPressed, setIsPressed] = useState(false);
@@ -41,7 +45,7 @@ const SignUp = () => {
   
       if (response.ok) {
         // Account created successfully
-       // alert("Account created successfully!");
+        alert("A verification email has been sent. Please check your inbox and confirm it!");
       // navigate('/signUp/selectInterest',{state:{activeTab}})
        navigate('/signIn',{state:{activeTab}})
         // You can redirect the user to another page or perform any other action here
@@ -54,7 +58,7 @@ const SignUp = () => {
       alert("An error occurred while creating the account.");
     }
   };
-  
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -82,8 +86,8 @@ const SignUp = () => {
               <div className="flex gap-5 max-md:flex-wrap">
                 <img
                   loading="lazy"
-                  alt="x"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f2a3bb95b557667529e1799bade4aa16c1163b5562eac2ef0ee3315f24260670?"
+                  alt="individual"
+                 src={individualSticker}
                   className="shrink-0 self-start w-12 aspect-[0.94]"
                 />
                 <div className="flex flex-col">
@@ -101,8 +105,8 @@ const SignUp = () => {
               <div className="flex gap-5 max-md:flex-wrap">
                 <img
                   loading="lazy"
-                  alt="x"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/857369826d894bbb090fcbf80d186a2b33803a42d4a82b584e706a4ccd67f90c?"
+                  alt="organisation"
+                 src={organisationSticker}
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
@@ -119,8 +123,8 @@ const SignUp = () => {
               <div className="flex gap-5 max-md:flex-wrap">
                 <img
                   loading="lazy"
-                  alt="x"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e60a82cc2a2460c4e070453f9a1b2aad8a0a38d3ed980313177d151fa0049f3?"
+                  alt="educational"
+                 src={educationSticker}
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
@@ -235,6 +239,9 @@ const SignUp = () => {
               >
                 <div className="flex gap-2.5 px-px">
                   <span>Create an Account</span>
+                  <span>
+              <FiArrowUpRight size={20} />
+              </span>
                 </div>
               </button>
 

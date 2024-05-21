@@ -9,7 +9,7 @@ import CreateAccount from "./components/signUp/createAccount/CreateAccount";
 import Password from "./components/signIn/password/Password";
 import ProtectedRoute from "./services/ProtectedRoute";
 import Dashboard from "./components/dashboards/Dashboard";
-import SelectInterest from "./components/signUp/selectInterest/SelectInterest";
+import SelectInterest from "./components/signIn/selectInterest/SelectInterest";
 import QuestionPage from "./components/dashboards/userDashBoard/QuestionPage";
 import InterviewScreen from "./pages/InterviewPage";
 import GenerateQuestionsPage from "./pages/GenerateQuestionsPage"

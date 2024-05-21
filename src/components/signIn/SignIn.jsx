@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import { useLocation} from "react-router-dom";
-import { Link ,useNavigate } from "react-router-dom";
-import smartLogo from "../../assets/images/smart-logo.png"
+import React, { useState, useEffect } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import smartLogo from "../../assets/images/smart-logo.png";
+import educationSticker from "../../assets/persons/education-sticker.png"
+import organisationSticker from "../../assets/persons/organisation-sticker.png"
+import individualSticker from "../../assets/persons/individul-sticker.png"
+import socialIcon from '../../assets/images/social-icon.png'
+
 const SignIn = () => {
   const navigate = useNavigate();
   const [isPressed, setIsPressed] = useState(false);
@@ -13,12 +17,28 @@ const SignIn = () => {
   const handleMouseUp = () => {
     setIsPressed(false);
   };
+
   const location = useLocation();
   const { activeTab } = location.state || {};
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    agreedToTerms: false,
   });
+
+  useEffect(() => {
+    const rememberedEmail = localStorage.getItem("rememberedEmail");
+    const rememberedPassword = localStorage.getItem("rememberedPassword");
+    if (rememberedEmail && rememberedPassword) {
+      setFormData((prevData) => ({
+        ...prevData,
+        email: rememberedEmail,
+        password: rememberedPassword,
+        agreedToTerms: true,
+      }));
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,11 +64,17 @@ const SignIn = () => {
         const responseData = await response.json();
         const accessToken = responseData.access_token;
         localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("loggedIn",true)
-        navigate('/signUp/selectInterest',{state:{activeTab}})
+        localStorage.setItem("loggedIn", true);
         
-       // navigate("/signIn/dashboard"); 
-        // Handle successful sign-in, such as redirecting to another page
+        if (formData.agreedToTerms) {
+          localStorage.setItem("rememberedEmail", formData.email);
+          localStorage.setItem("rememberedPassword", formData.password);
+        } else {
+          localStorage.removeItem("rememberedEmail");
+          localStorage.removeItem("rememberedPassword");
+        }
+
+        navigate('/signUp/selectInterest', { state: { activeTab } });
       } else {
         alert("Sign-in failed. Please check your credentials.");
       }
@@ -57,7 +83,6 @@ const SignIn = () => {
       alert("An error occurred while signing in. Please try again later.");
     }
   };
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,17 +92,33 @@ const SignIn = () => {
     }));
   };
 
+  const handleCheckboxChange = (e) => {
+    const { checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      agreedToTerms: checked,
+    }));
+
+    if (checked) {
+      localStorage.setItem("rememberedEmail", formData.email);
+      localStorage.setItem("rememberedPassword", formData.password);
+    } else {
+      localStorage.removeItem("rememberedEmail");
+      localStorage.removeItem("rememberedPassword");
+    }
+  };
+
   return (
     <>
       <div className="container mx-auto h-screen px-4 py-4 flex flex-col md:flex-row">
-        <div className="w-full md:w-1/2  flex justify-center items-center">
-          {activeTab !== "organization" && activeTab !== "educational" &&  (
+        <div className="w-full md:w-1/2 flex justify-center items-center">
+          {activeTab !== "organization" && activeTab !== "educational" && (
             <div className="flex flex-col justify-center px-8 py-7 mt-8 bg-white rounded-md">
               <div className="flex gap-5 max-md:flex-wrap">
                 <img
                   loading="lazy"
-                  alt="x"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/f2a3bb95b557667529e1799bade4aa16c1163b5562eac2ef0ee3315f24260670?"
+                  alt="individual"
+                 src={individualSticker}
                   className="shrink-0 self-start w-12 aspect-[0.94]"
                 />
                 <div className="flex flex-col">
@@ -95,8 +136,8 @@ const SignIn = () => {
               <div className="flex gap-5 max-md:flex-wrap">
                 <img
                   loading="lazy"
-                  alt="x"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/857369826d894bbb090fcbf80d186a2b33803a42d4a82b584e706a4ccd67f90c?"
+                  alt="organisation"
+                  src={organisationSticker}
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
@@ -113,8 +154,8 @@ const SignIn = () => {
               <div className="flex gap-5 max-md:flex-wrap">
                 <img
                   loading="lazy"
-                  alt="x"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e60a82cc2a2460c4e070453f9a1b2aad8a0a38d3ed980313177d151fa0049f3?"
+                  alt="eductional"
+                 src={educationSticker}
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
@@ -140,7 +181,7 @@ const SignIn = () => {
                 alt="smart Grader"
               />
             </Link>
-            {activeTab ==="individual" &&(
+            {activeTab === "individual" && (
               <div className="self-center mt-5 text-2xl text-slate-800">
                 Log In as Candidate
               </div>
@@ -152,11 +193,11 @@ const SignIn = () => {
             )}
             {activeTab === "educational" && (
               <div className="self-center mt-5 text-2xl text-slate-800">
-               Log In as Student
+                Log In as Student
               </div>
             )}
             <form onSubmit={handleSubmit}>
-            <div>
+              <div>
                 <input
                   type="email"
                   name="email"
@@ -165,6 +206,7 @@ const SignIn = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className="justify-center items-start p-5 mt-5 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10"
+                  autoFocus={localStorage.getItem("rememberedEmail") === null}
                 />
               </div>
 
@@ -180,24 +222,18 @@ const SignIn = () => {
                 />
               </div>
 
-              <div className="flex flex-row justify-between gap-3 mt-6 leading-5  max-md:flex-wrap">
-                <div className="flex flex-row gap-3 ">
+              <div className="flex flex-row justify-between gap-3 mt-6 leading-5 max-md:flex-wrap">
+                <div className="flex flex-row gap-3">
                   <input
                     type="checkbox"
                     name="agreedToTerms"
                     checked={formData.agreedToTerms}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        agreedToTerms: e.target.checked,
-                      })
-                    }
+                    onChange={handleCheckboxChange}
                     className="shrink-0 self-start rounded-md border border-solid border-neutral-500 h-[18px] w-[18px]"
                   />
-                  <div className="text-gray-600 ">Remember Me </div>
+                  <div className="text-gray-600">Remember Me </div>
                 </div>
                 <Link to='password'><div className="text-cyan-600">Forget Password?</div></Link>
-              
               </div>
               <button
                 className={`flex justify-center items-center px-4 py-5 mt-8 text-white bg-sky-500 rounded-md border border-sky-500 border-solid w-full ${
@@ -208,7 +244,7 @@ const SignIn = () => {
                 type="submit"
               >
                 <div className="flex gap-2.5 px-px">
-                  <span>Create an Account</span>
+                  <span>Login</span>
                 </div>
               </button>
 
@@ -216,25 +252,23 @@ const SignIn = () => {
                 <div>
                   <span className="font-light text-gray-600">Don't have an account?</span>{" "}
                   <br />
-                
-                    <div className="text-cyan-600 cursor-pointer" onClick={()=>navigate("/createAccount")}>Signup</div>
-                 
+                  <div className="text-cyan-600 cursor-pointer" onClick={() => navigate("/createAccount")}>Signup</div>
                 </div>
               </div>
             </form>
           </div>
-          <div className="flex gap-5 px-5 mt-10 pt-20 md:mt-20 md:pt-40 text-sm font-light leading-5 justify-center  text-center text-neutral-500 ">
-      <div className="flex gap-5">Legal information </div>
-      <div className="flex ">
-        <div className="flex gap-5 ">Help Resources</div> 
-        <img
-          loading="lazy"
-          alt=""
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/88a0e7a6410adfd197105689cc2d240f8ae2219d2991fd8544613570b57adea6?"
-          className="shrink-0 mx-5 aspect-[4.35] w-[93px]"
-        />
-      </div>
-    </div>
+          <div className="flex gap-5 px-5 mt-10 pt-20 md:mt-20 md:pt-40 text-sm font-light leading-5 justify-center text-center text-neutral-500">
+            <div className="flex gap-5">Legal information</div>
+            <div className="flex">
+              <div className="flex gap-5">Help Resources</div>
+              <img
+                loading="lazy"
+                alt="socialIcon"
+               src={socialIcon}
+                className="shrink-0 mx-5 aspect-[4.35] w-[93px]"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -242,3 +276,4 @@ const SignIn = () => {
 };
 
 export default SignIn;
+

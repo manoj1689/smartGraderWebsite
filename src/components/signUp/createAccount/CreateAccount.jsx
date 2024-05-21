@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FiArrowUpRight } from "react-icons/fi";
 import smartLogo from "../../../assets/images/smart-logo.png"
 import individualPerson from "../../../assets/images/individual-person.png"
 import organizationPerson from "../../../assets/images/organization-person.png"
 import educationalPerson from "../../../assets/images/educational-person.png"
+import educationSticker from "../../../assets/persons/education-sticker.png"
+import organisationSticker from "../../../assets/persons/organisation-sticker.png"
+import individualSticker from "../../../assets/persons/individul-sticker.png"
 function CreateAccount() {
   const navigate = useNavigate();
   const [isPressed, setIsPressed] = useState(false);
@@ -52,8 +56,8 @@ function CreateAccount() {
             <div className="flex gap-5 max-md:flex-wrap">
               <img
                 loading="lazy"
-                alt="x"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/f2a3bb95b557667529e1799bade4aa16c1163b5562eac2ef0ee3315f24260670?"
+                alt="individualSticker"
+                src={individualSticker}
                 className="shrink-0 self-start w-12 aspect-[0.94]"
               />
               <div className="flex flex-col">
@@ -72,8 +76,8 @@ function CreateAccount() {
             <div className="flex gap-5 max-md:flex-wrap">
               <img
                 loading="lazy"
-                alt="x"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/857369826d894bbb090fcbf80d186a2b33803a42d4a82b584e706a4ccd67f90c?"
+                alt="organisationSticker"
+                src={organisationSticker}
                 className="shrink-0 self-start w-12 aspect-square"
               />
               <div className="flex flex-col">
@@ -91,8 +95,8 @@ function CreateAccount() {
             <div className="flex gap-5 max-md:flex-wrap">
               <img
                 loading="lazy"
-                alt="x"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e60a82cc2a2460c4e070453f9a1b2aad8a0a38d3ed980313177d151fa0049f3?"
+                alt="educationSticker"
+                src={educationSticker}
                 className="shrink-0 self-start w-12 aspect-square"
               />
               <div className="flex flex-col">
@@ -116,12 +120,10 @@ function CreateAccount() {
           >
             <div className="flex gap-2.5 px-px">
               <span>Create an Account</span>
-              <img
-                loading="lazy"
-                alt="x"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/1ed497768b332ec6a18438d602c8ba173c3be32b8dfe35e408b12ed9e6dc49a2?"
-                className="shrink-0 my-auto w-2 border-2 border-white border-solid aspect-square stroke-[2px] stroke-white"
-              />
+              <span>
+              <FiArrowUpRight size={20} />
+              </span>
+            
             </div>
           </button>
         </div>

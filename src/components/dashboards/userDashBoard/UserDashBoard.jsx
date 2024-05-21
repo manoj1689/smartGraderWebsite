@@ -1,8 +1,13 @@
 import React ,{useState,useEffect} from 'react'
 import { Link,useNavigate } from 'react-router-dom' 
 import smartLogo from "../../../assets/images/smart-logo.png"
+import codingDev from "../../../assets/individual/codingdeveloper.png"
+import star from "../../../assets/individual/Star.png"
+import graderLogo from '../../../assets/individual/graderIcon.png'
 import LineScoreCard from './LineScoreCard';
 import CircleScoreCard from './CircleScoreCard';
+import { TfiBell } from "react-icons/tfi";
+import { FiArrowUpRight } from "react-icons/fi";
 function UserDashBoard(props) {
   const [cardsData, setCardsData] = useState([]);
 
@@ -63,11 +68,7 @@ function UserDashBoard(props) {
           Here's the current status for today!
         </div>
       </div>
-      <img
-        loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/eadc73067cac4b04fb39f7dbe19b7fbe82b827d24b0a929bddaf5d0ef961a267?"
-        className="shrink-0 w-6 aspect-[0.7]"
-      />
+      < TfiBell size={30} />
     </div>
         
         <div className="flex flex-wrap gap-4 px-10 py-10 mt-10">
@@ -83,28 +84,28 @@ function UserDashBoard(props) {
           />
           <img
             loading="lazy"
-            alt=""
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/6d0c594958ca1e635d880ffc9427a70b6140c14614bd200826b4ee9ee6b04b8b?"
+            alt="Coding"
+            src={codingDev}
             className="self-end aspect-square w-12"
           />
           <div className="flex relative gap-1 py-1.5 mt-3 bg-white rounded-sm shadow-sm">
             <img
               loading="lazy"
-              alt=""
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/48ac4a8b86895860941586dccd8bd2679810c703a33b1e67f2173d1016138428?"
-              className="shrink-0 aspect-[1.09] fill-amber-400 w-[13px]"
+              alt="star"
+              src={star}
+              className="shrink-0 aspect-[1.09] fill-amber-400 w-[17px] h-[17px]"
             />
             <div className="flex-auto">{card.rating}/5</div>
           </div>
         </div>
       </div>
       <div className="flex gap-2 justify-between mt-4">
-        <div className="flex gap-1 text-sm leading-6">
+        <div className="flex gap-1 text-sm leading-4">
           <img
             loading="lazy"
-            alt=""
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/67afd907ddbad73a613c755b6abb717256487023921b5497d85b408ca1ca26d7?"
-            className="shrink-0 aspect-[1.27] w-[20px]"
+            alt="grader"
+            src={graderLogo}
+            className="shrink-0 aspect-[1.27] w-[30px]"
           />
           <div className="my-auto">{card.title}</div>
         </div>
@@ -143,13 +144,8 @@ function UserDashBoard(props) {
           handleCardClick(card.id);
         }}
       >
-        <div>Take A Test</div>
-        <img
-          loading="lazy"
-          alt=""
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/1ed497768b332ec6a18438d602c8ba173c3be32b8dfe35e408b12ed9e6dc49a2?"
-          className="shrink-0 my-auto w-2 border-2 border-white border-solid aspect-square"
-        />
+        <div className='flex flex-row gap-2'><span>Take a Test</span><span ><FiArrowUpRight size={15} /></span></div>
+       
       </button>
      
     </div>

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 function CircleScoreCard() {
   const [scores, setScores] = useState({
-    technicalSkills: 65,
-    softSkills: 20,
-    commSkills: 15,
+    technicalSkills: 35,
+    softSkills: 55,
+    commSkills: 10,
   });
 
   const handleChange = (e) => {
