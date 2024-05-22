@@ -20,7 +20,7 @@ function SelectInterest() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get('/categories/subcat?category_id=1');
+        const response = await axiosInstance.get('/categories/all');
         console.log('Response data:', response.data.data);
         setCategories(response.data.data);
       } catch (error) {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import smartLogo from "../../../assets/images/smart-logo.png";
 import codingDev from "../../../assets/individual/codingdeveloper.png";
 import star from "../../../assets/individual/Star.png";
 import graderLogo from "../../../assets/individual/graderIcon.png";
@@ -12,20 +11,78 @@ import { CiClock2 } from "react-icons/ci";
 import { IoHelpCircleOutline } from "react-icons/io5";
 import { IoCheckmark } from "react-icons/io5";
 import womanCheck from "../../../assets/individual/woman-plan-todo-list.png";
+import axiosInstance from "../../../axiosInstance";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 function UserDashBoard(props) {
-  const [cardsData, setCardsData] = useState([]);
-
   const navigate = useNavigate();
-  const [activeItem, setActiveItem] = useState("Dashboard");
+  const [cardsData, setCardsData] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [seachList,setSearchList]=useState()
+  const [query, setQuery] = useState('');
+ 
+  useEffect(() => {
+    const fetchSearch = async () => {
+      try {
+        const response = await fetch('/categories/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query }), // Set the query dynamically
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch categories');
+        }
+        const data = await response.json();
+        setSearchList(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
 
-  const handleItemClick = (item) => {
-    setActiveItem(item);
+    fetchSearch();
+  }, [query]); // Fetch categories whenever the query changes
+
+console.log("query",query)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get('/categories/subcat?category_id=1');
+        console.log('Response data:', response.data.data);
+        setCategories(response.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const toggleCategory = (category) => {
+    if (selectedCategories.includes(category.name)) {
+      setSelectedCategories(selectedCategories.filter((c) => c !== category.name));
+    } else {
+      setSelectedCategories([...selectedCategories, category.name]);
+    }
+  };
+ console.log("categories Data top Bar",selectedCategories)
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+    }
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const handleNext = () => {
+    if (currentIndex < categories.length - 4) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }
   };
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,32 +97,69 @@ function UserDashBoard(props) {
             },
           }
         );
-
+  
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-
-        const data = await response.json();
-        setCardsData(data.data);
-        console.log("cardsData",data.data)
+  
+        const responseData = await response.json();
+  
+        // Filter the data based on selected categories
+        let filteredData = responseData.data;
+        if (selectedCategories.length > 0) {
+          filteredData = responseData.data.filter((item) =>
+            selectedCategories.includes(item.name)
+          );
+        }
+  
+        setCardsData(filteredData);
+        console.log("cardsData", filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchData();
-  }, []);
-
+  }, [selectedCategories]);
+  
   const handleCardClick = (id) => {
     navigate(`/signIn/dashboard/question/${id}`);
   };
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results)
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: 'block', textAlign: 'left' }}>id: {item.name}</span>
+        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.id}</span>
+      </>
+    )
+  }
 
   return (
     <div className=" w-full px-4 py-4">
       <div className="  px-4 md:px-10 md:py-10 py-4">
-        <div className="flex gap-5 justify-between max-md:flex-wrap">
-          <div className="flex gap-3.5 px-5 my-auto max-md:flex-wrap">
-            <div className="grow text-2xl font-medium leading-8 text-sky-500">
+        <div className="flex gap-5 my-10 justify-between max-md:flex-wrap">
+          <div className="flex gap-3.5 px-5  max-md:flex-wrap">
+            <div className="grow  text-2xl font-medium leading-8 text-sky-500">
               <span className="">Hello!</span>{" "}
               <span className="text-sky-500">{props.individualData.name}</span>
             </div>
@@ -75,6 +169,45 @@ function UserDashBoard(props) {
           </div>
           <TfiBell size={30} />
         </div>
+        <div className="flex  justify-between items-center px-5 text-xs leading-4 text-neutral-500 max-md:flex-wrap">
+        <div className="flex gap-5  flex-row justify-between items-center">
+        <FaChevronLeft onClick={handlePrevious} />
+        <div className="flex gap-2 self-stretch my-auto font-light max-md:flex-wrap">
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.slice(currentIndex, currentIndex + 4).map((category) => (
+              <div
+                key={category.id}
+                onClick={() => toggleCategory(category)}
+                className={`justify-center text-sm px-8 py-2 border border-solid border-neutral-500 rounded-[30px] max-md:px-5 cursor-pointer ${
+                  selectedCategories.includes(category.name)
+                    ? "text-sky-500 bg-sky-50 border-sky-500"
+                    : "border-neutral-500"
+                }`}
+              >
+                {category.name}
+              </div>
+            ))}
+          </div>
+        </div>
+        <FaChevronRight onClick={handleNext} />
+      </div>
+   
+      <div className="flex gap-5 self-stretch max-md:flex-wrap max-md:max-w-full">
+      <div style={{ width: 400 }}>
+          <ReactSearchAutocomplete
+            items={seachList}
+            onSearch={handleOnSearch}
+            onHover={handleOnHover}
+            onSelect={handleOnSelect}
+            onFocus={handleOnFocus}
+            autoFocus
+            formatResult={formatResult}
+            onInputChange={(input) => setQuery(input)}
+          />
+        </div>
+      
+      </div>
+    </div>
 
         <div className="flex flex-wrap gap-4 px-10 py-10 mt-10">
           {cardsData.map((card) => (
