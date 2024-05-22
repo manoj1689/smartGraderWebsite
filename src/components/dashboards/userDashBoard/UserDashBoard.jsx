@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import codingDev from "../../../assets/individual/codingdeveloper.png";
 import star from "../../../assets/individual/Star.png";
@@ -21,33 +21,41 @@ function UserDashBoard(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [seachList,setSearchList]=useState()
+  const [seachList,setSearchList]=useState([])
   const [query, setQuery] = useState('');
- 
-  useEffect(() => {
-    const fetchSearch = async () => {
+  const [searchResult,setSearchResult]=useState([])
+  const prevQueryRef = useRef('');
+  const fetchSearch = async (searchTerm) => {
+    if (searchTerm) {
       try {
-        const response = await fetch('/categories/search', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ query }), // Set the query dynamically
-        });
+        console.log('Query:', searchTerm); // Log the query before making the GET request
+        const response = await fetch(
+          `http://34.131.249.177:8000/categories/search?term=${searchTerm}`, // Use searchTerm in the API call
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch categories');
         }
         const data = await response.json();
-        setSearchList(data);
+        setSearchList(data.data); // Update the searchList with the fetched data
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
-    };
+    }
+  };
 
-    fetchSearch();
-  }, [query]); // Fetch categories whenever the query changes
+  useEffect(() => {
+    if (query !== prevQueryRef.current) {
+      prevQueryRef.current = query; // Update the previous query ref
+      fetchSearch(query); // Fetch data for the new query
+    }
+  }, [query]);
 
-console.log("query",query)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -69,7 +77,7 @@ console.log("query",query)
       setSelectedCategories([...selectedCategories, category.name]);
     }
   };
- console.log("categories Data top Bar",selectedCategories)
+//  console.log("categories Data top Bar",selectedCategories)
   const handlePrevious = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
@@ -113,7 +121,7 @@ console.log("query",query)
         }
   
         setCardsData(filteredData);
-        console.log("cardsData", filteredData);
+      
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -126,9 +134,9 @@ console.log("query",query)
     navigate(`/signIn/dashboard/question/${id}`);
   };
   const handleOnSearch = (string, results) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    console.log(string, results)
+    setQuery(string); // Set the query state with the searched string
+   
+
   }
 
   const handleOnHover = (result) => {
@@ -148,8 +156,8 @@ console.log("query",query)
   const formatResult = (item) => {
     return (
       <>
-        <span style={{ display: 'block', textAlign: 'left' }}>id: {item.name}</span>
-        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.id}</span>
+       {/*<span style={{ display: 'block', textAlign: 'left' }}>id: {item.name}</span> */}
+        <span style={{ display: 'block', textAlign: 'left', cursor:'pointer'}}>{item.name}</span>
       </>
     )
   }
@@ -202,7 +210,8 @@ console.log("query",query)
             onFocus={handleOnFocus}
             autoFocus
             formatResult={formatResult}
-            onInputChange={(input) => setQuery(input)}
+            styling={ {border: "1.5px solid #C0C0C0",
+             borderRadius: "5px"}}
           />
         </div>
       
