@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { MdOutlineCreditScore } from "react-icons/md";
+import CircleScore from "../../../assets/individual/circleScore.png"
 
 function CircleScoreCard() {
   const [scores, setScores] = useState({
@@ -21,17 +23,15 @@ function CircleScoreCard() {
         <div className="flex flex-col w-[67%] max-md:ml-0 max-md:w-full">
           <div className="flex flex-col text-lg font-medium leading-6 text-slate-800 max-md:mt-10">
             <div className="flex gap-2.5 self-start ml-11 max-md:ml-2.5">
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/08727c6676285b6db8684addac365cf99a2ca9a048727fc8bd9872e69f27ebac?"
-                className="shrink-0 aspect-square w-[25px]"
-              />
+            <MdOutlineCreditScore size={24} color="#01AFF4"/>
               <div className="flex-auto my-auto">Areas to Improve</div>
             </div>
             <img
               loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/ee0b2bce01b38b1f9bc7c0b5b7e11eb1e19d799748890bf49aed00a0df8278c6?"
-              className="mt-1 w-full aspect-square"
+              src={CircleScore}
+              width={350}
+              height={350}
+              className="mb-1"
             />
           </div>
         </div>
