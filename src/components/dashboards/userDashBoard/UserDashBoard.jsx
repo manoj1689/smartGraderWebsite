@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../../axiosInstance";
 import codingDev from "../../../assets/individual/codingdeveloper.png";
 import star from "../../../assets/individual/Star.png";
 import graderLogo from "../../../assets/individual/graderIcon.png";
+import womanCheck from "../../../assets/individual/woman-plan-todo-list.png";
 import LineScoreCard from "./LineScoreCard";
 import CircleScoreCard from "./CircleScoreCard";
 import { TfiBell } from "react-icons/tfi";
@@ -10,51 +12,32 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { CiClock2 } from "react-icons/ci";
 import { IoHelpCircleOutline } from "react-icons/io5";
 import { IoCheckmark } from "react-icons/io5";
-import womanCheck from "../../../assets/individual/woman-plan-todo-list.png";
-import axiosInstance from "../../../axiosInstance";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+
+
 function UserDashBoard(props) {
   const navigate = useNavigate();
   const [cardsData, setCardsData] = useState([]);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [seachList,setSearchList]=useState([])
   const [query, setQuery] = useState('');
-  const [searchResult,setSearchResult]=useState([])
   const prevQueryRef = useRef('');
+ 
+ 
   const fetchSearch = async (searchTerm) => {
     if (searchTerm) {
       try {
         console.log('Query:', searchTerm); // Log the query before making the GET request
-        const response = await fetch(
-          `http://34.131.249.177:8000/categories/search?term=${searchTerm}`, // Use searchTerm in the API call
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error('Failed to fetch categories');
-        }
-        const data = await response.json();
-        setSearchList(data.data); // Update the searchList with the fetched data
+        const response = await axiosInstance.get(`/categories/search?term=${searchTerm}`);
+        setSearchList(response.data.data); // Update the searchList with the fetched data
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
     }
   };
-
-  useEffect(() => {
-    if (query !== prevQueryRef.current) {
-      prevQueryRef.current = query; // Update the previous query ref
-      fetchSearch(query); // Fetch data for the new query
-    }
-  }, [query]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,7 +51,35 @@ function UserDashBoard(props) {
     };
 
     fetchData();
-  }, []);
+
+    const fetchCardData = async () => {
+      try {
+        const response = await axiosInstance.get('/sets/all?sub_category_id=10');
+        const responseData = response.data;
+
+        // Filter the data based on selected categories
+        let filteredData = responseData.data;
+        if (selectedCategories.length > 0) {
+          filteredData = responseData.data.filter((item) =>
+            selectedCategories.includes(item.name)
+          );
+        }
+
+        setCardsData(filteredData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchCardData();
+
+    if (query !== prevQueryRef.current) {
+      prevQueryRef.current = query; // Update the previous query ref
+      fetchSearch(query); // Fetch data for the new query
+    }
+
+  }, [query, selectedCategories]);
+ 
 
   const toggleCategory = (category) => {
     if (selectedCategories.includes(category.name)) {
@@ -90,45 +101,6 @@ function UserDashBoard(props) {
     }
   };
 
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "http://34.131.249.177:8000/sets/all?sub_category_id=10",
-          {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-              // Add your token header here if required
-            },
-          }
-        );
-  
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-  
-        const responseData = await response.json();
-  
-        // Filter the data based on selected categories
-        let filteredData = responseData.data;
-        if (selectedCategories.length > 0) {
-          filteredData = responseData.data.filter((item) =>
-            selectedCategories.includes(item.name)
-          );
-        }
-  
-        setCardsData(filteredData);
-      
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-  
-    fetchData();
-  }, [selectedCategories]);
   
   const handleCardClick = (id) => {
     navigate(`/signIn/dashboard/question/${id}`);

@@ -24,6 +24,20 @@ export default {
       boxShadow: {
         shadow: "var(--shadow)",
       },
+      fontFamily: {
+        spline: ["Spline Sans", "sans-serif"]
+      
+      },
+      keyframes: {
+        colorChange: {
+          '0%': { backgroundPosition: '0% 0%' },
+          '100%': { backgroundPosition: '100% 0%' },
+        },
+      },
+      animation: {
+        colorChange: 'colorChange 1s forwards',
+      },
+      
     },
   },
   plugins: [],

@@ -24,7 +24,7 @@ function App() {
         </HideNav>
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage/>} />
           <Route path="signIn" element={<SignIn />} />
           <Route path="signUp" element={<SignUp />} />
           <Route path="/signUp/selectInterest" element={<SelectInterest />} />

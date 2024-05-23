@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { FaMicrophoneAlt ,FaMicrophoneAltSlash } from "react-icons/fa";
 
 const SpeechToText = ({ onTranscriptUpdate, isRecording, onRecordingChange }) => {
   const [isListening, setIsListening] = useState(false);
@@ -71,14 +72,15 @@ const SpeechToText = ({ onTranscriptUpdate, isRecording, onRecordingChange }) =>
   }
 
   return (
-    <div className="flex flex-col items-center p-4 bg-white shadow-lg rounded-lg">
-      <button
+    <div className="flex flex-col items-start p-4 bg-white shadow-lg rounded-lg">
+      <div
         onClick={toggleListening}
-        className={`px-4 py-2 rounded-lg font-semibold text-white ${
-          isListening ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
+        className={`flex items-center px-4 py-2 rounded-lg font-semibold text-white ${
+          isListening ? 'text-red-500 hover:text-red-600' : 'text-green-500 hover:text-green-700'
         }`}>
+        {isListening ? <FaMicrophoneAltSlash size={25} className="mr-2" /> : <FaMicrophoneAlt size={25} className="mr-2" />}
         {isListening ? 'Stop Recording' : 'Start Recording'}
-      </button>
+      </div>
     </div>
   );
 };

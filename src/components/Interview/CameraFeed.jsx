@@ -1,118 +1,109 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
+import * as faceapi from 'face-api.js';
+import { toast } from 'react-toastify';
+
+const MODEL_URL = '/models';
+
+const loadModels = async () => {
+    try {
+        await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+        await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+        await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL);
+        await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL);
+        console.log('Models loaded');
+    } catch (error) {
+        console.error('Error loading models:', error);
+    }
+};
+
+const detectFaces = async (videoElement) => {
+    if (!videoElement) return [];
+    try {
+        return await faceapi.detectAllFaces(videoElement, new faceapi.TinyFaceDetectorOptions())
+            .withFaceLandmarks()
+            .withFaceExpressions();
+    } catch (error) {
+        console.error('Error detecting faces:', error);
+        return [];
+    }
+};
 
 const CameraFeed = ({ onFacesDetected }) => {
     const videoRef = useRef(null);
+    const canvasRef = useRef(null);
+    const intervalIdRef = useRef(null);
+    const noFaceTimeoutRef = useRef(null);
+    const multipleFaceTimeoutRef = useRef(null);
+
+    const handleVideoPlay = useCallback(() => {
+        intervalIdRef.current = setInterval(async () => {
+            if (videoRef.current && canvasRef.current) {
+                const detections = await detectFaces(videoRef.current);
+                console.log('Detections:', detections);
+
+                const faceVerified = detections.length > 0;
+                const multiplePeopleDetected = detections.length > 1;
+                console.log(`Face Verified: ${faceVerified}, Multiple People Detected: ${multiplePeopleDetected}`);
+
+                if (!faceVerified && !noFaceTimeoutRef.current) {
+                    noFaceTimeoutRef.current = setTimeout(() => {
+                        console.log('No face detected for more than 10 seconds.');
+                        toast.warn('No face detected for more than 10 seconds.');
+                    }, 10000);
+                } else if (faceVerified && noFaceTimeoutRef.current) {
+                    clearTimeout(noFaceTimeoutRef.current);
+                    noFaceTimeoutRef.current = null;
+                }
+
+                if (multiplePeopleDetected && !multipleFaceTimeoutRef.current) {
+                    multipleFaceTimeoutRef.current = setTimeout(() => {
+                        console.log('Multiple faces detected for more than 10 seconds.');
+                        toast.warn('Multiple faces detected for more than 10 seconds.');
+                    }, 10000);
+                } else if (!multiplePeopleDetected && multipleFaceTimeoutRef.current) {
+                    clearTimeout(multipleFaceTimeoutRef.current);
+                    multipleFaceTimeoutRef.current = null;
+                }
+            }
+        }, 100);
+    }, [onFacesDetected]);
 
     useEffect(() => {
-        async function enableStream() {
+        const startVideo = async () => {
             try {
-                console.log('Requesting camera access...');
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                console.log('Camera access granted.');
-                if (videoRef.current) {
-                    videoRef.current.srcObject = stream;
-                    console.log('Camera stream set to video.');
-                } else {
-                    console.error('Video ref is not available.');
-                }
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                videoRef.current.srcObject = stream;
+                console.log('Video stream started');
+                videoRef.current.onplay = handleVideoPlay;
             } catch (err) {
-                console.error('Error accessing the camera:', err);
-            }
-        }
-
-        enableStream();
-
-        if (videoRef.current) {
-            videoRef.current.onloadedmetadata = () => {
-                console.log('Camera feed metadata loaded, playing video...');
-                videoRef.current.play()
-                    .then(() => {
-                        console.log('Video started playing.');
-                        // Here you can start detecting faces as video is now playing
-                        // Implement the face detection logic here or in another effect
-                    })
-                    .catch(error => {
-                        console.error('Error attempting to play video:', error);
-                    });
-            };
-        }
-
-        return () => {
-            if (videoRef.current && videoRef.current.srcObject) {
-                console.log('Stopping camera feed...');
-                videoRef.current.srcObject.getTracks().forEach(track => {
-                    track.stop();
-                    console.log('Camera feed stopped.');
-                });
+                console.error('Error accessing webcam and microphone:', err);
             }
         };
-    }, []);
 
-    // You can include additional logic or useEffect here for face detection using the videoRef
-    // ...
+        const loadAndStart = async () => {
+            await loadModels();
+            await startVideo();
+        };
+
+        loadAndStart();
+
+        return () => {
+            if (intervalIdRef.current) clearInterval(intervalIdRef.current);
+            if (noFaceTimeoutRef.current) clearTimeout(noFaceTimeoutRef.current);
+            if (multipleFaceTimeoutRef.current) clearTimeout(multipleFaceTimeoutRef.current);
+            if (videoRef.current && videoRef.current.srcObject) {
+                videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+                console.log('Video stream stopped');
+            }
+        };
+    }, [handleVideoPlay]);
 
     return (
         <div>
-            <video ref={videoRef} autoPlay muted id="video-feed" style={{ width: '100%' }} />
+            <video ref={videoRef} autoPlay muted style={{ width: '100%' ,borderRadius:'1%'}} />
+            <canvas ref={canvasRef} style={{ position: 'absolute' }} />
         </div>
     );
 };
 
 export default CameraFeed;
-
-
-
-
-
-// // CameraFeed.jsx
-// import React, { useState, useEffect, useRef } from 'react';
-
-// const CameraFeed = () => {
-//   const [hasPermission, setHasPermission] = useState(false);
-//   const [error, setError] = useState('');
-//   const videoRef = useRef(null);
-
-//   useEffect(() => {
-//     async function getMedia() {
-//       try {
-//         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-//         if (videoRef.current) {
-//           videoRef.current.srcObject = stream;
-//         }
-//         setHasPermission(true);
-//       } catch (err) {
-//         setError('Camera access was denied. Please allow camera access and refresh the page.');
-//         setHasPermission(false);
-//       }
-//     }
-
-//     // Check for permissions first
-//     navigator.permissions.query({ name: 'camera' })
-//       .then(permission => {
-//         if (permission.state === 'granted') {
-//           getMedia();
-//         } else if (permission.state === 'prompt') {
-//           getMedia(); // Will prompt the user
-//         } else {
-//           setError('Camera access is not allowed. Please allow camera access and refresh the page.');
-//           setHasPermission(false);
-//         }
-//       });
-
-//     // Cleanup the stream on unmount
-//     return () => {
-//       if (videoRef.current && videoRef.current.srcObject) {
-//         videoRef.current.srcObject.getTracks().forEach(track => track.stop());
-//       }
-//     };
-//   }, []);
-
-//   return (
-//     <div className="camera-feed">
-//       {!hasPermission && <div className="camera-error">{error}</div>}
-//       {hasPermission && <video ref={videoRef} autoPlay playsInline />}
-//     </div>
-//   );
-// };
-
-// export default CameraFeed;
