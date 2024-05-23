@@ -65,7 +65,7 @@ const CameraFeed = ({ onFacesDetected }) => {
                     multipleFaceTimeoutRef.current = null;
                 }
             }
-        }, 100);
+        },500);
     }, [onFacesDetected]);
 
     useEffect(() => {
