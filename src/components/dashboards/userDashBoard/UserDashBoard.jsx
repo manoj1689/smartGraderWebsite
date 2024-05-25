@@ -13,8 +13,7 @@ import { CiClock2 } from "react-icons/ci";
 import { IoHelpCircleOutline } from "react-icons/io5";
 import { IoCheckmark } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 function UserDashBoard(props) {
   const navigate = useNavigate();
@@ -22,19 +21,20 @@ function UserDashBoard(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [seachList,setSearchList]=useState([])
-  const [query, setQuery] = useState('');
-  const prevQueryRef = useRef('');
- 
- 
+  const [seachList, setSearchList] = useState([]);
+  const [query, setQuery] = useState("");
+  const prevQueryRef = useRef("");
+
   const fetchSearch = async (searchTerm) => {
     if (searchTerm) {
       try {
-        console.log('Query:', searchTerm); // Log the query before making the GET request
-        const response = await axiosInstance.get(`/categories/search?term=${searchTerm}`);
+        console.log("Query:", searchTerm); // Log the query before making the GET request
+        const response = await axiosInstance.get(
+          `/categories/search?term=${searchTerm}`
+        );
         setSearchList(response.data.data); // Update the searchList with the fetched data
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error("Error fetching categories:", error);
       }
     }
   };
@@ -42,11 +42,13 @@ function UserDashBoard(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get('/categories/subcat?category_id=1');
-        console.log('Response data:', response.data.data);
+        const response = await axiosInstance.get(
+          "/categories/subcat?category_id=1"
+        );
+        console.log("Response data:", response.data.data);
         setCategories(response.data.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -54,7 +56,9 @@ function UserDashBoard(props) {
 
     const fetchCardData = async () => {
       try {
-        const response = await axiosInstance.get('/sets/all?sub_category_id=10');
+        const response = await axiosInstance.get(
+          "/sets/all?sub_category_id=10"
+        );
         const responseData = response.data;
 
         // Filter the data based on selected categories
@@ -67,7 +71,7 @@ function UserDashBoard(props) {
 
         setCardsData(filteredData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -77,18 +81,18 @@ function UserDashBoard(props) {
       prevQueryRef.current = query; // Update the previous query ref
       fetchSearch(query); // Fetch data for the new query
     }
-
   }, [query, selectedCategories]);
- 
 
   const toggleCategory = (category) => {
     if (selectedCategories.includes(category.name)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category.name));
+      setSelectedCategories(
+        selectedCategories.filter((c) => c !== category.name)
+      );
     } else {
       setSelectedCategories([...selectedCategories, category.name]);
     }
   };
-//  console.log("categories Data top Bar",selectedCategories)
+  //  console.log("categories Data top Bar",selectedCategories)
   const handlePrevious = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
@@ -101,43 +105,44 @@ function UserDashBoard(props) {
     }
   };
 
-  
   const handleCardClick = (id) => {
     navigate(`/signIn/dashboard/question/${id}`);
   };
   const handleOnSearch = (string, results) => {
     setQuery(string); // Set the query state with the searched string
-   
-
-  }
+  };
 
   const handleOnHover = (result) => {
     // the item hovered
-    console.log(result)
-  }
+    console.log(result);
+  };
 
   const handleOnSelect = (item) => {
     // the item selected
-    console.log(item)
-  }
+    console.log(item);
+  };
 
   const handleOnFocus = () => {
-    console.log('Focused')
-  }
+    console.log("Focused");
+  };
 
   const formatResult = (item) => {
     return (
       <>
-       {/*<span style={{ display: 'block', textAlign: 'left' }}>id: {item.name}</span> */}
-        <span style={{ display: 'block', textAlign: 'left', cursor:'pointer'}}>{item.name}</span>
+        {/*<span style={{ display: 'block', textAlign: 'left' }}>id: {item.name}</span> */}
+        <span
+          style={{ display: "block", textAlign: "left", cursor: "pointer" }}
+        >
+          {item.name}
+        </span>
       </>
-    )
-  }
+    );
+  };
 
   return (
-    <div className=" w-full px-4 py-4">
-      <div className="  px-4 md:px-10 md:py-10 py-4">
-        <div className="flex gap-5 my-10 justify-between max-md:flex-wrap">
+    <div className=" w-full px-4 ">
+  
+        <div className="flex gap-5  mb-10 justify-between max-md:flex-wrap">
           <div className="flex gap-3.5 px-5  max-md:flex-wrap">
             <div className="grow  text-2xl font-medium leading-8 text-sky-500">
               <span className="">Hello!</span>{" "}
@@ -147,50 +152,49 @@ function UserDashBoard(props) {
               Here's the current status for today!
             </div>
           </div>
-          <TfiBell size={30} />
+          <TfiBell size={30} color="grey"/>
         </div>
-        <div className="flex  justify-between items-center px-5 text-xs leading-4 text-neutral-500 max-md:flex-wrap">
-        <div className="flex gap-5  flex-row justify-between items-center">
-        <FaChevronLeft onClick={handlePrevious} />
-        <div className="flex gap-2 self-stretch my-auto font-light max-md:flex-wrap">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.slice(currentIndex, currentIndex + 4).map((category) => (
-              <div
-                key={category.id}
-                onClick={() => toggleCategory(category)}
-                className={`justify-center text-sm px-8 py-2 border border-solid border-neutral-500 rounded-[30px] max-md:px-5 cursor-pointer ${
-                  selectedCategories.includes(category.name)
-                    ? "text-sky-500 bg-sky-50 border-sky-500"
-                    : "border-neutral-500"
-                }`}
-              >
-                {category.name}
+        <div className="flex  justify-between items-center gap-3 text-xs leading-4 text-neutral-500 max-md:flex-wrap">
+          <div className="flex lg:flex-col mx-auto lg:order-2 md:gap-5 self-stretch max-md:flex-wrap max-md:max-w-full">
+            <div className="md:mb-0 mb-12 lg:w-[400px] w-[300px] ">
+              <ReactSearchAutocomplete
+                items={seachList}
+                onSearch={handleOnSearch}
+                onHover={handleOnHover}
+                onSelect={handleOnSelect}
+                onFocus={handleOnFocus}
+                autoFocus
+                formatResult={formatResult}
+                styling={{ border: "1.5px solid #C0C0C0", borderRadius: "5px" }}
+              />
+            </div>
+          </div>
+          <div className=" lg:order-1 flex gap-5  flex-row justify-between items-center">
+            <FaChevronLeft onClick={handlePrevious} />
+            <div className="flex gap-2 self-stretch my-auto font-light max-md:flex-wrap">
+              <div className="flex flex-wrap justify-center gap-4">
+                {categories
+                  .slice(currentIndex, currentIndex + 4)
+                  .map((category) => (
+                    <div
+                      key={category.id}
+                      onClick={() => toggleCategory(category)}
+                      className={`justify-center text-sm px-8 py-2 border border-solid border-neutral-500 rounded-[30px] max-md:px-5 cursor-pointer ${
+                        selectedCategories.includes(category.name)
+                          ? "text-sky-500 bg-sky-50 border-sky-500"
+                          : "border-neutral-500"
+                      }`}
+                    >
+                      {category.name}
+                    </div>
+                  ))}
               </div>
-            ))}
+            </div>
+            <FaChevronRight onClick={handleNext} />
           </div>
         </div>
-        <FaChevronRight onClick={handleNext} />
-      </div>
-   
-      <div className="flex gap-5 self-stretch max-md:flex-wrap max-md:max-w-full">
-      <div style={{ width: 400 }}>
-          <ReactSearchAutocomplete
-            items={seachList}
-            onSearch={handleOnSearch}
-            onHover={handleOnHover}
-            onSelect={handleOnSelect}
-            onFocus={handleOnFocus}
-            autoFocus
-            formatResult={formatResult}
-            styling={ {border: "1.5px solid #C0C0C0",
-             borderRadius: "5px"}}
-          />
-        </div>
-      
-      </div>
-    </div>
 
-        <div className="flex flex-wrap gap-4 px-10 py-10 mt-10">
+        <div className="flex flex-wrap max-md:justify-center max-md:align-center gap-4 px-10 py-10 mt-10">
           {cardsData.map((card) => (
             <div
               key={card.id}
@@ -271,78 +275,69 @@ function UserDashBoard(props) {
           ))}
         </div>
         <div className="pt-5 pl-8 bg-white rounded-md border border-solid border-black border-opacity-10 max-md:pl-5">
-          <div className="flex flex-col md:flex-row " >
+          <div className="flex flex-col md:flex-row ">
             <div className="basis-5/6 flex flex-col xl:flex-row  gap-5  max-md:gap-0">
-            <div className="md:w-full  flex flex-col sm:flex-row ">
-          <div >
-           
-            <div className="font-medium  text-slate-800">
-                  Set Your Own Questions{" "}
-                </div>
-
-           
-            <div className="flex flex-col md:flex-row " >
-            <div className=" flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 ">
-                
-                <div className="flex gap-2.5 mt-7">
-                  <IoCheckmark size={28} color="#01AFF4" />
-                  <div className="flex-auto my-auto">
-                    Create by Selecting Domain
+              <div className="md:w-full  flex flex-col sm:flex-row ">
+                <div className="">
+                  <div className="font-medium  text-slate-800">
+                    Set Your Own Questions{" "}
                   </div>
-                </div>
-                <div className="flex gap-2.5 mt-1.5">
-                  <IoCheckmark size={28} color="#01AFF4" />
-                  <div className="flex-auto my-auto">Create by Writing JD</div>
+
+                  <div className="flex flex-col md:flex-row ">
+                    <div className=" flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 ">
+                      <div className="flex gap-2.5 mt-7">
+                        <IoCheckmark size={28} color="#01AFF4" />
+                        <div className="flex-auto my-auto">
+                          Create by Selecting Domain
+                        </div>
+                      </div>
+                      <div className="flex gap-2.5 mt-1.5">
+                        <IoCheckmark size={28} color="#01AFF4" />
+                        <div className="flex-auto my-auto">
+                          Create by Writing JD
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col ml-5  max-md:ml-0 max-md:w-full ">
+                      <div className="flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 ">
+                        <div className="flex gap-2.5 mt-7">
+                          <IoCheckmark size={28} color="#01AFF4" />
+                          <div className="flex-auto my-auto">
+                            Create by Resume Uploading
+                          </div>
+                        </div>
+                        <div className="flex gap-2.5 mt-1.5">
+                          <IoCheckmark size={28} color="#01AFF4" />
+                          <div className="flex-auto my-auto">
+                            Create by Your Own Questions
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="flex flex-col ml-5  max-md:ml-0 max-md:w-full ">
-              <div className="flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 ">
-                <div className="flex gap-2.5 mt-7">
-                  <IoCheckmark size={28} color="#01AFF4" />
-                  <div className="flex-auto my-auto">
-                    Create by Resume Uploading
-                  </div>
-                </div>
-                <div className="flex gap-2.5 mt-1.5">
-                  <IoCheckmark size={28} color="#01AFF4" />
-                  <div className="flex-auto my-auto">
-                    Create by Your Own Questions
-                  </div>
-                </div>
+
+              <div className=" lg:pt-10 w-full ">
+                <button
+                  onClick={() => navigate("/signIn/dashboard/generatequestion")}
+                  type="button"
+                  className="flex justify-center items-center bg-blue-400 w-50 md:w-72 mx-auto  my-5 text-white px-4 py-2 mt-4 rounded-sm hover:bg-blue-500 transition duration-300"
+                >
+                  <span className="mr-2">Lets Get Started</span>
+                  <FiArrowUpRight size={20} />
+                </button>
               </div>
             </div>
-            </div>
-           
-            </div>
-            
-          </div>
-          
-          <div className=" lg:pt-10 w-full ">
-              <button
-                onClick={() => navigate("/signIn/dashboard/generatequestion")}
-                type="button"
-                className="flex justify-center items-center bg-blue-400 w-50 md:w-72 mx-auto  my-5 text-white px-4 py-2 mt-4 rounded-sm hover:bg-blue-500 transition duration-300"
-              >
-                <span className="mr-2">Lets Get Started</span>
-                <FiArrowUpRight size={20} />
-              </button>
-       
 
-          </div>
-              
+            <div className="flex justify-center items-center  h-full">
+              <img
+                loading="lazy"
+                alt="womanCheck"
+                src={womanCheck}
+                className="w-96"
+              />
             </div>
-       
-           
-            <div className="basis-1/6  max-md:w-full">
-            
-                    <img
-                      loading="lazy"
-                      alt="womanCheck"
-                      src={womanCheck}
-                      className="w-96"
-                    />
-                  </div>
-         
           </div>
         </div>
         <div className="flex flex-col md:flex-row  max-md:flex-col max-md:gap-0">
@@ -356,7 +351,7 @@ function UserDashBoard(props) {
             <CircleScoreCard />
           </div>
         </div>
-      </div>
+     
     </div>
   );
 }

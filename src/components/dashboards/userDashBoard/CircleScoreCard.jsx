@@ -19,7 +19,7 @@ function CircleScoreCard() {
 
   return (
     <div className="grow pt-7 pr-8 w-full bg-white rounded-md border border-solid border-black border-opacity-10 max-md:mt-7 max-md:max-w-full">
-      <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+      <div className="flex gap-5 max-sm:flex-col max-md:gap-0">
         <div className="flex flex-col w-[67%] max-md:ml-0 max-md:w-full">
           <div className="flex flex-col text-lg font-medium leading-6 text-slate-800 max-md:mt-10">
             <div className="flex gap-2.5 self-start ml-11 max-md:ml-2.5">

@@ -24,10 +24,28 @@ function CreateAccount() {
     setActiveTab(tab);
 };
   return (
-    <div className="container mx-auto  px-4 py-4 flex flex-col md:flex-row">
-      <div className="w-full md:w-1/2">
+    <div className="container mx-auto  px-4 py-4 flex flex-col lg:flex-row">
+       <div>
+          <div className=" flex  lg:hidden  gap-4 items-start text-neutral-500 max-md:flex-wrap">
+            <Link to="/">
+              <img
+                width={179}
+                height={43}
+                src={smartLogo}
+                alt="smart Grader"
+              />
+            </Link>
+
+            <div className="shrink-0 mt-2.5 w-px border border-solid bg-black bg-opacity-10 border-black border-opacity-10 h-[33px]" />
+            <div className="flex-auto mt-3 text-sm leading-5">
+              A brief, catchy phrase that <br />
+              encapsulates the SmartGrader mission.
+            </div>
+          </div>
+        </div>
+      <div className="w-full order-2 lg:order-1 lg:w-1/2">
         <div>
-          <div className="flex gap-4 items-start text-neutral-500 max-md:flex-wrap">
+          <div className="flex max-lg:hidden  gap-4 items-start text-neutral-500 max-md:flex-wrap">
             <Link to="/">
               <img
                 width={179}
@@ -45,7 +63,7 @@ function CreateAccount() {
           </div>
         </div>
         <div className="flex flex-col mt-40 md:w-5/6 w-full">
-          <div className="text-4xl leading-8 text-slate-800 max-md:max-w-full">
+          <div className="text-2xl font-semibold md:text-4xl leading-8  text-slate-800 max-md:max-w-full">
             Signup with SmartGrader
           </div>
           <div
@@ -129,7 +147,7 @@ function CreateAccount() {
         </div>
       </div>
 
-      <div className="w-full md:w-1/2  flex justify-center items-end">
+      <div className="w-full order-1 lg:order-2 lg:w-1/2  flex justify-center items-end">
         <div className="mt-10">
           {activeTab === "individual"&& (
             <img

@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../axiosInstance';
 import { FiArrowUpRight } from "react-icons/fi";
+import { ToastContainer, toast,Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SelectInterest() {
   const navigate = useNavigate();
   const [isPressed, setIsPressed] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const notify = () => toast.warn('🦄 Please select five or more categories to proceed!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
 
   const handleMouseDown = () => {
     setIsPressed(true);
@@ -44,18 +58,24 @@ function SelectInterest() {
       console.log("Proceeding with selected categories:", selectedCategories);
       navigate("/signIn/dashboard");
     } else {
-      alert("Please select five or more categories to proceed.");
+      notify();
     }
   };
 
   return (
     <div className="container mx-auto h-screen px-4 py-4 justify-center">
+      <ToastContainer type="warning"/>
       <div className="flex flex-col px-5">
-        <div className="self-center text-2xl mt-20 md:mt-40 font-medium leading-8 text-slate-800">
-          Let’s Select Your Interest{" "}
+        <div className="flex flex-row self-center text-2xl mt-20 md:mt-40 font-medium leading-8 text-slate-800">
+          Let’s Select Your Interest
         </div>
-        <div className="flex justify-center items-center mt-5 w-full text-base font-light leading-6 text-neutral-500">
-          Please select <span className="text-base px-2 font-normal leading-6 text-neutral-500"> Five or more </span> categories to proceed
+        <div className="flex flex-col md:flex-row mt-5 justify-center items-center text-base font-light leading-6 text-neutral-500 text-center md:text-left">
+          <div className="self-center">
+            Please select <span className="text-base px-2 font-bold leading-6 text-neutral-500">Five or more</span>
+          </div>
+          <div className="self-center md:ml-2">
+            categories to proceed
+          </div>
         </div>
         <div className="flex flex-col mt-5 mb-5 items-center text-xs leading-4">
           <div className="flex gap-2.5 px-5 font-light text-neutral-500 max-md:flex-wrap">
@@ -88,7 +108,7 @@ function SelectInterest() {
             <div className="flex gap-2.5 px-px">
               <span>Continue</span>
               <span>
-              <FiArrowUpRight size={20} />
+                <FiArrowUpRight size={20} />
               </span>
             </div>
           </button>

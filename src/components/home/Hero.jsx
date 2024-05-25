@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'; // Importing framer-motion for animation
 
 const Hero = () => {
   return (
-    <section className="bg-blue-50 py-16">
+    <section className="bg-blue-50 my-20 pt-16">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
           <motion.div 
@@ -30,7 +30,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
-            href="#get-started" 
+            href="/createAccount" 
             className="bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition duration-300 flex items-center max-w-max"
           >
             Get Started with SmartGrader <FaArrowRight className="ml-2" />

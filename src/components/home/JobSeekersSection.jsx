@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate} from "react-router-dom";
 import { FaArrowRight } from 'react-icons/fa';
 import seekersImage from '../../assets/home/job-seekers-banner.png';
 import buttonRoundedTickImage from '../../assets/home/rounded-tick-icon.png';
@@ -21,11 +22,12 @@ const cardVariants = {
 };
 
 const JobSeekersSection = () => {
+  const navigate = useNavigate();
   return (
     <motion.div 
       initial="offscreen" 
       whileInView="onscreen" 
-      viewport={{ once: true, amount: 0.8 }} 
+      viewport={{ once: true, amount: 0.4 }} 
       className="container mx-auto flex flex-col md:flex-row gap-5 max-w-[1005px] px-4"
       variants={cardVariants}
       style={{ marginBottom: '20px' }} // Added style for margin-bottom
@@ -76,7 +78,8 @@ const JobSeekersSection = () => {
         </div>
         <motion.div 
           whileHover={{ scale: 1.05 }} 
-          className="flex items-center justify-center self-start px-4 py-2 mt-9 text-sm text-white bg-sky-500 rounded-md border border-sky-500 transition-transform duration-300"
+          className="flex items-center cursor-pointer justify-center self-start px-4 py-2 mt-9 text-sm text-white bg-sky-500 rounded-md border border-sky-500 transition-transform duration-300"
+          onClick={()=> navigate('/signUp',{ state: { activeTab:'individual' } })}
         >
           <span>Start Preparing Today</span>
           <FaArrowRight className="ml-2" />

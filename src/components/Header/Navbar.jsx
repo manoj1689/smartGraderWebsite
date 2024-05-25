@@ -11,21 +11,21 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-white  shadow-md fixed w-full  top-0 z-50">
       <div className="container mx-auto px-4 flex flex-row justify-between items-center py-4">
-        <div className="text-lg basis-1/4 md:basis-1/3 font-semibold">
+        <div className="text-lg basis-1/4  font-semibold">
           <Link to="/">
             <img src={logoImage} alt="Smart Grader Logo" className="h-11" /> {/* Adjust the path to your logo */}
           </Link>
         </div>
         
-        <nav className="hidden md:flex basis-1/2 space-x-6 items-center">
+        <nav className="hidden md:flex basis-1/2 space-x-6 justify-center items-center">
   <a href="#home" className="text-gray-900 hover:text-blue-700 transition duration-300">Home</a>
   <a href="#how-it-works" className="text-gray-900 hover:text-blue-700 transition duration-300">How It Works</a>
   <a href="#pricing" className="text-gray-900 hover:text-blue-700 transition duration-300">Pricing</a>
   <a href="#partners" className="text-gray-900 hover:text-blue-700 transition duration-300">Partners</a>
-  <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a>
-  <a href="#contact" className="text-gray-900 hover:text-blue-700 transition duration-300">Contact Us</a>
+  {/* <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a>
+  <a href="#contact" className="text-gray-900 hover:text-blue-700 transition duration-300">Contact Us</a> */}
 </nav>  
 <div className="hidden md:flex flex-row basis-1/4 space-x-6 justify-end items-center">
   <Link to="signIn" className="text-gray-900 hover:text-blue-700 transition duration-300 flex items-center">

@@ -79,8 +79,17 @@ const SignUp = () => {
   
   return (
     <>
-      <div className="container mx-auto h-screen px-4 py-4 flex flex-col md:flex-row ">
-        <div className="w-full md:w-1/2  flex justify-center items-center">
+      <div className="container mx-auto h-screen px-4 py-4 flex flex-col lg:flex-row ">
+      <div className="lg:hidden w-full "><Link to="/">
+              <img
+                width={179}
+                height={43}
+                src={smartLogo}
+                alt="smart Grader"
+              />
+            </Link></div>
+        <div className="w-full lg:w-1/2 flex flex-col justify-center items-center">
+      
           {activeTab === "individual" && (
             <div className="flex flex-col justify-center px-8 py-7 mt-8 bg-white rounded-md">
               <div className="flex gap-5 max-md:flex-wrap">
@@ -140,16 +149,17 @@ const SignUp = () => {
             </div>
           )}
         </div>
-        <div className="w-full md:w-1/2">
+        <div className="w-full lg:w-1/2">
           <div className="flex flex-col grow px-5 mt-36 text-sm max-md:mt-10 max-md:max-w-full justify-center items-center">
-            <Link to="/">
+           
+           <div className="max-lg:hidden"><Link to="/">
               <img
                 width={179}
                 height={43}
                 src={smartLogo}
                 alt="smart Grader"
               />
-            </Link>
+            </Link></div> 
             {activeTab === "individual" && (
               <div className="self-center mt-5 text-2xl text-slate-800">
                 Signup as Individual Users

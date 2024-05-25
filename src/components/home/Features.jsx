@@ -22,7 +22,7 @@ const features = [
 
 const Features = () => {
   return (
-    <section id='how-it-works' className="bg-white py-16">
+    <section id='how-it-works' className="bg-white py-24">
       <div className="container mx-auto px-4 text-center">
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}

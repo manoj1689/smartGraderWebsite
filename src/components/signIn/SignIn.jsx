@@ -110,8 +110,17 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="container mx-auto h-screen px-4 py-4 flex flex-col md:flex-row">
-        <div className="w-full md:w-1/2 flex justify-center items-center">
+      <div className="container mx-auto h-screen px-4 py-4 flex flex-col lg:flex-row">
+         <div className="lg:hidden w-full "><Link to="/">
+              <img
+                width={179}
+                height={43}
+                src={smartLogo}
+                alt="smart Grader"
+              />
+            </Link></div>
+        <div className="w-full lg:w-1/2 flex flex-col justify-center items-center">
+       
           {activeTab !== "organization" && activeTab !== "educational" && (
             <div className="flex flex-col justify-center px-8 py-7 mt-8 bg-white rounded-md">
               <div className="flex gap-5 max-md:flex-wrap">
@@ -171,16 +180,16 @@ const SignIn = () => {
             </div>
           )}
         </div>
-        <div className="w-full md:w-1/2">
+        <div className="w-full lg:w-1/2">
           <div className="flex flex-col grow px-5 mt-36 text-sm max-md:mt-10 max-md:max-w-full justify-center items-center">
-            <Link to="/">
+          <div className="max-lg:hidden  "><Link to="/">
               <img
                 width={179}
                 height={43}
                 src={smartLogo}
                 alt="smart Grader"
               />
-            </Link>
+            </Link></div>
             {activeTab === "individual" && (
               <div className="self-center mt-5 text-2xl text-slate-800">
                 Log In as Candidate
@@ -257,15 +266,15 @@ const SignIn = () => {
               </div>
             </form>
           </div>
-          <div className="flex gap-5 px-5 mt-10 pt-20 md:mt-20 md:pt-40 text-sm font-light leading-5 justify-center text-center text-neutral-500">
-            <div className="flex gap-5">Legal information</div>
+          <div className="flex  px-5 mt-10 pt-20 pb-5 md:mt-20 md:pt-40 text-sm font-light leading-5 justify-center text-center text-neutral-500">
+            <div className="flex px-1 md:gap-5">Legal information</div>
             <div className="flex">
-              <div className="flex gap-5">Help Resources</div>
+              <div className="flex px-1 md:gap-5">Help Resources</div>
               <img
                 loading="lazy"
                 alt="socialIcon"
                src={socialIcon}
-                className="shrink-0 mx-5 aspect-[4.35] w-[93px]"
+                className="shrink-0 mx-2 md:mx-5 aspect-[4.35] w-[93px]"
               />
             </div>
           </div>

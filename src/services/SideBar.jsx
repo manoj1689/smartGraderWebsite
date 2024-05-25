@@ -8,6 +8,7 @@ import { BsGraphUpArrow } from 'react-icons/bs';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { BsQuestionCircle } from 'react-icons/bs';
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function SideBar() {
   const navigate = useNavigate();
@@ -31,13 +32,13 @@ function SideBar() {
     <div
     className={`flex flex-col h-full  shadow-md bg-sky-100  ${
       isSidebarOpen ? 'w-64' : 'w-20'
-    } md:hover:w-64 fixed md:relative z-50`}
+    } md:hover:w-64 fixed xl:relative z-50`}
     onMouseEnter={() => setIsSidebarOpen(true)}
     onMouseLeave={() => setIsSidebarOpen(false)}
   >
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
         <Link to="/signIn/dashboard">
-          {/* <img className="h-11" src={smartLogo} alt="smart Grader" /> */}
+        <GiHamburgerMenu color='grey' size={20} />
         </Link>
         <button className="md:hidden" onClick={toggleSidebar}>
           <svg

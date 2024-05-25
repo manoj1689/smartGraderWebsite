@@ -35,7 +35,7 @@ function App() {
 
             <Route
               path="/signIn/dashboard/question/:id"
-              element={<QuestionPage />}
+              element={<InterviewScreen />}
             />
               <Route path="/signIn/dashboard/generatequestion" element={<GenerateQuestionsPage />} />
           <Route path="/signIn/dashboard/result" element={<ResultPage />} />
