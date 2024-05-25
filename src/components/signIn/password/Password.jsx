@@ -38,8 +38,16 @@ function Password() {
   }
   return (
     <>
-      <div className="container mx-auto h-screen px-4 py-4 flex flex-col md:flex-row">
-        <div className="w-full md:w-1/2 flex flex-row justify-center items-center">
+     <div className="container mx-auto h-screen px-4 py-4 flex flex-col lg:flex-row">
+         <div className="lg:hidden w-full "><Link to="/">
+              <img
+                width={179}
+                height={43}
+                src={smartLogo}
+                alt="smart Grader"
+              />
+            </Link></div>
+        <div className="w-full lg:w-1/2 flex flex-row max-lg:my-10 justify-start items-center">
           <div>
             <img
               src={passwordIcon}
@@ -57,8 +65,8 @@ function Password() {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-center">
-          <div>
+        <div className="w-full md:w-1/2 flex flex-col mx-auto justify-center items-center">
+          <div className="max-lg:hidden">
             <Link to="/">
               <img
                 width={179}

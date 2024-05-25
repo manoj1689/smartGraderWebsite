@@ -5,9 +5,10 @@ import codingDev from "../../../assets/individual/codingdeveloper.png";
 import star from "../../../assets/individual/Star.png";
 import graderLogo from "../../../assets/individual/graderIcon.png";
 import womanCheck from "../../../assets/individual/woman-plan-todo-list.png";
+import java from "../../../assets/individual/javaLogo.png"
 import LineScoreCard from "./LineScoreCard";
 import CircleScoreCard from "./CircleScoreCard";
-import { TfiBell } from "react-icons/tfi";
+import { FaBell } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
 import { CiClock2 } from "react-icons/ci";
 import { IoHelpCircleOutline } from "react-icons/io5";
@@ -56,11 +57,17 @@ function UserDashBoard(props) {
 
     const fetchCardData = async () => {
       try {
-        const response = await axiosInstance.get(
-          "/sets/all?sub_category_id=10"
-        );
+        const token = localStorage.getItem('accessToken'); // Retrieve the token from local storage
+    
+        const response = await axiosInstance.get("/sets/all?sub_category_id=10", {
+          headers: {
+            Accept: 'application/json',
+            Token: token, // Include the token in the headers
+          },
+        });
+    
         const responseData = response.data;
-
+    
         // Filter the data based on selected categories
         let filteredData = responseData.data;
         if (selectedCategories.length > 0) {
@@ -68,13 +75,12 @@ function UserDashBoard(props) {
             selectedCategories.includes(item.name)
           );
         }
-
+    
         setCardsData(filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchCardData();
 
     if (query !== prevQueryRef.current) {
@@ -140,9 +146,8 @@ function UserDashBoard(props) {
   };
 
   return (
-    <div className=" w-full px-4 ">
-  
-        <div className="flex gap-5  mb-10 justify-between max-md:flex-wrap">
+    <div className="container mx-auto w-full px-4 md:px-10 ">
+       <div className="flex gap-5  mb-10 justify-between max-md:flex-wrap">
           <div className="flex gap-3.5 px-5  max-md:flex-wrap">
             <div className="grow  text-2xl font-medium leading-8 text-sky-500">
               <span className="">Hello!</span>{" "}
@@ -152,8 +157,13 @@ function UserDashBoard(props) {
               Here's the current status for today!
             </div>
           </div>
-          <TfiBell size={30} color="grey"/>
+          <div className="max-lg:hidden">
+          <FaBell size={30} color="#01AFF4"/>
+          </div>
+          
         </div>
+      <div className="rounded-md border border-solid my-5 px-4 py-10 border-black border-opacity-10 ">
+     
         <div className="flex  justify-between items-center gap-3 text-xs leading-4 text-neutral-500 max-md:flex-wrap">
           <div className="flex lg:flex-col mx-auto lg:order-2 md:gap-5 self-stretch max-md:flex-wrap max-md:max-w-full">
             <div className="md:mb-0 mb-12 lg:w-[400px] w-[300px] ">
@@ -173,9 +183,7 @@ function UserDashBoard(props) {
             <FaChevronLeft onClick={handlePrevious} />
             <div className="flex gap-2 self-stretch my-auto font-light max-md:flex-wrap">
               <div className="flex flex-wrap justify-center gap-4">
-                {categories
-                  .slice(currentIndex, currentIndex + 4)
-                  .map((category) => (
+                {categories.slice(currentIndex, currentIndex + 4).map((category) => (
                     <div
                       key={category.id}
                       onClick={() => toggleCategory(category)}
@@ -202,11 +210,12 @@ function UserDashBoard(props) {
             >
               <div className="flex flex-col justify-center text-xs leading-6 whitespace-nowrap bg-sky-50 rounded-md">
                 <div className="flex overflow-hidden relative flex-col pt-4 pb-1 w-full aspect-w-1 aspect-h-1">
+                  <div className="flex flex-row w-full justify-around">
                   <img
                     loading="lazy"
-                    src={card.img_url}
+                    src={java}
                     alt={card.title}
-                    className="object-cover absolute inset-0 w-full h-full"
+                    className="w-20 h-20"
                   />
                   <img
                     loading="lazy"
@@ -214,6 +223,8 @@ function UserDashBoard(props) {
                     src={codingDev}
                     className="self-end aspect-square w-12"
                   />
+                  </div>
+                
                   <div className="flex relative gap-1 py-1.5 mt-3 bg-white rounded-sm shadow-sm">
                     <img
                       loading="lazy"
@@ -274,11 +285,13 @@ function UserDashBoard(props) {
             </div>
           ))}
         </div>
-        <div className="pt-5 pl-8 bg-white rounded-md border border-solid border-black border-opacity-10 max-md:pl-5">
+      </div>
+      
+        <div className="pt-5 my-10  pl-8 bg-white rounded-md border border-solid border-black border-opacity-10 max-md:pl-5">
           <div className="flex flex-col md:flex-row ">
-            <div className="basis-5/6 flex flex-col xl:flex-row  gap-5  max-md:gap-0">
-              <div className="md:w-full  flex flex-col sm:flex-row ">
-                <div className="">
+            <div className="md:basis-2/3 justify-center items-center  flex flex-col xl:flex-row  gap-5  max-md:gap-0">
+              <div className="  flex flex-col sm:flex-row ">
+                <div >
                   <div className="font-medium  text-slate-800">
                     Set Your Own Questions{" "}
                   </div>
@@ -318,19 +331,19 @@ function UserDashBoard(props) {
                 </div>
               </div>
 
-              <div className=" lg:pt-10 w-full ">
-                <button
-                  onClick={() => navigate("/signIn/dashboard/generatequestion")}
-                  type="button"
-                  className="flex justify-center items-center bg-blue-400 w-50 md:w-72 mx-auto  my-5 text-white px-4 py-2 mt-4 rounded-sm hover:bg-blue-500 transition duration-300"
-                >
-                  <span className="mr-2">Lets Get Started</span>
-                  <FiArrowUpRight size={20} />
-                </button>
-              </div>
-            </div>
+              <div className="md:basis-1/6 flex mx-auto justify-center items-center lg:pt-10 w-full h-full">
+  <button
+    onClick={() => navigate("/signIn/dashboard/generatequestion")}
+    type="button"
+    className="flex flex-row items-center justify-center bg-blue-400 w-50 md:w-60 my-5 text-white px-4 py-2 mt-4 rounded-sm hover:bg-blue-500 transition duration-300"
+  >
+    <span className="mr-2">Let's Get Started</span>
+    <FiArrowUpRight size={20} />
+  </button>
+</div>
 
-            <div className="flex justify-center items-center  h-full">
+</div>
+            <div className="flex md:basis-1/3 justify-center items-center ">
               <img
                 loading="lazy"
                 alt="womanCheck"
@@ -340,14 +353,14 @@ function UserDashBoard(props) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row  max-md:flex-col max-md:gap-0">
+        <div className="flex flex-col mb-10 md:flex-row gap-3  max-md:flex-col max-md:gap-0">
           <div
             className="w-full md:w-1/2 cursor-pointer"
             onClick={() => navigate("/signIn/dashboard/result")}
           >
             <LineScoreCard />
           </div>
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 ">
             <CircleScoreCard />
           </div>
         </div>

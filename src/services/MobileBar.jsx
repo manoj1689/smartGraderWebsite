@@ -8,6 +8,8 @@ import { BsGraphUpArrow } from 'react-icons/bs';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { BsQuestionCircle } from 'react-icons/bs';
+import { FaBell } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function MobileBar() {
   const navigate = useNavigate();
@@ -29,30 +31,18 @@ function MobileBar() {
 
   return (
     <div className="w-full h-full">
-      <button
-        className="flex w-full fixed z-50 items-center justify-between px-4 py-3 border-b bg-sky-100 border-gray-200"
-        onClick={toggleSidebar}
+      <div
+        className="flex flex-row w-full fixed z-50 items-center justify-between px-4 py-3 border-b bg-sky-100 border-gray-200"
+       
       >
-        <svg
-          className="w-6 h-6 text-gray-500"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16m-7 6h7"
-          ></path>
-        </svg>
-      </button>
-      <div>
-        <Link to="/signIn/dashboard">
-          {/* <img className="h-11" src={smartLogo} alt="smart Grader" /> */}
-        </Link>
+        <div>
+        <GiHamburgerMenu className="w-6 h-6 " color={`${isSidebarOpen ? '01AFF4' : '5E676B'}`}  onClick={toggleSidebar}  /> 
+        </div>
+        <div >
+          <FaBell className="w-6 h-6"  color="5E676B"/>
+          </div>
       </div>
+    
       {isSidebarOpen && (
         <>
           <div className="flex fixed z-50 flex-col mt-12 flex-grow shadow-md bg-sky-100 overflow-y-auto h-full" style={{ scrollBehavior: 'smooth' }}>

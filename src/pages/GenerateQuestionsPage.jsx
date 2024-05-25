@@ -125,8 +125,8 @@ const GenerateQuestionsPage = () => {
   };
 
   return (
-    <div className="container flex">
-      <div className="data_container mx-auto py-8 px-4 w-4/6">
+    <div className="container flex flex-col lg:flex-row">
+      <div className="data_container mx-auto py-8 px-4 order-2 md:ml-10 lg:order-1 w-full lg:w-4/6">
         <h1 className="text-3xl font-bold mb-6">Generate Exam Question Set</h1>
         <div className="bg-white shadow-md rounded-lg p-6">
           <div className="mb-4">
@@ -267,8 +267,8 @@ const GenerateQuestionsPage = () => {
           </div>
         )}
       </div>
-      <div className="image_container  w-1/3">
-        <img src={Image} className="w-3/4" alt="Fail to load image" />
+      <div className="flex image_container order-1 justify-center align-center mx-auto lg:order max-lg:w-2/5 lg:w-2/6">
+        <img src={Image} className="h-1/2" alt="Fail to load image" />
       </div>
     </div>
   );

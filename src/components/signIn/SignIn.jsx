@@ -123,7 +123,7 @@ const SignIn = () => {
        
           {activeTab !== "organization" && activeTab !== "educational" && (
             <div className="flex flex-col justify-center px-8 py-7 mt-8 bg-white rounded-md">
-              <div className="flex gap-5 max-md:flex-wrap">
+              <div className="flex flex-row gap-5 max-md:flex-wrap">
                 <img
                   loading="lazy"
                   alt="individual"
@@ -274,7 +274,7 @@ const SignIn = () => {
                 loading="lazy"
                 alt="socialIcon"
                src={socialIcon}
-                className="shrink-0 mx-2 md:mx-5 aspect-[4.35] w-[93px]"
+                className="shrink-0  md:mx-5 aspect-[4.35] w-[93px]"
               />
             </div>
           </div>
