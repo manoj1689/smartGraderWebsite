@@ -14,7 +14,7 @@ import QuestionPage from "./components/dashboards/userDashBoard/QuestionPage";
 import InterviewScreen from "./pages/InterviewPage";
 import GenerateQuestionsPage from "./pages/GenerateQuestionsPage"
 import ResultPage from "./pages/ResultPage";
-
+import NotFound from "./components/NotFound/NotFound";
 function App() {
   return (
     <div>
@@ -24,7 +24,7 @@ function App() {
         </HideNav>
 
         <Routes>
-          <Route path="/" element={<HomePage/>} />
+          <Route exact path="/" element={<HomePage/>} />
           <Route path="signIn" element={<SignIn />} />
           <Route path="signUp" element={<SignUp />} />
           <Route path="/signUp/selectInterest" element={<SelectInterest />} />
@@ -42,7 +42,7 @@ function App() {
           <Route path="/signIn/dashboard/interviewscreen" element={<InterviewScreen />} />
           </Route>
         
-
+          <Route component={NotFound} />
         </Routes>
       </BrowserRouter>
 
