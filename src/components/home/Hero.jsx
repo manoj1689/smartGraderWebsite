@@ -2,8 +2,9 @@ import React from "react";
 import { FaArrowRight } from 'react-icons/fa'; // Importing icon from react-icons
 import heroImage from '../../assets/home/hero-image.png'; // Importing the hero image
 import { motion } from 'framer-motion'; // Importing framer-motion for animations
-
+import { useNavigate } from "react-router-dom";
 const Hero = () => {
+  const navigate=useNavigate()
   return (
     <section className="bg-blue-50 my-20 pt-16">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
@@ -30,7 +31,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
-            href="/createAccount" 
+            onClick={()=>navigate("createAccount")}  
             className="bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-800 transition duration-300 flex items-center max-w-max"
           >
             Get Started with SmartGrader <FaArrowRight className="ml-2" />
