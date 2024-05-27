@@ -22,6 +22,8 @@ function MobileBar() {
 
   const handleLogout = () => {
     localStorage.removeItem('loggedIn');
+    localStorage.removeItem('emailId');
+    localStorage.removeItem('accessToken')
     navigate('/');
   };
 

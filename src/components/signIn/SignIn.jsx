@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import smartLogo from "../../assets/images/smart-logo.png";
-import educationSticker from "../../assets/persons/education-sticker.png"
-import organisationSticker from "../../assets/persons/organisation-sticker.png"
-import individualSticker from "../../assets/persons/individul-sticker.png"
-import socialIcon from '../../assets/images/social-icon.png'
+import educationSticker from "../../assets/persons/education-sticker.png";
+import organisationSticker from "../../assets/persons/organisation-sticker.png";
+import individualSticker from "../../assets/persons/individul-sticker.png";
+import socialIcon from '../../assets/images/social-icon.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const SignIn = () => {
 
   const location = useLocation();
   const { activeTab } = location.state || {};
-  
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -59,28 +61,46 @@ const SignIn = () => {
           client_secret: "",
         }),
       });
-  
+
       if (response.ok) {
         const responseData = await response.json();
-        const accessToken = responseData.access_token;
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("loggedIn", true);
-        
-        if (formData.agreedToTerms) {
-          localStorage.setItem("rememberedEmail", formData.email);
-          localStorage.setItem("rememberedPassword", formData.password);
-        } else {
-          localStorage.removeItem("rememberedEmail");
-          localStorage.removeItem("rememberedPassword");
-        }
+        console.log(responseData)
+        const { status, msg,email, access_token, is_onboard, is_verified  } = responseData;
 
-        navigate('/signUp/selectInterest', { state: { activeTab } });
+        if (status === 1 ) {
+          localStorage.setItem("accessToken", access_token);
+          localStorage.setItem("emailId",email)
+          localStorage.setItem("loggedIn", true);
+          if (is_verified===1 && is_onboard===1){
+      
+            if (formData.agreedToTerms) {
+              localStorage.setItem("rememberedEmail", formData.email);
+              localStorage.setItem("rememberedPassword", formData.password);
+             
+            } else {
+              localStorage.removeItem("rememberedEmail");
+              localStorage.removeItem("rememberedPassword");
+            }
+            navigate("/signIn/dashboard");
+          }else if(is_verified===1 && is_onboard===0) {
+            navigate('/signUp/selectInterest', { state: { activeTab } });
+          }
+         
+        } else if (status === 404 && msg === "User Not Found") {
+          toast.error("Email ID is incorrect");
+        } else if (status === 401 && msg === "Invalid credentials") {
+          toast.error("Password is incorrect");
+        } else if (status === 401 && msg === "Unverified user") {
+          toast.error("Please verify your email by your Gmail account.");
+        } else {
+          toast.error("Sign-in failed. Please check your credentials.");
+        }
       } else {
-        alert("Sign-in failed. Please check your credentials.");
+        toast.error("Sign-in failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("Error signing in:", error);
-      alert("An error occurred while signing in. Please try again later.");
+      toast.error("An error occurred while signing in. Please try again later.");
     }
   };
 
@@ -107,6 +127,7 @@ const SignIn = () => {
       localStorage.removeItem("rememberedPassword");
     }
   };
+
 
   return (
     <>
@@ -181,6 +202,7 @@ const SignIn = () => {
           )}
         </div>
         <div className="w-full lg:w-1/2">
+        <ToastContainer />
           <div className="flex flex-col grow px-5 mt-36 text-sm max-md:mt-10 max-md:max-w-full justify-center items-center">
           <div className="max-lg:hidden  "><Link to="/">
               <img
@@ -278,6 +300,7 @@ const SignIn = () => {
               />
             </div>
           </div>
+        
         </div>
       </div>
     </>

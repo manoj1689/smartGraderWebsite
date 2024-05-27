@@ -205,7 +205,10 @@ function UserDashBoard(props) {
         <div className="flex flex-wrap max-md:justify-center max-md:align-center gap-4 px-10 py-10 mt-10">
           {cardsData.map((card) => (
             <div
-              key={card.id}
+              key={card.id}   onClick={(e) => {
+                e.stopPropagation();
+                handleCardClick(card.id);
+              }}
               className="flex flex-col p-4 h-2/5 bg-white rounded-md border border-solid border-black border-opacity-10 shadow-md hover:shadow-lg hover:border-slate-800 transition duration-300 ease-in-out w-64 font-light text-neutral-500 cursor-pointer"
             >
               <div className="flex flex-col justify-center text-xs leading-6 whitespace-nowrap bg-sky-50 rounded-md">
@@ -237,7 +240,7 @@ function UserDashBoard(props) {
                 </div>
               </div>
               <div className="flex gap-2 justify-between mt-4">
-                <div className="flex gap-1 text-sm leading-4">
+                <div className="flex gap-1 text-sm leading-4" >
                   <img
                     loading="lazy"
                     alt="grader"
@@ -270,10 +273,7 @@ function UserDashBoard(props) {
               </div>
               <button
                 className="flex items-center justify-center px-3 py-2 mt-4 text-xs text-white bg-sky-500 rounded-md border border-sky-500 border-solid hover:bg-slate-800 hover:border-slate-800"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleCardClick(card.id);
-                }}
+              
               >
                 <div className="flex flex-row items-center gap-2">
                   <div>Take a Test</div>

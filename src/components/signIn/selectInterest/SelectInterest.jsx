@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../axiosInstance';
 import { FiArrowUpRight } from "react-icons/fi";
-import { ToastContainer, toast,Bounce } from 'react-toastify';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function SelectInterest() {
@@ -53,10 +53,38 @@ function SelectInterest() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (selectedCategories.length >= 5) {
-      console.log("Proceeding with selected categories:", selectedCategories);
-      navigate("/signIn/dashboard");
+      const token = localStorage.getItem('accessToken');
+
+      if (!token) {
+        toast.error('Token is missing. Please log in again.');
+        return;
+      }
+
+      try {
+        const response = await axiosInstance.post(
+          'http://34.131.249.177:8000/users/career_domain',
+          selectedCategories,
+          {
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              token: token
+            }
+          }
+        );
+        console.log(response)
+        if (response.data.status ===1 && response.data.msg==="success") {
+          console.log("Proceeding with selected categories:", selectedCategories);
+          navigate("/signIn/dashboard");
+        } else {
+          toast.error('Failed to save selected categories.');
+        }
+      } catch (error) {
+        console.error('Error submitting data:', error);
+        toast.error('An error occurred while submitting your selection.');
+      }
     } else {
       notify();
     }
@@ -64,7 +92,7 @@ function SelectInterest() {
 
   return (
     <div className="container mx-auto h-screen px-4 py-4 justify-center">
-      <ToastContainer type="warning"/>
+      <ToastContainer type="warning" />
       <div className="flex flex-col px-5">
         <div className="flex flex-row self-center text-2xl mt-20 md:mt-40 font-medium leading-8 text-slate-800">
           Let’s Select Your Interest

@@ -54,8 +54,18 @@ const InterviewScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      
       try {
-        const response = await axiosInstance.get(`/questions/all?set_id=${id}`);
+        const token = localStorage.getItem('accessToken'); // Retrieve the token from local storage
+    
+        const response = await axiosInstance.get(`/questions/all?set_id=${id}`, {
+          headers: {
+            Accept: 'application/json',
+            Token: token, // Include the token in the headers
+          },
+        }
+      );
+       
         setQuestionsData(response.data.data);
         console.log("Questions fetched:", response.data.data);
       } catch (error) {
@@ -185,7 +195,7 @@ const InterviewScreen = () => {
 
   return (
     <ErrorBoundary>
-      <div ref={fullscreenRef} className="flex h-screen bg-gray-100">
+      <div ref={fullscreenRef} className="container flex h-screen bg-gray-100">
         <div className="basis-1/3">
           <aside className="p-4 bg-white shadow-lg">
             <div className="mt-5 ">
