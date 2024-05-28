@@ -15,6 +15,8 @@ import { IoHelpCircleOutline } from "react-icons/io5";
 import { IoCheckmark } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function UserDashBoard(props) {
   const navigate = useNavigate();
@@ -25,7 +27,25 @@ function UserDashBoard(props) {
   const [seachList, setSearchList] = useState([]);
   const [query, setQuery] = useState("");
   const prevQueryRef = useRef("");
-
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 1500 },
+      items: 3
+    },
+    desktop: {
+      breakpoint: { max: 1500, min: 1264 },
+      items: 2
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
   const fetchSearch = async (searchTerm) => {
     if (searchTerm) {
       try {
@@ -147,26 +167,70 @@ function UserDashBoard(props) {
 
   return (
     <div className="container mx-auto w-full px-4 md:px-10 ">
-       <div className="flex gap-5  mb-10 justify-between max-md:flex-wrap">
-          <div className="flex gap-3.5 px-5  max-md:flex-wrap">
-            <div className="grow  text-2xl font-medium leading-8 text-sky-500">
-              <span className="">Hello!</span>{" "}
-              <span className="text-sky-500">{props.individualData.name}</span>
-            </div>
-            <div className="flex-auto my-auto text-base font-light leading-4 text-neutral-500">
-              Here's the current status for today!
-            </div>
-          </div>
+  
+        
+       <div className="flex  gap-5 my-16  mb-10 justify-between ">
+       <div className="flex flex-col md:flex-row  gap-5 px-5 ">
+  <div className="flex text-sky-500">
+    <span className="block text-base md:text-xl lg:text-2xl xl:text-3xl">
+      Hello!
+    </span>{"  "}
+    <span className="block text-base  md:text-xl lg:text-2xl xl:text-3xl pl-1 md:pl-3 text-sky-500">
+      {props.individualData.name}
+    </span>
+  </div>
+  <div className="flex-auto my-auto text-sm sm:text-base md:text-lg font-light leading-4 text-neutral-500">
+    Here's the current status for today!
+  </div>
+</div>
+
           <div className="max-lg:hidden">
           <FaBell size={30} color="#01AFF4"/>
           </div>
           
         </div>
+      
+        
       <div className="rounded-md border border-solid my-5 px-4 py-10 border-black border-opacity-10 ">
      
-        <div className="flex  justify-between items-center gap-3 text-xs leading-4 text-neutral-500 max-md:flex-wrap">
-          <div className="flex lg:flex-col mx-auto lg:order-2 md:gap-5 self-stretch max-md:flex-wrap max-md:max-w-full">
-            <div className="md:mb-0 mb-12 lg:w-[400px] w-[300px] ">
+      <div className="flex flex-col   lg:flex-row  ">
+        <div className="order-2 lg:order-1 lg:w-2/3">
+        <Carousel
+  swipeable={false}
+  draggable={false}
+  showDots={false}
+  responsive={responsive}
+  ssr={true} // means to render carousel on server-side.
+  infinite={true}
+  // removeArrowOnDeviceType={["tablet", "mobile"]}
+  autoPlaySpeed={1000}
+  keyBoardControl={true}
+  customTransition="all .5"
+  transitionDuration={500}
+  className="container py-5"
+  
+  
+  dotListClass="custom-dot-list-style"
+  itemClass="carousel-item-padding-20-px"
+>
+{categories.map((category) => (
+                    <div
+                      key={category.id}
+                      onClick={() => toggleCategory(category)}
+                      className={`flex flex-row justify-center align-center  text-sm mx-5 lg:mx-10 py-2 border border-solid border-neutral-500 rounded-[30px] max-md:px-5 cursor-pointer ${
+                        selectedCategories.includes(category.name)
+                          ? "text-sky-500 bg-sky-50 border-sky-500"
+                          : "border-neutral-500"
+                      }`}
+                    >
+                      {category.name}
+                    </div>
+                  ))}
+</Carousel>
+        </div>
+        <div className="order-1 lg:order-2  flex justify-end items-center  lg:w-1/3">
+  
+            <div className="md:mb-0 md:px-5 sm:w-[350px] max-sm:w-full ">
               <ReactSearchAutocomplete
                 items={seachList}
                 onSearch={handleOnSearch}
@@ -177,32 +241,13 @@ function UserDashBoard(props) {
                 formatResult={formatResult}
                 styling={{ border: "1.5px solid #C0C0C0", borderRadius: "5px" }}
               />
-            </div>
+          
           </div>
-          <div className=" lg:order-1 flex gap-5  flex-row justify-between items-center">
-            <FaChevronLeft onClick={handlePrevious} />
-            <div className="flex gap-2 self-stretch my-auto font-light max-md:flex-wrap">
-              <div className="flex flex-wrap justify-center gap-4">
-                {categories.slice(currentIndex, currentIndex + 4).map((category) => (
-                    <div
-                      key={category.id}
-                      onClick={() => toggleCategory(category)}
-                      className={`justify-center text-sm px-8 py-2 border border-solid border-neutral-500 rounded-[30px] max-md:px-5 cursor-pointer ${
-                        selectedCategories.includes(category.name)
-                          ? "text-sky-500 bg-sky-50 border-sky-500"
-                          : "border-neutral-500"
-                      }`}
-                    >
-                      {category.name}
-                    </div>
-                  ))}
-              </div>
-            </div>
-            <FaChevronRight onClick={handleNext} />
-          </div>
+    </div>   
+
         </div>
 
-        <div className="flex flex-wrap max-md:justify-center max-md:align-center gap-4 px-10 py-10 mt-10">
+        <div className="flex flex-wrap max-lg:justify-center max-lg:align-center gap-4 px-10 py-10 mt-10">
           {cardsData.map((card) => (
             <div
               key={card.id}   onClick={(e) => {
@@ -363,7 +408,7 @@ function UserDashBoard(props) {
           <div className="w-full md:w-1/2 ">
             <CircleScoreCard />
           </div>
-        </div>
+        </div> 
      
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { FaVolumeUp } from "react-icons/fa";
+import { FaVolumeUp, FaMicrophoneAlt, FaMicrophoneAltSlash } from "react-icons/fa";
 import CameraFeed from "../components/Interview/CameraFeed";
 import BrowserInstructions from "../components/Interview/BrowserInstructions";
 import Checklist from "../components/Interview/Checklist";
@@ -34,9 +34,9 @@ const InterviewScreen = () => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
-  const [isAnimating, setIsAnimating] = useState(false);
   const synth = window.speechSynthesis;
   const fullscreenRef = useRef(null);
+
   const speak = useCallback(
     (text) => {
       if (synth.speaking) {
@@ -54,18 +54,15 @@ const InterviewScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      
       try {
-        const token = localStorage.getItem('accessToken'); // Retrieve the token from local storage
-    
+        const token = localStorage.getItem("accessToken"); // Retrieve the token from local storage
         const response = await axiosInstance.get(`/questions/all?set_id=${id}`, {
           headers: {
-            Accept: 'application/json',
+            Accept: "application/json",
             Token: token, // Include the token in the headers
           },
-        }
-      );
-       
+        });
+
         setQuestionsData(response.data.data);
         console.log("Questions fetched:", response.data.data);
       } catch (error) {
@@ -76,11 +73,11 @@ const InterviewScreen = () => {
     fetchData();
   }, [id]);
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = useCallback(() => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-  };
+  }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     setLoading(true);
     setProgress(30);
 
@@ -102,16 +99,14 @@ const InterviewScreen = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [answer, currentQuestionIndex, handleNextQuestion, questionsData]);
 
   const currentQuestion = questionsData[currentQuestionIndex];
   console.log(currentQuestion);
+
   async function requestCameraAndMicrophone() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
-      });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       const cameraStatus = await navigator.permissions.query({
         name: "camera",
       });
@@ -128,7 +123,7 @@ const InterviewScreen = () => {
     }
   }
 
-  const toggleFullscreen = () => {
+  const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
       fullscreenRef.current.requestFullscreen().catch((err) => {
         console.error(`Failed to enter fullscreen mode: ${err.message}`);
@@ -138,23 +133,23 @@ const InterviewScreen = () => {
         console.error(`Failed to exit fullscreen mode: ${err.message}`);
       });
     }
-  };
+  }, []);
 
-  const checkFullscreenStatus = () => {
+  const checkFullscreenStatus = useCallback(() => {
     const isFullscreen = document.fullscreenElement !== null;
     setPermissions((prev) => ({ ...prev, fullscreen: isFullscreen }));
-  };
+  }, []);
 
-  const handleVisibilityChange = () => {
+  const handleVisibilityChange = useCallback(() => {
     const isActive = document.visibilityState === "visible";
     setPermissions((prev) => ({ ...prev, tabActive: isActive }));
-  };
+  }, []);
 
-  const detectDevToolsOpen = () => {
+  const detectDevToolsOpen = useCallback(() => {
     const threshold = 100;
     const devToolsOpen = window.outerWidth - window.innerWidth > threshold;
     setPermissions((prev) => ({ ...prev, devToolsOpen }));
-  };
+  }, []);
 
   useEffect(() => {
     requestCameraAndMicrophone();
@@ -172,19 +167,22 @@ const InterviewScreen = () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("resize", detectDevToolsOpen);
     };
+  }, [checkFullscreenStatus, detectDevToolsOpen, handleVisibilityChange]);
+
+  const handleFacesDetected = useCallback((results) => {
+    setFaceDetectionResults(results);
   }, []);
 
-  const handleFacesDetected = (results) => {
-    // console.log('Face detection results:', results);
-    setFaceDetectionResults(results);
-  };
-
-  const updateTranscript = (newTranscript) => {
+  const updateTranscript = useCallback((newTranscript) => {
     setAnswer((prevAnswer) => prevAnswer + newTranscript);
-  };
+  }, []);
 
-  const handleAnswerChange = (event) => {
+  const handleAnswerChange = useCallback((event) => {
     setAnswer(event.target.value);
+  }, []);
+
+  const toggleListening = () => {
+    setIsRecording((prevIsRecording) => !prevIsRecording);
   };
 
   useFullscreen(true); // Ensure fullscreen button is shown by default
@@ -196,64 +194,34 @@ const InterviewScreen = () => {
   return (
     <ErrorBoundary>
       <div ref={fullscreenRef} className="container flex h-screen bg-gray-100">
-        <div className="basis-1/3">
-          <aside className="p-4 bg-white shadow-lg">
-            <div className="mt-5 ">
-              <CameraFeed onFacesDetected={handleFacesDetected} /> 
-            </div>
-            <div>
-              <BrowserInstructions />
-            </div>
-
-            <div>
-              <Checklist
-                items={[
-                  { label: "Camera Access", isChecked: permissions.camera },
-                  {
-                    label: "Microphone Access",
-                    isChecked: permissions.microphone,
-                  },
-                  {
-                    label: "Fullscreen Mode",
-                    isChecked: permissions.fullscreen,
-                  },
-                  {
-                    label: "DevTools Closed",
-                    isChecked: !permissions.devToolsOpen,
-                  },
-                ]}
-              />
-            </div>
-            {/* <div className="flex w-full justify-end my-5">
-              <button
-                onClick={toggleFullscreen}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600"
-              >
-                {permissions.fullscreen
-                  ? "Exit Fullscreen"
-                  : "Enter Fullscreen"}
-              </button>
-            </div> */}
-          </aside>
+        <div className="flex flex-col basis-1/3 p-4 bg-white shadow-lg">
+          <div className="mt-5">
+            <CameraFeed onFacesDetected={handleFacesDetected} />
+          </div>
+          <div className="mt-4">
+            <BrowserInstructions />
+          </div>
+          <div className="mt-4">
+            <Checklist
+              items={[
+                { label: "Camera Access", isChecked: permissions.camera },
+                { label: "Microphone Access", isChecked: permissions.microphone },
+                { label: "Fullscreen Mode", isChecked: permissions.fullscreen },
+                { label: "DevTools Closed", isChecked: !permissions.devToolsOpen },
+              ]}
+            />
+          </div>
         </div>
-        <div className="basis-2/3 py-5">
+        <div className="flex flex-col basis-2/3 py-5">
           <div className="p-8 space-y-4">
-            <div className="w-full text-base font-medium leading-5 text-neutral-700 font-spline">
-              {" "}
+            <div className="w-full text-xl font-semibold leading-6 text-neutral-700">
               Question {currentQuestion.id}
             </div>
-            <div className="flex flex-row text-base leading-5 text-neutral-600 font-spline gap-2.5 justify-between px-4 py-4 mt-2.5 w-full  rounded-md border border-solid border-neutral-500 max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col md:flex-row text-base leading-5 text-neutral-600 gap-2.5 justify-between px-4 py-4 mt-2.5 w-full rounded-md border border-solid border-neutral-500">
               <QuestionDisplay
-                questionText={
-                  currentQuestion
-                    ? currentQuestion.title
-                    : "Loading question..."
-                }
+                questionText={currentQuestion ? currentQuestion.title : "Loading question..."}
               />
-
-              <div
-                className="flex items-center px-4  rounded disabled:opacity-50"
-              >
+              <div className="flex items-center px-4 rounded">
                 <span>
                   <GiSoundWaves size={35} color="01AFF4" />
                 </span>
@@ -262,60 +230,70 @@ const InterviewScreen = () => {
                 </span>
               </div>
             </div>
-         
             <div className="relative">
-              <div>
-                <AnswerField
-                  value={answer}
-                  onChange={handleAnswerChange}
-                  placeholder="Type your answer here..."
-                  charLimit={500}
-                  className="w-full  p-2 border border-gray-300 rounded"
-                />
-              </div>
+              <AnswerField
+                value={answer}
+                onChange={handleAnswerChange}
+                placeholder="Type your answer here..."
+                charLimit={500}
+                className="w-full p-3 border border-gray-300 rounded-lg"
+              />
               <div className="absolute top-2 right-2 p-1 text-gray-500 hover:text-gray-700 focus:outline-none">
                 <CiMicrophoneOn size={35} />
               </div>
             </div>
-
             <SpeechToText
               isRecording={isRecording}
               onRecordingChange={setIsRecording}
               onTranscriptUpdate={updateTranscript}
             />
-            <div className="flex flex-row justify-center align-center gap-3 mt-4">
-            <button
+            <div className="flex flex-wrap justify-center items-center gap-3 mt-4">
+              <button
                 onClick={toggleFullscreen}
-                className=" px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600"
+                className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
               >
-                {permissions.fullscreen
-                  ? "Exit Fullscreen"
-                  : "Enter Fullscreen"}
-              </button> 
-
-            <button onClick={() => speak(currentQuestion.title)} disabled={ttsPlaying} className="flex items-center px-4 py-2 rounded-sm bg-blue-600 text-white  disabled:opacity-50">
-                        <FaVolumeUp className="mr-2" />
-                        Replay Question
-                    </button>
+                {permissions.fullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+              </button>
+              <button
+                onClick={() => speak(currentQuestion.title)}
+                disabled={ttsPlaying}
+                className="flex-1 flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              >
+                <FaVolumeUp className="mr-2" />
+                Replay Question
+              </button>
+              <button
+                onClick={toggleListening}
+                className={`flex-1 px-4 py-2 rounded-lg font-semibold text-white ${
+                  isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-700'
+                }`}
+              >
+                {isRecording ? (
+                  <>
+                    <FaMicrophoneAltSlash size={25} className="mr-2" />
+                    Stop Recording
+                  </>
+                ) : (
+                  <>
+                    <FaMicrophoneAlt size={25} className="mr-2" />
+                    Start Recording
+                  </>
+                )}
+              </button>
               <SubmitButton
                 onClick={handleSubmit}
-                disabled={
-                  !answer.trim() ||
-                  !permissions.camera ||
-                  !permissions.microphone
-                }
+                className="flex-1"
+                disabled={!answer.trim() || !permissions.camera || !permissions.microphone}
               />
               <button
                 onClick={handleNextQuestion}
-                className="px-4 py-2 bg-gray-500 text-white rounded-sm hover:bg-gray-600"
+                className="flex-1 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
               >
                 Next
               </button>
             </div>
-            {loading && (
-              <div className="progress-bar" style={{ width: `${progress}%` }} />
-            )}
-            {error && <div className="error">{error}</div>}
+            {loading && <div className="progress-bar mt-4" style={{ width: `${progress}%` }} />}
+            {error && <div className="error mt-4 text-red-500">{error}</div>}
             <ToastContainer />
           </div>
         </div>

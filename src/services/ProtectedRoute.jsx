@@ -13,7 +13,7 @@ function ProtectedRoute() {
             <div className="hidden md:block"> {/* Show only on md and above */}
                 <SideBar />
             </div>
-            <div className="flex-grow sm:ml-10 mt-16">
+            <div className="flex-grow w-1/2">
                 <Outlet />
             </div>
         </div>

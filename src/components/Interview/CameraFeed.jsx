@@ -30,14 +30,13 @@ const detectFaces = async (videoElement) => {
 
 const CameraFeed = ({ onFacesDetected }) => {
     const videoRef = useRef(null);
-    const canvasRef = useRef(null);
     const intervalIdRef = useRef(null);
     const noFaceTimeoutRef = useRef(null);
     const multipleFaceTimeoutRef = useRef(null);
 
     const handleVideoPlay = useCallback(() => {
         intervalIdRef.current = setInterval(async () => {
-            if (videoRef.current && canvasRef.current) {
+            if (videoRef.current) {
                 const detections = await detectFaces(videoRef.current);
                 console.log('Detections:', detections);
 
@@ -64,8 +63,14 @@ const CameraFeed = ({ onFacesDetected }) => {
                     clearTimeout(multipleFaceTimeoutRef.current);
                     multipleFaceTimeoutRef.current = null;
                 }
+
+                // Pass detections to the parent component
+                onFacesDetected({
+                    faceVerified,
+                    multiplePeopleDetected
+                });
             }
-        },500);
+        }, 500);
     }, [onFacesDetected]);
 
     useEffect(() => {
@@ -100,10 +105,9 @@ const CameraFeed = ({ onFacesDetected }) => {
 
     return (
         <div>
-            <video ref={videoRef} autoPlay muted style={{ width: '100%' ,borderRadius:'1%'}} />
-            <canvas ref={canvasRef} style={{ position: 'absolute' }} />
+            <video ref={videoRef} autoPlay muted style={{ width: '100%', borderRadius: '1%' }} />
         </div>
     );
 };
 
-export default CameraFeed;
+export default React.memo(CameraFeed);

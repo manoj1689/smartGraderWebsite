@@ -32,12 +32,13 @@ function SideBar() {
 
   return (
     <div
-    className={`flex flex-col h-full  shadow-md bg-sky-100  ${
+    className={`flex flex-col  overflow-y-auto h-full shadow-md bg-sky-100  ${
       isSidebarOpen ? 'w-64' : 'w-20'
-    } md:hover:w-64 fixed xl:relative z-50`}
+    } md:hover:w-64 relative z-50`}
     onMouseEnter={() => setIsSidebarOpen(true)}
     onMouseLeave={() => setIsSidebarOpen(false)}
-  >
+  
+    style={{ scrollBehavior: 'smooth' }}>
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
         <Link to="/signIn/dashboard">
         <GiHamburgerMenu color='grey' size={20} />
