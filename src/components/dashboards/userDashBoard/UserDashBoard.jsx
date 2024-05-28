@@ -119,18 +119,7 @@ function UserDashBoard(props) {
     }
   };
   //  console.log("categories Data top Bar",selectedCategories)
-  const handlePrevious = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prevIndex) => prevIndex - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentIndex < categories.length - 4) {
-      setCurrentIndex((prevIndex) => prevIndex + 1);
-    }
-  };
-
+ 
   const handleCardClick = (id) => {
     navigate(`/signIn/dashboard/question/${id}`);
   };
@@ -170,7 +159,7 @@ function UserDashBoard(props) {
   
         
        <div className="flex  gap-5 my-16  mb-10 justify-between ">
-       <div className="flex flex-col md:flex-row  gap-5 px-5 ">
+       <div className="flex flex-col lg:flex-row  gap-5 px-5 ">
   <div className="flex text-sky-500">
     <span className="block text-base md:text-xl lg:text-2xl xl:text-3xl">
       Hello!
@@ -191,25 +180,35 @@ function UserDashBoard(props) {
         </div>
       
         
-      <div className="rounded-md border border-solid my-5 px-4 py-10 border-black border-opacity-10 ">
+      <div className="rounded-md border border-solid my-5 py-10 border-black border-opacity-10 ">
      
       <div className="flex flex-col   lg:flex-row  ">
         <div className="order-2 lg:order-1 lg:w-2/3">
         <Carousel
-  swipeable={false}
+        
+  swipeable={true}
   draggable={false}
   showDots={false}
   responsive={responsive}
   ssr={true} // means to render carousel on server-side.
   infinite={true}
-  // removeArrowOnDeviceType={["tablet", "mobile"]}
+  //removeArrowOnDeviceType={["tablet", "mobile"]}
   autoPlaySpeed={1000}
   keyBoardControl={true}
   customTransition="all .5"
   transitionDuration={500}
   className="container py-5"
+  customLeftArrow={
+    <div className="absolute z-10 left-2 bg-gray-400 bg-opacity-60 px-3 py-3 rounded-full">
+    <FaChevronLeft className="max-w-6 cursor-pointer text-primary-300" />
+  </div>
   
-  
+  }
+  customRightArrow={
+    <div className="absolute z-10 right-2 bg-gray-400 bg-opacity-60 px-3 py-3 rounded-full">
+    <FaChevronRight className="max-w-6 cursor-pointer text-primary-300" />
+  </div>
+  }
   dotListClass="custom-dot-list-style"
   itemClass="carousel-item-padding-20-px"
 >
@@ -217,7 +216,7 @@ function UserDashBoard(props) {
                     <div
                       key={category.id}
                       onClick={() => toggleCategory(category)}
-                      className={`flex flex-row justify-center align-center  text-sm mx-5 lg:mx-10 py-2 border border-solid border-neutral-500 rounded-[30px] max-md:px-5 cursor-pointer ${
+                      className={`flex justify-center align-center text-sm  py-2 mx-5 md:mx-10  border border-solid border-neutral-500 rounded-[30px]  cursor-pointer ${
                         selectedCategories.includes(category.name)
                           ? "text-sky-500 bg-sky-50 border-sky-500"
                           : "border-neutral-500"

@@ -193,7 +193,7 @@ const InterviewScreen = () => {
 
   return (
     <ErrorBoundary>
-      <div ref={fullscreenRef} className="container flex h-screen bg-gray-100">
+      <div ref={fullscreenRef} className="container mx-auto flex h-screen bg-gray-100">
         <div className="flex flex-col basis-1/3 p-4 bg-white shadow-lg">
           <div className="mt-5">
             <CameraFeed onFacesDetected={handleFacesDetected} />
