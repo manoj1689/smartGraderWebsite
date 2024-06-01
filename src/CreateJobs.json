@@ -1,0 +1,8 @@
+[
+    { "id": 1, "title": "Software Engineer", "level": "Mid", "status": "Open", "applicants": 20, "interviews": 5 },
+    { "id": 2, "title": "Data Analyst", "level": "Junior", "status": "Closed", "applicants": 15, "interviews": 3 },
+    { "id": 3, "title": "Software Engineer 1", "level": "Mid", "status": "Open", "applicants": 20, "interviews": 5 },
+    { "id": 4, "title": "Data Analyst 1", "level": "Junior", "status": "Closed", "applicants": 15, "interviews": 3 },
+    { "id": 5, "title": "Software Engineer 2", "level": "Mid", "status": "Open", "applicants": 20, "interviews": 5 },
+    { "id": 6, "title": "Data Analyst 2", "level": "Junior", "status": "Closed", "applicants": 15, "interviews": 3 }
+  ]

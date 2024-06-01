@@ -5,7 +5,9 @@ import codingDev from "../../../assets/individual/codingdeveloper.png";
 import star from "../../../assets/individual/Star.png";
 import graderLogo from "../../../assets/individual/graderIcon.png";
 import womanCheck from "../../../assets/individual/woman-plan-todo-list.png";
-import java from "../../../assets/individual/javaLogo.png"
+import java from "../../../assets/individual/javaLogo.png";
+import achievement from "../../../assets/individual/certificateAchievements.png"
+import interView from "../../../assets/individual/job-interview.png"
 import LineScoreCard from "./LineScoreCard";
 import CircleScoreCard from "./CircleScoreCard";
 import { FaBell } from "react-icons/fa";
@@ -17,34 +19,34 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
-function UserDashBoard(props) {
+import NotificationBar from "../../NotificationBar/NotificationBar";
+function UserDashBoard() {
   const navigate = useNavigate();
   const [cardsData, setCardsData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [seachList, setSearchList] = useState([]);
+  const [searchList, setSearchList] = useState([]);
   const [query, setQuery] = useState("");
   const prevQueryRef = useRef("");
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 1500 },
-      items: 3
+      items: 5,
     },
     desktop: {
       breakpoint: { max: 1500, min: 1264 },
-      items: 2
+      items: 4,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2
+      items: 2,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
+      items: 1,
+    },
   };
   const fetchSearch = async (searchTerm) => {
     if (searchTerm) {
@@ -77,17 +79,20 @@ function UserDashBoard(props) {
 
     const fetchCardData = async () => {
       try {
-        const token = localStorage.getItem('accessToken'); // Retrieve the token from local storage
-    
-        const response = await axiosInstance.get("/sets/all?sub_category_id=10", {
-          headers: {
-            Accept: 'application/json',
-            Token: token, // Include the token in the headers
-          },
-        });
-    
+        const token = localStorage.getItem("accessToken"); // Retrieve the token from local storage
+
+        const response = await axiosInstance.get(
+          "/sets/all?sub_category_id=10",
+          {
+            headers: {
+              Accept: "application/json",
+              Token: token, // Include the token in the headers
+            },
+          }
+        );
+
         const responseData = response.data;
-    
+
         // Filter the data based on selected categories
         let filteredData = responseData.data;
         if (selectedCategories.length > 0) {
@@ -95,7 +100,7 @@ function UserDashBoard(props) {
             selectedCategories.includes(item.name)
           );
         }
-    
+
         setCardsData(filteredData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -119,7 +124,7 @@ function UserDashBoard(props) {
     }
   };
   //  console.log("categories Data top Bar",selectedCategories)
- 
+
   const handleCardClick = (id) => {
     navigate(`/signIn/dashboard/question/${id}`);
   };
@@ -155,101 +160,76 @@ function UserDashBoard(props) {
   };
 
   return (
-    <div className="container mx-auto w-full px-4 md:px-10 ">
-  
-        
-       <div className="flex  gap-5 my-16  mb-10 justify-between ">
-       <div className="flex flex-col lg:flex-row  gap-5 px-5 ">
-  <div className="flex text-sky-500">
-    <span className="block text-base md:text-xl lg:text-2xl xl:text-3xl">
-      Hello!
-    </span>{"  "}
-    <span className="block text-base  md:text-xl lg:text-2xl xl:text-3xl pl-1 md:pl-3 text-sky-500">
-      {props.individualData.name}
-    </span>
-  </div>
-  <div className="flex-auto my-auto text-sm sm:text-base md:text-lg font-light leading-4 text-neutral-500">
-    Here's the current status for today!
-  </div>
-</div>
+    <div className="container mx-auto w-full h-full px-4 md:px-10 ">
+     <NotificationBar/>
 
-          <div className="max-lg:hidden">
-          <FaBell size={30} color="#01AFF4"/>
-          </div>
-          
-        </div>
-      
-        
       <div className="rounded-md border border-solid my-5 py-10 border-black border-opacity-10 ">
-     
-      <div className="flex flex-col   lg:flex-row  ">
-        <div className="order-2 lg:order-1 lg:w-2/3">
-        <Carousel
         
-  swipeable={true}
-  draggable={false}
-  showDots={false}
-  responsive={responsive}
-  ssr={true} // means to render carousel on server-side.
-  infinite={true}
-  //removeArrowOnDeviceType={["tablet", "mobile"]}
-  autoPlaySpeed={1000}
-  keyBoardControl={true}
-  customTransition="all .5"
-  transitionDuration={500}
-  className="container py-5"
-  customLeftArrow={
-    <div className="absolute z-10 left-2 bg-gray-400 bg-opacity-60 px-3 py-3 rounded-full">
-    <FaChevronLeft className="max-w-6 cursor-pointer text-primary-300" />
-  </div>
-  
-  }
-  customRightArrow={
-    <div className="absolute z-10 right-2 bg-gray-400 bg-opacity-60 px-3 py-3 rounded-full">
-    <FaChevronRight className="max-w-6 cursor-pointer text-primary-300" />
-  </div>
-  }
-  dotListClass="custom-dot-list-style"
-  itemClass="carousel-item-padding-20-px"
->
-{categories.map((category) => (
-                    <div
-                      key={category.id}
-                      onClick={() => toggleCategory(category)}
-                      className={`flex justify-center align-center text-sm  py-2 mx-5 md:mx-10  border border-solid border-neutral-500 rounded-[30px]  cursor-pointer ${
-                        selectedCategories.includes(category.name)
-                          ? "text-sky-500 bg-sky-50 border-sky-500"
-                          : "border-neutral-500"
-                      }`}
-                    >
-                      {category.name}
-                    </div>
-                  ))}
-</Carousel>
-        </div>
-        <div className="order-1 lg:order-2  flex justify-end items-center  lg:w-1/3">
-  
-            <div className="md:mb-0 md:px-5 sm:w-[350px] max-sm:w-full ">
+        <div className=" flex justify-end items-center">
+            <div className="md:mb-0 px-4 sm:w-[350px] max-sm:w-full">
               <ReactSearchAutocomplete
-                items={seachList}
+                items={searchList}
                 onSearch={handleOnSearch}
                 onHover={handleOnHover}
                 onSelect={handleOnSelect}
                 onFocus={handleOnFocus}
                 autoFocus
                 formatResult={formatResult}
-                styling={{ border: "1.5px solid #C0C0C0", borderRadius: "5px" }}
+                styling={{ border: "1.5px solid #C0C0C0", borderRadius: "5px" ,zIndex:"50" }}
               />
-          
+            </div>
           </div>
-    </div>   
-
-        </div>
+       
+          <div className="container mx-auto lg:w-11/12">
+            <Carousel
+              swipeable={true}
+              draggable={false}
+              showDots={false}
+              responsive={responsive}
+              ssr={true}
+              infinite={true}
+              autoPlaySpeed={1000}
+              keyBoardControl={true}
+              customTransition="all .5"
+              transitionDuration={500}
+              className="container  py-5"
+              customLeftArrow={
+                <div className="absolute z-10 left-1 bg-gray-400 bg-opacity-60 px-3 py-3 rounded-full">
+                  <FaChevronLeft className="max-w-6 cursor-pointer text-primary-300" />
+                </div>
+              }
+              customRightArrow={
+                <div className="absolute z-10 right-1 bg-gray-400 bg-opacity-60 px-3 py-3 rounded-full">
+                  <FaChevronRight className="max-w-6 cursor-pointer text-primary-300" />
+                </div>
+              }
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item-padding-20-px  "
+            >
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  onClick={() => toggleCategory(category)}
+                  className={`flex justify-center align-center text-sm py-2 mx-2 border border-solid border-neutral-500 rounded-[30px] cursor-pointer ${
+                    selectedCategories.includes(category.name)
+                      ? "text-sky-500 bg-sky-50 border-sky-500"
+                      : "border-neutral-500"
+                  }`}
+                >
+                  {category.name}
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        
+        
+  
 
         <div className="flex flex-wrap max-lg:justify-center max-lg:align-center gap-4 px-10 py-10 mt-10">
           {cardsData.map((card) => (
             <div
-              key={card.id}   onClick={(e) => {
+              key={card.id}
+              onClick={(e) => {
                 e.stopPropagation();
                 handleCardClick(card.id);
               }}
@@ -258,20 +238,20 @@ function UserDashBoard(props) {
               <div className="flex flex-col justify-center text-xs leading-6 whitespace-nowrap bg-sky-50 rounded-md">
                 <div className="flex overflow-hidden relative flex-col pt-4 pb-1 w-full aspect-w-1 aspect-h-1">
                   <div className="flex flex-row w-full justify-around">
-                  <img
-                    loading="lazy"
-                    src={java}
-                    alt={card.title}
-                    className="w-20 h-20"
-                  />
-                  <img
-                    loading="lazy"
-                    alt="Coding"
-                    src={codingDev}
-                    className="self-end aspect-square w-12"
-                  />
+                    <img
+                      loading="lazy"
+                      src={java}
+                      alt={card.title}
+                      className="w-20 h-20"
+                    />
+                    <img
+                      loading="lazy"
+                      alt="Coding"
+                      src={codingDev}
+                      className="self-end aspect-square w-12"
+                    />
                   </div>
-                
+
                   <div className="flex relative gap-1 py-1.5 mt-3 bg-white rounded-sm shadow-sm">
                     <img
                       loading="lazy"
@@ -284,7 +264,7 @@ function UserDashBoard(props) {
                 </div>
               </div>
               <div className="flex gap-2 justify-between mt-4">
-                <div className="flex gap-1 text-sm leading-4" >
+                <div className="flex gap-1 text-sm leading-4">
                   <img
                     loading="lazy"
                     alt="grader"
@@ -315,10 +295,7 @@ function UserDashBoard(props) {
                   <div>{card.questions_count} Questions</div>
                 </div>
               </div>
-              <button
-                className="flex items-center justify-center px-3 py-2 mt-4 text-xs text-white bg-sky-500 rounded-md border border-sky-500 border-solid hover:bg-slate-800 hover:border-slate-800"
-              
-              >
+              <button className="flex items-center justify-center px-3 py-2 mt-4 text-xs text-white bg-sky-500 rounded-md border border-sky-500 border-solid hover:bg-slate-800 hover:border-slate-800">
                 <div className="flex flex-row items-center gap-2">
                   <div>Take a Test</div>
                   <div>
@@ -330,85 +307,170 @@ function UserDashBoard(props) {
           ))}
         </div>
       </div>
-      
-        <div className="pt-5 my-10  pl-8 bg-white rounded-md border border-solid border-black border-opacity-10 max-md:pl-5">
-          <div className="flex flex-col md:flex-row ">
-            <div className="md:basis-2/3 justify-center items-center  flex flex-col xl:flex-row  gap-5  max-md:gap-0">
-              <div className="  flex flex-col sm:flex-row ">
-                <div >
-                  <div className="font-medium  text-slate-800">
-                    Set Your Own Questions{" "}
-                  </div>
 
-                  <div className="flex flex-col md:flex-row ">
-                    <div className=" flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 ">
+      <div className="pt-5 my-10  pl-8 bg-white rounded-md border border-solid border-black border-opacity-10 max-md:pl-5">
+        <div className="flex flex-col md:flex-row ">
+          <div className="md:basis-2/3 justify-center items-center  flex flex-col xl:flex-row  gap-5  max-md:gap-0">
+            <div className="  flex flex-col sm:flex-row ">
+              <div>
+                <div className="font-medium  text-slate-800">
+                  Set Your Own Questions{" "}
+                </div>
+
+                <div className="flex flex-col md:flex-row ">
+                  <div className=" flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 ">
+                    <div className="flex gap-2.5 mt-7">
+                      <IoCheckmark size={28} color="#01AFF4" />
+                      <div className="flex-auto my-auto">
+                        Create by Selecting Domain
+                      </div>
+                    </div>
+                    <div className="flex gap-2.5 mt-1.5">
+                      <IoCheckmark size={28} color="#01AFF4" />
+                      <div className="flex-auto my-auto">
+                        Create by Writing JD
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col ml-5  max-md:ml-0 max-md:w-full ">
+                    <div className="flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 ">
                       <div className="flex gap-2.5 mt-7">
                         <IoCheckmark size={28} color="#01AFF4" />
                         <div className="flex-auto my-auto">
-                          Create by Selecting Domain
+                          Create by Resume Uploading
                         </div>
                       </div>
                       <div className="flex gap-2.5 mt-1.5">
                         <IoCheckmark size={28} color="#01AFF4" />
                         <div className="flex-auto my-auto">
-                          Create by Writing JD
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col ml-5  max-md:ml-0 max-md:w-full ">
-                      <div className="flex flex-col self-stretch my-auto text-lg font-light leading-6 text-neutral-500 ">
-                        <div className="flex gap-2.5 mt-7">
-                          <IoCheckmark size={28} color="#01AFF4" />
-                          <div className="flex-auto my-auto">
-                            Create by Resume Uploading
-                          </div>
-                        </div>
-                        <div className="flex gap-2.5 mt-1.5">
-                          <IoCheckmark size={28} color="#01AFF4" />
-                          <div className="flex-auto my-auto">
-                            Create by Your Own Questions
-                          </div>
+                          Create by Your Own Questions
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="md:basis-1/6 flex mx-auto justify-center items-center lg:pt-10 w-full h-full">
-  <button
-    onClick={() => navigate("/signIn/dashboard/generatequestion")}
-    type="button"
-    className="flex flex-row items-center justify-center bg-blue-400 w-50 md:w-60 my-5 text-white px-4 py-2 mt-4 rounded-sm hover:bg-blue-500 transition duration-300"
-  >
-    <span className="mr-2">Let's Get Started</span>
-    <FiArrowUpRight size={20} />
-  </button>
-</div>
-
-</div>
-            <div className="flex md:basis-1/3 justify-center items-center ">
-              <img
-                loading="lazy"
-                alt="womanCheck"
-                src={womanCheck}
-                className="w-96"
-              />
+            <div className="md:basis-1/6 flex mx-auto justify-center items-center lg:pt-10 w-full h-full">
+              <button
+                onClick={() => navigate("/signIn/dashboard/generatequestion")}
+                type="button"
+                className="flex flex-row items-center justify-center bg-blue-400 w-50 md:w-60 my-5 text-white px-4 py-2 mt-4 rounded-sm hover:bg-blue-500 transition duration-300"
+              >
+                <span className="mr-2">Let's Get Started</span>
+                <FiArrowUpRight size={20} />
+              </button>
             </div>
           </div>
+          <div className="flex md:basis-1/3 justify-center items-center ">
+            <img
+              loading="lazy"
+              alt="womanCheck"
+              src={womanCheck}
+              className="w-96"
+            />
+          </div>
         </div>
-        <div className="flex flex-col mb-10 md:flex-row gap-3  max-md:flex-col max-md:gap-0">
-          <div
-            className="w-full md:w-1/2 cursor-pointer"
-            onClick={() => navigate("/signIn/dashboard/result")}
-          >
-            <LineScoreCard />
+      </div>
+      <div className="flex flex-col mb-10 md:flex-row gap-3  max-md:flex-col max-md:gap-0">
+        <div
+          className="w-full md:w-1/2 cursor-pointer"
+          onClick={() => navigate("/signIn/dashboard/result")}
+        >
+          <LineScoreCard />
+        </div>
+        <div className="w-full md:w-1/2 ">
+          <CircleScoreCard />
+        </div>
+      </div>
+      <div className="my-10 flex flex-col lg:flex-row gap-3">
+        <div className="flex flex-col md:flex-row gap-3  lg:w-1/2">
+        <div className="flex flex-col  py-8 pr-7 pl-3.5 bg-white  border border-solid border-black border-opacity-10 w-full ">
+          <div className="flex gap-1.5 self-start text-lg font-medium leading-6 whitespace-nowrap text-slate-800">
+            <img
+              loading="lazy"
+              alt="achievement"
+              src={achievement}
+              className="shrink-0 aspect-square w-[26px]"
+            />
+            <div className="flex-auto my-auto">Badges/Achievements</div>
           </div>
-          <div className="w-full md:w-1/2 ">
-            <CircleScoreCard />
+          <div className="shrink-0 mt-4 ml-3.5 w-full h-px  rounded-md border border-solid border-black border-opacity-10" />
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4212c04f5674154ed14d0742e085f4c32dc5f61d0f32992d5833690ac2b6ce6f?"
+            className="mt-2.5 max-w-full aspect-[1.33] w-[109px]"
+          />
+          <div className="ml-5 text-sm leading-5 text-neutral-500">
+            Entry Level
           </div>
-        </div> 
-     
+        </div>
+        <div className="flex flex-col  justify-center font-light  rounded-md border border-solid border-black border-opacity-10 w-full ">
+        <div className="flex overflow-hidden bg-white relative flex-col items-start  lg:p-2.5 w-full aspect-[2]    md:aspect-[1.28] ">
+  <img
+    loading="lazy"
+    alt="interview"
+    src={interView}
+    className="absolute bottom-0 right-0 object-cover "
+  />
+  <div className="relative text-lg px-2 font-medium leading-6 text-slate-800">
+    <br />
+    Preparation
+    <br />
+    Tips
+  </div>
+  <div className="relative mt-3  px-2  text-sm leading-5 text-neutral-500">
+    How to prepare <br />
+    for the upcoming session
+  </div>
+  <div className="relative mt-3.5  px-2  text-xs leading-4 text-sky-500 underline">
+    Read More
+  </div>
+</div>
+
+    </div>
+
+        </div>
+      
+    <div className="flex flex-col px-6 py-8 bg-white rounded-md border border-solid border-black border-opacity-10 lg:w-1/2 max-md:px-5">
+      <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full">
+        <div className="flex gap-1.5 self-start text-lg font-medium leading-6 text-slate-800">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/6e11f9e3c86ac0afbffedab4ee00ede66e4d93d01723eee11339e11c2b3652f6?"
+            className="shrink-0 aspect-square w-[26px]"
+          />
+          <div className="flex-auto my-auto">Review Past Interviews</div>
+        </div>
+        <div className="justify-center px-2.5 py-2 text-xs font-light leading-4 rounded-md border border-solid border-neutral-500 text-neutral-500">
+          View All
+        </div>
+      </div>
+      <div className="shrink-0 mt-3 h-px border border-solid border-black border-opacity-10 max-md:max-w-full" />
+      <div className="flex gap-5 w-full justify-between self-start mt-6 text-base leading-4 text-slate-800">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/2921a7134b0e918d2a777773b8d4a89b1372d9bda49d35dd22a64ca69e31f87c?"
+          className="shrink-0 w-24 aspect-[4.76]"
+        />
+        <div className="flex-auto my-auto max-sm:text-sm">Frond End Developer</div>
+      </div>
+      <div className=" mt-2 text-base font-light leading-5 text-neutral-500  ">
+        <ul className="my-5">
+          <li className="my-3">
+          Candidate excellent on technical skills but have to
+        improve communications skills.
+          </li>
+          <li className="my-3">
+          All other have good command on code.{" "}
+          </li>
+          
+        </ul>
+      
+      </div>
+    </div>
+      </div>
     </div>
   );
 }

@@ -38,7 +38,7 @@ const [educationalData,setEducationalData]=useState()
         } else {
           console.error("Access token not found in local storage");
         }
-      }, [individualData,educationalData,organizationData]);
+      }, []);
   return (
     <div>{ dashboardKey==="U" &&  <UserDashBoard individualData={individualData} />
         }

@@ -125,7 +125,7 @@ const GenerateQuestionsPage = () => {
   };
 
   return (
-    <div className="container flex flex-col lg:flex-row">
+    <div className="container flex flex-col mx-auto lg:flex-row">
       <div className="data_container mx-auto py-8 px-4 order-2 md:ml-10 lg:order-1 w-full lg:w-4/6">
         <h1 className="text-3xl font-bold mb-6">Generate Exam Question Set</h1>
         <div className="bg-white shadow-md rounded-lg p-6">

@@ -1,18 +1,26 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-function OrganizationDashBorad(props) {
-    const navigate=useNavigate()
-    const handleLogout=()=>{
-        localStorage.removeItem("loggedIn")
-        navigate("/")
-    }
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { FaBell } from "react-icons/fa";
+import NotificationBar from "../../NotificationBar/NotificationBar";
+import CurrentJobs from "./CurrentJobs";
+function OrganizationDashboard() {
+  const navigate = useNavigate();
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    navigate("/");
+  };
+
   return (
-    <div>
-        <div>welcome {props.organizationData.name}</div>
-        <button onClick={handleLogout} type='button' className='bg-red-400'>Logout</button>
+    <div className="container mx-auto w-full h-full px-4 md:px-10">
+    <NotificationBar/>
+    <CurrentJobs/>
+      <button onClick={handleLogout} type="button" className="bg-red-400">
+        Logout
+      </button>
     </div>
-  )
+  );
 }
 
-
-export default OrganizationDashBorad
+export default OrganizationDashboard;
