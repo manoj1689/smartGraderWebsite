@@ -1,29 +1,30 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import { FaFacebookF,FaYoutube, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import logoImage from '../../assets/home/logo-white.png';
-
+import { SiGmail } from "react-icons/si";
+import { FaWindowClose } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="bg-neutral-900 py-5 text-white">
       <div className="container mx-auto px-4 text-center">
         <div className="flex justify-center space-x-4 mb-4">
-          <a href="https://facebook.com" className="text-white hover:text-sky-500 transition duration-300">
+          <a href="https://www.facebook.com/pages/creation/?ref_type=comet_home" className="text-white hover:text-sky-500 transition duration-300">
             <FaFacebookF />
           </a>
-          <a href="https://twitter.com" className="text-white hover:text-sky-500 transition duration-300">
-            <FaTwitter />
+          <a href=" https://www.youtube.com/channel/UCftfkcIZ12QjtOarvNepG8g" className="text-white hover:text-sky-500 transition duration-300">
+            <FaYoutube />
           </a>
-          <a href="https://google.com" className="text-white hover:text-sky-500 transition duration-300">
-            <FaGoogle />
+          <a href="smartgrader02@gmail.com" className="text-white hover:text-sky-500 transition duration-300">
+            <SiGmail />
           </a>
-          <a href="https://instagram.com" className="text-white hover:text-sky-500 transition duration-300">
+          <a href=" https://www.instagram.com/smart_grader/" className="text-white hover:text-sky-500 transition duration-300">
             <FaInstagram />
           </a>
-          <a href="https://linkedin.com" className="text-white hover:text-sky-500 transition duration-300">
+          <a href="https://www.linkedin.com/in/smart-grader-a36536311/" className="text-white hover:text-sky-500 transition duration-300">
             <FaLinkedinIn />
           </a>
-          <a href="https://github.com" className="text-white hover:text-sky-500 transition duration-300">
-            <FaGithub />
+          <a href="https://x.com/smart_grader" className="text-white hover:text-sky-500 transition duration-300">
+            <FaWindowClose />
           </a>
         </div>
         <div className="border-t border-gray-700 pt-4">

@@ -7,24 +7,34 @@ const Pricing = () => {
     {
       plan: "Individual",
       price: "Free",
-      features: ["Lorem ipsum dolor", "Nulla ornare maximus", "Nulla molestie"]
+      features: [
+        "Access to AI-driven assessments",
+        "Personalized feedback",
+        "Progress tracking",
+        "Limited to 5 assessments per month"
+      ]
     },
     {
-      plan: "Education Institutes",
-      price: "$599 / Month",
-      features: ["Lorem ipsum dolor", "Nulla ornare maximus", "Nulla molestie"]
+      plan: "Educational Institutes",
+      price: "₹45,000 / Month",
+      features: [
+        "Unlimited assessments",
+        "Detailed analytics",
+        "Customizable interview questions",
+        "Student progress tracking",
+        "Dedicated support"
+      ]
     },
     {
       plan: "Startups",
-      price: "$299 / Month",
+      price: "₹22,500 / Month",
       features: [
-        "Everything in Basic Plan",
-        "Lorem ipsum dolor",
-        "Nulla ornare maximus",
-        "Aliquam at posuere",
-        "Nunc ultrices accumsan",
-        "Nulla ornare maximus",
-        "Nulla molestie"
+        "Everything in Educational Institutes Plan",
+        "Employer branding features",
+        "Customizable job descriptions",
+        "Resume and candidate evaluation",
+        "Interview simulation and feedback",
+        "Priority support"
       ]
     }
   ];
@@ -47,11 +57,11 @@ const Pricing = () => {
               style={{ minHeight: '400px' }} // Set a minimum height for consistent card size
             >
               <div>
-                <h3 className="text-xl font-bold mb-4 text-sky-600  font-spline text-left">{pricing.plan}</h3>
-                <p className="text-2xl font-bold mb-4 text-gray-900  font-spline text-left">{pricing.price}</p>
+                <h3 className="text-xl font-bold mb-4 text-sky-600 font-spline text-left">{pricing.plan}</h3>
+                <p className="text-2xl font-bold mb-4 text-gray-900 font-spline text-left">{pricing.price}</p>
                 <ul className="mb-4 text-gray-700 text-left">
                   {pricing.features.map((feature, index) => (
-                    <li key={index} className="flex items-center  font-spline mb-2">
+                    <li key={index} className="flex items-center font-spline mb-2">
                       <FaCheckCircle className="text-sky-600 mr-2" />
                       {feature}
                     </li>
@@ -63,7 +73,7 @@ const Pricing = () => {
                 href="/createAccount"
                 className="bg-sky-600 text-white px-4 py-2 rounded-md flex items-center justify-center transition-transform duration-300 mt-auto"
               >
-                <span className=' font-spline'>Get Started</span>
+                <span className='font-spline'>Get Started</span>
                 <FaArrowRight className="ml-2" />
               </motion.a>
             </motion.div>

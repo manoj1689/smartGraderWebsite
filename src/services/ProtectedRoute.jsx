@@ -7,10 +7,10 @@ function ProtectedRoute() {
     const auth = localStorage.getItem("loggedIn");
     return auth ? (
         <div className="flex min-h-screen">
-            <div className="md:hidden"> {/* Hide on md and above */}
+            <div className="lg:hidden"> {/* Hide on md and above */}
                 <MobileBar />
             </div>
-            <div className="hidden md:block"> {/* Show only on md and above */}
+            <div className="hidden lg:block"> {/* Show only on lg and above */}
                 <SideBar />
             </div>
             <div className="flex-grow w-1/2">
