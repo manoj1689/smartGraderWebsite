@@ -15,7 +15,7 @@ const QuestionPage = (props) => {
           throw new Error('No access token found');
         }
 
-        const response = await fetch(`http://34.131.249.177:8000/questions/all?set_id=${id}`, {
+        const response = await fetch(`https://api.smartgrader.in/questions/all?set_id=${id}`, {
           headers: {
             Accept: 'application/json',
             Token: token,

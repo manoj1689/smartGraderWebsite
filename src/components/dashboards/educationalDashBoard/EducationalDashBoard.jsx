@@ -1,15 +1,17 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import Visitor_landing from './Visitor/Visitor_landing';
 function EducationalDashBoard(props) {
-    const navigate=useNavigate()
-    const handleLogout=()=>{
-        localStorage.removeItem("loggedIn")
-        navigate("/")
-    }
+    // const navigate=useNavigate()
+    // const handleLogout=()=>{
+    //     localStorage.removeItem("loggedIn")
+    //     navigate("/")
+    // }
   return (
     <div>
-        <div>Hello  {(props.educationalData.name)}</div>
-        <button onClick={handleLogout} type='button' className='bg-red-400'>Logout</button>
+ 
+        <Visitor_landing/>
+    
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 import institutionsImage from '../../assets/home/institutions-banner.png';
 import buttonRoundedTickImage from '../../assets/home/rounded-tick-icon.png';
-
+import HomeLine from "../../assets/home/HomeLine.png"
 const cardVariants = {
 
   offscreen: {
@@ -34,7 +34,7 @@ const InstitutionsSection = () => {
       variants={cardVariants}
       style={{ marginBottom: '20px' }} // Added style for margin-bottom
     >
-      <div className="w-full md:w-1/2 flex items-center">
+      <div className="w-full md:w-1/3 flex items-center">
         <motion.img
           loading="lazy"
           src={institutionsImage}
@@ -42,10 +42,15 @@ const InstitutionsSection = () => {
           alt="Institutions Banner"
         />
       </div>
-      <div className="flex flex-col justify-center w-full md:w-1/2 text-slate-800">
+      <div className="flex flex-col justify-center w-full md:w-2/3 text-slate-800">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
           Robust Testing Platform <br /> for Educational Institutions
         </h2>
+        <img
+        loading="lazy"
+        src={HomeLine}
+        className="mt-1.5 max-w-full aspect-[14.29] w-[307px]"
+      />
         <div className="mt-8 space-y-4">
           <div className="flex items-center gap-2">
             <img

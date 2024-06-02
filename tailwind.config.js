@@ -25,8 +25,7 @@ export default {
         shadow: "var(--shadow)",
       },
       fontFamily: {
-        spline: ["Spline Sans", "sans-serif"]
-      
+        'spline': ['"Spline Sans"', 'sans-serif'],
       },
       keyframes: {
         colorChange: {

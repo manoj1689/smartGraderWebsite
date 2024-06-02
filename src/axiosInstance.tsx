@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://34.131.249.177:8000', // Replace with your FastAPI server URL
+  baseURL: 'https://api.smartgrader.in', // Replace with your FastAPI server URL
   headers: {
     'Content-Type': 'application/json',
   },

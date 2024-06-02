@@ -55,7 +55,7 @@ function Password() {
    
   
     try {
-      const response = await fetch(`http://34.131.249.177:8000/users/getotp?email=${encodeURIComponent(formData.email)}`, {
+      const response = await fetch(`https://api.smartgrader.in/users/getotp?email=${encodeURIComponent(formData.email)}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -94,7 +94,7 @@ function Password() {
       
       const otpVal = enteredOtp; // Assuming OTP is hardcoded for now
   
-      const url = `http://34.131.249.177:8000/users/verifyotp?email=${storedEmail}&otp=${otpVal}`;
+      const url = `https://api.smartgrader.in/users/verifyotp?email=${storedEmail}&otp=${otpVal}`;
   
       const response = await fetch(url, {
         method: "POST",
@@ -124,7 +124,7 @@ function Password() {
       const storedEmail = localStorage.getItem("emailId");
       const otpVal = enteredOtp; // Assuming OTP is hardcoded for now
   
-      const url = `http://34.131.249.177:8000/users/updatepw?email=${storedEmail}&otp=${otpVal}`;
+      const url = `https://api.smartgrader.in/users/updatepw?email=${storedEmail}&otp=${otpVal}`;
   
       const response = await fetch(url, {
         method: "POST",

@@ -10,7 +10,7 @@ function NotificationBar() {
     // Make sure accessToken is not null or undefined
     if (accessToken) {
       // Fetch user data using access token
-      fetch("http://34.131.249.177:8000/users/me?jwt=" + accessToken, {
+      fetch("https://api.smartgrader.in/users/me?jwt=" + accessToken, {
         method: "GET",
         headers: {
           Accept: "application/json",

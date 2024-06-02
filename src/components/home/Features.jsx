@@ -28,7 +28,7 @@ const Features = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+          className="text-3xl md:text-4xl font-spline  font-medium leading-8  text-gray-900 mb-4"
         >
           How Smart Graders Works
         </motion.h2>
@@ -36,24 +36,28 @@ const Features = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="text-gray-600 mb-12"
+          className="text-gray-700 font-spline mb-12"
         >
           Intuitive. Intelligent. Impactful.
         </motion.p>
         <div className="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-8">
           {features.map((feature, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              className="flex flex-col items-center p-6 bg-blue-50 rounded-lg shadow-md w-full md:w-1/3 transform hover:shadow-lg transition duration-300"
-            >
-              {feature.icon}
-              <h3 className="text-2xl font-semibold text-gray-900 mt-4">{feature.title}</h3>
-              <p className="text-gray-700 mt-2 text-center">{feature.description}</p>
-            </motion.div>
+          <motion.div 
+          key={index}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.1, delay: index * 0.1 }}
+          whileHover={{ scale: 1.05, translateZ: 0, transformStyle: "preserve-3d" }}
+          className="flex flex-col items-center p-6 bg-blue-50 rounded-lg shadow-md w-full md:w-1/3 transform hover:shadow-lg hover:bg-blue-100 transition duration-300"
+        >
+          {feature.icon}
+          <div style={{ backfaceVisibility: "hidden" }}> 
+            <h3 className="mt-8 text-2xl font-spline font-normal text-slate-800">{feature.title}</h3>
+            <p className="mt-6 text-base font-light leading-6 font-spline text-neutral-700">{feature.description}</p>
+          </div>
+      
+        </motion.div>
+        
           ))}
         </div>
       </div>

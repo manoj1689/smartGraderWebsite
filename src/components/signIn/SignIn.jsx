@@ -45,7 +45,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `http://34.131.249.177:8000/login`;
+      const url = `https://api.smartgrader.in/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {

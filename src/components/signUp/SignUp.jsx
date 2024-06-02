@@ -31,7 +31,7 @@ const SignUp = () => {
     try {
       const queryParams = new URLSearchParams(formData);
       const queryString = queryParams.toString();
-      const url = `http://34.131.249.177:8000/users/signup?${queryString}`;
+      const url = `https://api.smartgrader.in/users/signup?${queryString}`;
   
       console.log("Constructed URL:", url);
   
