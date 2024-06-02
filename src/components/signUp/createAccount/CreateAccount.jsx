@@ -55,19 +55,19 @@ function CreateAccount() {
               />
             </Link>
 
-            <div className="shrink-0 mt-2.5 w-px border border-solid bg-black bg-opacity-10 border-black border-opacity-10 h-[33px]" />
+            <div className="shrink-0 mt-2.5  border border-solid bg-black bg-opacity-10 border-black border-opacity-10 h-[33px]" />
             <div className="flex-auto mt-3 text-sm leading-5">
               A brief, catchy phrase that <br />
               encapsulates the SmartGrader mission.
             </div>
           </div>
         </div>
-        <div className="flex flex-col mt-40 md:w-5/6 w-full">
-          <div className="text-2xl font-semibold md:text-4xl leading-8  text-slate-800 max-md:max-w-full">
+        <div className="flex flex-col mt-20 md:mt-32 md:w-5/6 w-full">
+          <div className="text-3xl  font-medium font-spline md:text-4xl leading-8  text-slate-900 max-md:max-w-full">
             Signup with SmartGrader
           </div>
           <div
-             className={`flex flex-col justify-center px-8 py-7 mt-8 bg-white rounded-md border ${activeTab === 'individual' ? 'border-sky-500' : 'border-black border-opacity-10'} hover:bg-sky-50 hover:rounded-md border hover:border-sky-500 border-solid max-md:pl-5 max-md:max-w-full cursor-pointer`}
+             className={`flex flex-col justify-center px-4 py-4 mt-8 bg-white rounded-md border ${activeTab === 'individual' ? 'border-sky-500' : 'border-black border-opacity-10'} hover:bg-sky-50 hover:rounded-md border hover:border-sky-500 border-solid max-md:pl-5 max-md:max-w-full cursor-pointer`}
              onClick={() => handleTabClick('individual')}
 
           >
@@ -88,7 +88,7 @@ function CreateAccount() {
             </div>
           </div>
           <div
-           className={`flex flex-col justify-center px-8 py-7 mt-5 bg-white rounded-md border ${activeTab === 'organization' ? 'border-sky-500' : 'border-black border-opacity-10'} hover:bg-sky-50 hover:rounded-md border hover:border-sky-500 border-solid max-md:pl-5 max-md:max-w-full cursor-pointer`}
+           className={`flex flex-col justify-center px-4 py-4 mt-5 bg-white rounded-md border ${activeTab === 'organization' ? 'border-sky-500' : 'border-black border-opacity-10'} hover:bg-sky-50 hover:rounded-md border hover:border-sky-500 border-solid max-md:pl-5 max-md:max-w-full cursor-pointer`}
            onClick={() => handleTabClick('organization')}
           >
             <div className="flex gap-5 max-md:flex-wrap">
@@ -107,7 +107,7 @@ function CreateAccount() {
             </div>
           </div>
           <div
-              className={`flex flex-col justify-center px-8 py-7 mt-5 bg-white rounded-md border ${activeTab === 'educational' ? 'border-sky-500' : 'border-black border-opacity-10'} hover:bg-sky-50 hover:rounded-md border hover:border-sky-500 border-solid max-md:pl-5 max-md:max-w-full cursor-pointer`}
+              className={`flex flex-col justify-center px-4 py-4 my-5  bg-white rounded-md border ${activeTab === 'educational' ? 'border-sky-500' : 'border-black border-opacity-10'} hover:bg-sky-50 hover:rounded-md border hover:border-sky-500 border-solid max-md:pl-5 max-md:max-w-full cursor-pointer`}
               onClick={() => handleTabClick('educational')}
           >
             <div className="flex gap-5 max-md:flex-wrap">
@@ -147,30 +147,27 @@ function CreateAccount() {
         </div>
       </div>
 
-      <div className="w-full order-1 lg:order-2 lg:w-1/2  flex justify-center items-end">
+      <div className="w-full order-1 lg:order-2 lg:w-1/2  flex justify-center items-end ">
         <div className="mt-10">
           {activeTab === "individual"&& (
             <img
               src={individualPerson}
               alt="person"
-              width={443}
-              height={380}
+              className="w-full rounded-md lg:px-16   object-cover "
             />
           )}
           { activeTab === "organization"&& (
             <img
               src={organizationPerson}
               alt="person"
-              width={443}
-              height={380}
+              className="w-full rounded-md lg:px-16   object-cover "
             />
           )}
           { activeTab === "educational" && (
             <img
               src={educationalPerson}
               alt="person"
-              width={443}
-              height={380}
+              className="w-full rounded-md lg:px-16   object-cover "
             />
           )}
         </div>
