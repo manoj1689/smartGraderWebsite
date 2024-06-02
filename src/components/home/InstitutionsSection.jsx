@@ -43,7 +43,7 @@ const InstitutionsSection = () => {
         />
       </div>
       <div className="flex flex-col justify-center w-full md:w-1/2 text-slate-800">
-       <div className='md:w-10/12 md:mx-auto px-4 py-4'>
+       <div className='  px-4 py-4'>
        <h2 className="text-3xl md:text-4xl font-spline font-medium mb-4 leading-tight">
           Robust Testing Platform <br /> for Educational Institutions
         </h2>

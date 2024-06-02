@@ -83,13 +83,13 @@ const OrganizationsSection = () => {
           <p className="font-light font-spline text-gray-700">Make informed hiring decisions with comprehensive reporting.</p>
         </div>
         <motion.div 
-          whileHover={{ scale: 1.05 }} 
-          className="flex items-center cursor-pointer justify-center self-start   w-2/3 lg:w-1/2 py-2 mt-9  text-sm text-white bg-sky-500 rounded-md border border-sky-500 transition-transform duration-300"
-          onClick={()=> navigate('/signUp',{ state: { activeTab:'organization' } })}
-        >
-          <span>Optimize Your Hiring Process</span>
-          <FaArrowRight className="ml-2" />
-        </motion.div>
+  whileHover={{ scale: 1.05 }} 
+  className="flex items-center cursor-pointer justify-center self-start w-max px-4 py-2 mt-9 text-sm text-white bg-sky-500 rounded-md border border-sky-500 transition-transform duration-300 whitespace-nowrap"
+  onClick={() => navigate('/signUp', { state: { activeTab: 'organization' } })}
+>
+  <span>Optimize Your Hiring Process</span>
+  <FaArrowRight className="ml-2" />
+</motion.div>
       </div>
     </motion.div>
   );

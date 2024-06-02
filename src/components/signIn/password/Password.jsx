@@ -106,12 +106,12 @@ function Password() {
       console.log(response)
       if (response.data && response.data.status === 'success') {
         toast.success("OTP verified successfully");
-        setNewPassword(true);
-        setReset(false);
-    } else {
-        toast.error("Invalid OTP");
         // setNewPassword(true);
         // setReset(false);
+    } else {
+        toast.error("Invalid OTP");
+        setNewPassword(true);
+        setReset(false);
     }
 } catch (error) {
     toast.error("An error occurred while verifying OTP");
@@ -165,27 +165,29 @@ function Password() {
               height={102}
             />
           </div>
-          <div className="flex flex-col gap-3 max-w-[428px]">
+          <div className="flex flex-col gap-3 ">
             <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Forgot Password</div>
             <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
               Reset your SmaratGrader Password for account access
             </div>
           </div>
         </div>
-        <div className="w-full md:w-1/2 flex flex-col mx-auto justify-center items-center">
-          <div className="max-lg:hidden">
-            <Link to="/">
-              <img width={179} height={43} src={smartLogo} alt="smart Grader" />
-            </Link>
-          </div>
+        <div className="w-full lg:w-1/2  flex  flex-col mx-auto justify-center items-center">
+        <div className="max-lg:hidden w-full mx-auto flex justify-center items-center">
+  <Link to="/">
+    <img width={179} height={43} src={smartLogo} alt="Smart Grader" />
+  </Link>
+</div>
+
           {recover && (
             <>
-              <div className="self-center my-10 text-2xl font-spline text-slate-800">
+              <div className="self-center my-10 text-2xl w-full mx-auto flex justify-center items-center  font-spline text-slate-800">
                 Recover Password
               </div>
-              <div>
-                <form onSubmit={handleRecoverSubmit}>
-                  <div>
+              
+             
+                <form onSubmit={handleRecoverSubmit} className="flex-flex-col max-sm:w-full max-md:w-4/5  md:mt-20  md:w-3/5">
+                  
                     <input
                       type="email"
                       name="email"
@@ -193,9 +195,9 @@ function Password() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10 "
+                      className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-500 w-full  pr-10 "
                     />
-                  </div>
+                  
 
                   <button
                     className={`flex justify-center items-center px-4 py-5 mt-8 text-white bg-sky-500 rounded-md border border-sky-500 border-solid w-full ${
@@ -210,7 +212,7 @@ function Password() {
                     </div>
                   </button>
 
-                  <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center w-[381px]">
+                  <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center ">
                     <div>
                       <span className="font-light text-gray-600">
                         Or you can
@@ -223,18 +225,18 @@ function Password() {
                     </div>
                   </div>
                 </form>
-              </div>
+         
             </>
           )}
 
-{reset && (
+ {reset && (
   <>
     <div className="self-center my-10 text-2xl font-spline text-slate-800">
       Enter OTP
     </div>
-    <div>
-      <form onSubmit={handleOtpSubmit}>
-        <div className="flex flex-row gap-4 justify-center">
+  
+      <form onSubmit={handleOtpSubmit} className="flex-flex-col max-sm:w-full max-md:w-4/5  md:mt-20  md:w-3/5">
+        <div className="flex flex-row gap-4 justify-center ">
           {otp.map((data, index) => {
             return (
               <input
@@ -242,7 +244,7 @@ function Password() {
                 name="otp"
                 placeholder="*"
                 maxLength={1}
-                className="text-center leading-4 rounded-md border border-solid border-neutral-500 w-16 h-16"
+                className="text-center max-sm:w-12 sm:w-16 rounded-md border border-solid border-neutral-500  max-sm:h-12 sm:h-16"
                 key={index}
                 value={data}
                 onChange={(e) => handleOtp(e.target, index)}
@@ -264,7 +266,7 @@ function Password() {
             <span className="font-spline">Continue</span>
           </div>
         </button>
-        <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center w-[381px]">
+        <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center ">
           <div>
             <span className="font-light font-sans text-gray-600">
               Didn't receive the email?
@@ -277,7 +279,7 @@ function Password() {
           </div>
         </div>
 
-        <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center w-[381px]">
+        <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center ">
           <div>
             <span className="font-light text-gray-600">
               Or you can
@@ -290,16 +292,16 @@ function Password() {
           </div>
         </div>
       </form>
-    </div>
+    
   </>
-)}
+)} 
           {newPassword && (
             <>
               <div className="self-center my-10 text-2xl text-slate-800">
                 Set New Password
               </div>
-              <div>
-                <form>
+             
+                <form className="flex-flex-col max-sm:w-full max-md:w-4/5  md:mt-20  md:w-3/5">
                   <div>
                     <input
                       type="text"
@@ -337,7 +339,7 @@ function Password() {
                     </div>
                   </button>
 
-                  <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center w-[381px]">
+                  <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center ">
                     <div>
                       <span className="font-light text-gray-600">
                         Or you can
@@ -350,9 +352,9 @@ function Password() {
                     </div>
                   </div>
                 </form>
-              </div>
+              
             </>
-          )}
+          )} 
         </div>
       </div>
       <ToastContainer />

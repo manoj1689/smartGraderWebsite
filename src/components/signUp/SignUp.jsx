@@ -175,7 +175,7 @@ const SignUp = () => {
                 Signup as Student
               </div>
             )}
-            <form onSubmit={handleSubmit} >
+            <form onSubmit={handleSubmit} className="flex flex-col max-sm:w-full md:mt-10 max-lg:w-8/12 xl:7/12" >
               <div>
                 <input
                   type="text"

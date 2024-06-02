@@ -227,7 +227,7 @@ const SignIn = () => {
                 Log In as Student
               </div>
             )}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex-flex-col w-full  md:mt-20  md:w-3/5">
               <div>
                 <input
                   type="email"
@@ -279,7 +279,7 @@ const SignIn = () => {
                 </div>
               </button>
 
-              <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center w-[381px]">
+              <div className="flex flex-col self-end mt-8 leading-5 text-center">
                 <div>
                   <span className="font-light text-gray-600 font-sans ">Don't have an account?</span>{" "}
                   <br />
@@ -289,9 +289,9 @@ const SignIn = () => {
             </form>
           </div>
           <div className="flex  px-5 mt-10 pt-20 pb-5 md:mt-20 md:pt-40 text-sm font-light leading-5 justify-center text-center text-neutral-500">
-            <div className="flex px-1 md:gap-5 font-spline ">Legal information</div>
+            <div className="flex pl-1 md:gap-5 font-spline ">Legal information</div>
             <div className="flex">
-              <div className="flex px-1 md:gap-5 font-spline ">Help Resources</div>
+              <div className="flex pl-1 md:gap-5 font-spline ">Help Resources</div>
               <img
                 loading="lazy"
                 alt="socialIcon"
