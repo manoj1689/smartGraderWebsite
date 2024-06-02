@@ -20,18 +20,18 @@ const Navbar = () => {
         </div>
         
         <nav className="hidden md:flex basis-1/2 space-x-6 justify-center items-center">
-  <a href="#home" className="text-gray-900 hover:text-blue-700 transition duration-300">Home</a>
-  <a href="#how-it-works" className="text-gray-900 hover:text-blue-700 transition duration-300">How It Works</a>
-  <a href="#pricing" className="text-gray-900 hover:text-blue-700 transition duration-300">Pricing</a>
-  <a href="#partners" className="text-gray-900 hover:text-blue-700 transition duration-300">Partners</a>
+  <a href="#home" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">Home</a>
+  <a href="#how-it-works" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">How It Works</a>
+  <a href="#pricing" className="text-gray-900 hover:text-blue-700 transition  font-spline duration-300">Pricing</a>
+  <a href="#partners" className="text-gray-900 hover:text-blue-700 transition  font-spline duration-300">Partners</a>
   {/* <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a>
   <a href="#contact" className="text-gray-900 hover:text-blue-700 transition duration-300">Contact Us</a> */}
 </nav>  
 <div className="hidden md:flex flex-row basis-1/4 space-x-6 justify-end items-center">
-  <Link to="signIn" className="text-gray-900 hover:text-blue-700 transition duration-300 flex items-center">
+  <Link to="signIn" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300 flex items-center">
     <FaSignInAlt className="mr-2" /> Login
   </Link>
-  <Link to="createAccount"  className="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition duration-300 flex items-center">
+  <Link to="createAccount"  className="bg-blue-700 text-white px-4 py-2  font-spline rounded-md hover:bg-blue-800 transition duration-300 flex items-center">
     <FaUser className="mr-2" /> Signup
   </Link>
 </div>

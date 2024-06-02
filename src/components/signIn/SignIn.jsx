@@ -152,8 +152,8 @@ const SignIn = () => {
                   className="shrink-0 self-start w-12 aspect-[0.94]"
                 />
                 <div className="flex flex-col">
-                  <div className="text-2xl text-slate-800">Individual User</div>
-                  <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Individual User</div>
+                  <div className="  font-sans text-lg font-light text-gray-600 my-1.5 ">
                     I am a candidate and want to test my skills through mock
                     interviews.
                   </div>
@@ -171,8 +171,8 @@ const SignIn = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-2xl text-slate-800">Organization</div>
-                  <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Organization</div>
+                  <div className="  font-sans text-lg  font-light text-gray-600 my-1.5 ">
                     I am an organization and want to outsource my interviews
                   </div>
                 </div>
@@ -189,10 +189,10 @@ const SignIn = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-2xl text-slate-800">
+                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
                     Educational Institution
                   </div>
-                  <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                  <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
                     I am a candidate and want to test my skills through mock
                     interviews.
                   </div>
@@ -213,17 +213,17 @@ const SignIn = () => {
               />
             </Link></div>
             {activeTab === "individual" && (
-              <div className="self-center mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
                 Log In as Candidate
               </div>
             )}
             {activeTab === "organization" && (
-              <div className="self-center mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
                 Log In as Organization
               </div>
             )}
             {activeTab === "educational" && (
-              <div className="self-center mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
                 Log In as Student
               </div>
             )}
@@ -262,9 +262,9 @@ const SignIn = () => {
                     onChange={handleCheckboxChange}
                     className="shrink-0 self-start rounded-md border border-solid border-neutral-500 h-[18px] w-[18px]"
                   />
-                  <div className="text-gray-600">Remember Me </div>
+                  <div className="text-gray-600 font-spline ">Remember Me </div>
                 </div>
-                <Link to='password'><div className="text-cyan-600">Forget Password?</div></Link>
+                <Link to='password'><div className="text-cyan-600 font-spline ">Forget Password?</div></Link>
               </div>
               <button
                 className={`flex justify-center items-center px-4 py-5 mt-8 text-white bg-sky-500 rounded-md border border-sky-500 border-solid w-full ${
@@ -274,24 +274,24 @@ const SignIn = () => {
                 onMouseUp={handleMouseUp}
                 type="submit"
               >
-                <div className="flex gap-2.5 px-px">
+                <div className="flex gap-2.5 px-3 font-spline ">
                   <span>Login</span>
                 </div>
               </button>
 
               <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center w-[381px]">
                 <div>
-                  <span className="font-light text-gray-600">Don't have an account?</span>{" "}
+                  <span className="font-light text-gray-600 font-sans ">Don't have an account?</span>{" "}
                   <br />
-                  <div className="text-cyan-600 cursor-pointer" onClick={() => navigate("/createAccount")}>Signup</div>
+                  <div className="text-cyan-600 cursor-pointer font-spline " onClick={() => navigate("/createAccount")}>Signup</div>
                 </div>
               </div>
             </form>
           </div>
           <div className="flex  px-5 mt-10 pt-20 pb-5 md:mt-20 md:pt-40 text-sm font-light leading-5 justify-center text-center text-neutral-500">
-            <div className="flex px-1 md:gap-5">Legal information</div>
+            <div className="flex px-1 md:gap-5 font-spline ">Legal information</div>
             <div className="flex">
-              <div className="flex px-1 md:gap-5">Help Resources</div>
+              <div className="flex px-1 md:gap-5 font-spline ">Help Resources</div>
               <img
                 loading="lazy"
                 alt="socialIcon"

@@ -16,8 +16,8 @@ const Partners = () => {
     <section id="partners" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-sky-600">Trusted by Leading Entities</h2>
-          <p className="text-lg text-gray-700 mt-2">Join our network of esteemed partners who have revolutionized their processes with SmartGrader.</p>
+          <h2 className="text-3xl md:text-4xl font-medium font-spline text-sky-600">Trusted by Leading Entities</h2>
+          <p className="text-lg text-gray-700 font-spline mt-2">Join our network of esteemed partners who have revolutionized their processes with SmartGrader.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {partnerLogos.map((logo, index) => (

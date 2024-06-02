@@ -29,7 +29,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="mt-3 w-full text-lg leading-6 text-neutral-700 max-md:max-w-full"
+            className="mt-3 w-full text-lg leading-6  font-spline font-thin  text-neutral-600 max-md:max-w-full"
           >
             Gain confidence and improve performance with precise feedback. Our platform leverages advanced technology to enhance interview and evaluation processes. Prepare smarter and excel with our AI-powered assessment solutions.
           </motion.p>

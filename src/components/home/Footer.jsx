@@ -27,7 +27,7 @@ const Footer = () => {
           </a>
         </div>
         <div className="border-t border-gray-700 pt-4">
-          <p className="text-sm font-light leading-7">
+          <p className="text-sm font-light font-spline leading-7">
             © Copyrights 2024 All Rights Reserved Smart Graders
           </p>
         </div>

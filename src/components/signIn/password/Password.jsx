@@ -106,12 +106,12 @@ function Password() {
       console.log(response)
       if (response.data && response.data.status === 'success') {
         toast.success("OTP verified successfully");
-        // setNewPassword(true);
-        // setReset(false);
-    } else {
-        toast.error("Invalid OTP");
         setNewPassword(true);
         setReset(false);
+    } else {
+        toast.error("Invalid OTP");
+        // setNewPassword(true);
+        // setReset(false);
     }
 } catch (error) {
     toast.error("An error occurred while verifying OTP");
@@ -165,9 +165,9 @@ function Password() {
               height={102}
             />
           </div>
-          <div className="flex flex-col gap-3 max-w-[328px]">
-            <div className="w-full text-2xl text-slate-800">Forgot Password</div>
-            <div className="mt-1.5 w-full text-base font-light leading-6 text-neutral-500">
+          <div className="flex flex-col gap-3 max-w-[428px]">
+            <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Forgot Password</div>
+            <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
               Reset your SmaratGrader Password for account access
             </div>
           </div>
@@ -180,7 +180,7 @@ function Password() {
           </div>
           {recover && (
             <>
-              <div className="self-center my-10 text-2xl text-slate-800">
+              <div className="self-center my-10 text-2xl font-spline text-slate-800">
                 Recover Password
               </div>
               <div>
@@ -206,7 +206,7 @@ function Password() {
                     type="submit"
                   >
                     <div className="flex gap-2.5 px-px">
-                      <span>Send Recovery Link</span>
+                      <span className="font-spline">Send Recovery Link</span>
                     </div>
                   </button>
 
@@ -217,9 +217,9 @@ function Password() {
                       </span>{" "}
                       <Link to="/signIn">
                         {" "}
-                        <span className="text-cyan-600">Login</span>
+                        <span className="text-cyan-600 font-spline">Login</span>
                       </Link>{" "}
-                      <span className="font-light gap-3 text-gray-600">Here</span>
+                      <span className="font-light gap-3 text-gray-600 font-spline">Here</span>
                     </div>
                   </div>
                 </form>
@@ -229,7 +229,7 @@ function Password() {
 
 {reset && (
   <>
-    <div className="self-center my-10 text-2xl text-slate-800">
+    <div className="self-center my-10 text-2xl font-spline text-slate-800">
       Enter OTP
     </div>
     <div>
@@ -261,19 +261,19 @@ function Password() {
           type="submit"
         >
           <div className="flex gap-2.5 px-px">
-            <span>Continue</span>
+            <span className="font-spline">Continue</span>
           </div>
         </button>
         <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center w-[381px]">
           <div>
-            <span className="font-light text-gray-600">
+            <span className="font-light font-sans text-gray-600">
               Didn't receive the email?
             </span>{" "}
             <Link to="/signIn">
               {" "}
-              <span className="text-cyan-600">Resend</span>
+              <span className="text-cyan-600 font-sans">Resend</span>
             </Link>{" "}
-            <span className="font-light gap-3 text-gray-600">Link</span>
+            <span className="font-light gap-3 text-gray-600 font-sans">Link</span>
           </div>
         </div>
 
@@ -333,7 +333,7 @@ function Password() {
                     onClick={() => toast.success("New Password Updated")}
                   >
                     <div className="flex gap-2.5 px-px">
-                      <span>Set Password</span>
+                      <span className="font-spline">Set Password</span>
                     </div>
                   </button>
 
@@ -344,9 +344,9 @@ function Password() {
                       </span>{" "}
                       <Link to="/signIn">
                         {" "}
-                        <span className="text-cyan-600">Login</span>
+                        <span className="text-cyan-600 font-spline">Login</span>
                       </Link>{" "}
-                      <span className="font-light gap-3 text-gray-600">Here</span>
+                      <span className="font-light gap-3 text-gray-600 font-spline">Here</span>
                     </div>
                   </div>
                 </form>

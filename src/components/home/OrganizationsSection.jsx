@@ -37,7 +37,7 @@ const OrganizationsSection = () => {
         <motion.img
           loading="lazy"
           src={organizationImage}
-          className="w-full rounded-md h-full lg:p-16  object-cover "
+          className="w-full rounded-md h-full lg:px-16   object-cover "
           alt="Organization Banner"
         />
       </div>

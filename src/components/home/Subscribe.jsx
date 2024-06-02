@@ -10,8 +10,8 @@ const Subscribe = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-sky-600">Subscribe to Our Newsletter</h2>
-          <p className="text-lg mb-8 text-gray-700">Get new offers and updates directly in your inbox.</p>
+          <h2 className="text-3xl md:text-4xl font-medium font-spline mb-12 text-sky-600">Subscribe to Our Newsletter</h2>
+          <p className="text-lg mb-8 font-spline text-gray-700">Get new offers and updates directly in your inbox.</p>
         </motion.div>
         <motion.form
           initial={{ opacity: 0, y: 50 }}
@@ -27,7 +27,7 @@ const Subscribe = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             type="submit"
-            className="bg-sky-600 text-white px-8 py-2 rounded hover:bg-sky-700 transition duration-300"
+            className="bg-sky-600 text-white px-8 py-2  font-spline rounded hover:bg-sky-700 transition duration-300"
           >
             Subscribe
           </motion.button>

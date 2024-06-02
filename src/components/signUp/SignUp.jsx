@@ -100,8 +100,8 @@ const SignUp = () => {
                   className="shrink-0 self-start w-12 aspect-[0.94]"
                 />
                 <div className="flex flex-col">
-                  <div className="text-2xl text-slate-800">Individual User</div>
-                  <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Individual User</div>
+                  <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
                     I am a candidate and want to test my skills through mock
                     interviews.
                   </div>
@@ -119,8 +119,8 @@ const SignUp = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-2xl text-slate-800">Organization</div>
-                  <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Organization</div>
+                  <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
                     I am an organization and want to outsource my interviews
                   </div>
                 </div>
@@ -137,10 +137,10 @@ const SignUp = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-2xl text-slate-800">
+                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
                     Educational Institution
                   </div>
-                  <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                  <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
                     I am a candidate and want to test my skills through mock
                     interviews.
                   </div>
@@ -161,17 +161,17 @@ const SignUp = () => {
               />
             </Link></div> 
             {activeTab === "individual" && (
-              <div className="self-center mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline mt-5 text-2xl text-slate-800">
                 Signup as Individual Users
               </div>
             )}
             {activeTab === "organization" && (
-              <div className="self-center mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
                 Signup as Organization
               </div>
             )}
             {activeTab === "educational" && (
-              <div className="self-center mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
                 Signup as Student
               </div>
             )}
@@ -247,7 +247,7 @@ const SignUp = () => {
                 onMouseUp={handleMouseUp}
                 type="submit"
               >
-                <div className="flex gap-2.5 px-px">
+                <div className="flex gap-2.5 font-spline ">
                   <span>Create an Account</span>
                   <span>
               <FiArrowUpRight size={20} />
@@ -255,12 +255,12 @@ const SignUp = () => {
                 </div>
               </button>
 
-              <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center text-cyan-600 w-[381px]">
+              <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center text-gray-600 w-[381px]">
                 <div>
-                  <span className="font-light">Already have an account?</span>{" "}
+                  <span className="font-light font-sans ">Already have an account?</span>{" "}
                   <br />
                   
-                    <span className="text-cyan-600 cursor-pointer" onClick={()=>navigate("/signIn")}>Log in here</span>
+                    <span className="text-cyan-600 cursor-pointer font-spline " onClick={()=>navigate("/signIn")}>Log in here</span>
                  
                 </div>
               </div>

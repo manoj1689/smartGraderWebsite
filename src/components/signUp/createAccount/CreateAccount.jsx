@@ -79,8 +79,8 @@ function CreateAccount() {
                 className="shrink-0 self-start w-12 aspect-[0.94]"
               />
               <div className="flex flex-col">
-                <div className="text-2xl text-slate-800">Individual User</div>
-                <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                <div className="text-2xl md:text-3xl text-slate-800">Individual User</div>
+                <div className="  font-sans text-lg  font-light text-gray-600 my-1.5 ">
                   I am a candidate and want to test my skills through mock
                   interviews.
                 </div>
@@ -99,8 +99,8 @@ function CreateAccount() {
                 className="shrink-0 self-start w-12 aspect-square"
               />
               <div className="flex flex-col">
-                <div className="text-2xl text-slate-800">Organization</div>
-                <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                <div className="text-2xl md:text-3xl text-slate-800">Organization</div>
+                <div className="  font-sans text-lg font-light text-gray-600 my-1.5 ">
                   I am an organization and want to outsource my interviews
                 </div>
               </div>
@@ -118,10 +118,10 @@ function CreateAccount() {
                 className="shrink-0 self-start w-12 aspect-square"
               />
               <div className="flex flex-col">
-                <div className="text-2xl text-slate-800">
+                <div className="text-2xl md:text-3xl text-slate-800">
                   Educational Institution
                 </div>
-                <div className="mt-1.5 text-base font-light leading-6 text-neutral-500">
+                <div className="  font-sans text-lg font-light text-gray-600 my-1.5 ">
                   I am a candidate and want to test my skills through mock
                   interviews.
                 </div>

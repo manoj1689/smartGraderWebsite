@@ -32,15 +32,15 @@ const JobSeekersSection = () => {
       variants={cardVariants}
       style={{ marginBottom: '20px' }} // Added style for margin-bottom
     >
-      <div className="w-full md:w-5/12 flex items-center">
+      <div className="w-full md:w-1/2 flex items-center">
         <motion.img
           loading="lazy"
           src={seekersImage}
-          className="w-full rounded-md h-full object-cover"
+          className="w-full rounded-md lg:px-16  object-cover"
           alt="Job Seekers Banner"
         />
       </div>
-      <div className="flex flex-col justify-center w-full md:w-7/12 text-slate-800">
+      <div className="flex flex-col justify-center w-full md:w-1/2 text-slate-800">
         <div className='md:w-10/12 md:mx-auto px-4 py-4'>
         <h2 className="text-3xl md:text-4xl font-spline font-medium mb-4 leading-tight">
           Tailored Interview <br /> Preparation for Job Seekers
@@ -84,7 +84,7 @@ const JobSeekersSection = () => {
         </div>
         <motion.div 
           whileHover={{ scale: 1.05 }} 
-          className="flex items-center cursor-pointer justify-center self-start lg:self-start w-2/3 lg:w-1/2  py-2 mt-9 text-sm text-white bg-sky-500 rounded-md border border-sky-500 transition-transform duration-300"
+          className="flex items-center cursor-pointer justify-center self-start lg:self-start w-2/3 lg:w-2/3  py-2 mt-9 text-sm text-white bg-sky-500 rounded-md border border-sky-500 transition-transform duration-300"
           onClick={()=> navigate('/signUp',{ state: { activeTab:'individual' } })}
         >
           <span>Start Preparing Today</span>

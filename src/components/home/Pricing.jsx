@@ -33,8 +33,8 @@ const Pricing = () => {
     <section id="pricing" className="bg-gray-100 py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-sky-600">Transparent Pricing for Every Need</h2>
-          <p className="text-lg text-gray-700 mt-2">Choose a plan that fits your needs.</p>
+          <h2 className="text-3xl md:text-4xl font-medium font-spline text-sky-600">Transparent Pricing for Every Need</h2>
+          <p className="text-lg text-gray-700 font-spline mt-2">Choose a plan that fits your needs.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {pricingPlans.map((pricing, index) => (
@@ -47,11 +47,11 @@ const Pricing = () => {
               style={{ minHeight: '400px' }} // Set a minimum height for consistent card size
             >
               <div>
-                <h3 className="text-xl font-bold mb-4 text-sky-600 text-left">{pricing.plan}</h3>
-                <p className="text-2xl font-bold mb-4 text-gray-900 text-left">{pricing.price}</p>
+                <h3 className="text-xl font-bold mb-4 text-sky-600  font-spline text-left">{pricing.plan}</h3>
+                <p className="text-2xl font-bold mb-4 text-gray-900  font-spline text-left">{pricing.price}</p>
                 <ul className="mb-4 text-gray-700 text-left">
                   {pricing.features.map((feature, index) => (
-                    <li key={index} className="flex items-center mb-2">
+                    <li key={index} className="flex items-center  font-spline mb-2">
                       <FaCheckCircle className="text-sky-600 mr-2" />
                       {feature}
                     </li>
@@ -63,7 +63,7 @@ const Pricing = () => {
                 href="/createAccount"
                 className="bg-sky-600 text-white px-4 py-2 rounded-md flex items-center justify-center transition-transform duration-300 mt-auto"
               >
-                <span>Get Started</span>
+                <span className=' font-spline'>Get Started</span>
                 <FaArrowRight className="ml-2" />
               </motion.a>
             </motion.div>

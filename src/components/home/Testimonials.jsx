@@ -33,7 +33,7 @@ const Testimonials = () => {
     <section id="testimonials" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-sky-600">Hear From Our Satisfied Users</h2>
+          <h2 className="text-3xl md:text-4xl font-medium font-spline text-sky-600">Hear From Our Satisfied Users</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
@@ -45,9 +45,9 @@ const Testimonials = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
               <img className="w-16 h-16 mx-auto mb-4 rounded-full" src={testimonial.image} alt={testimonial.name} />
-              <h3 className="text-xl font-bold mb-2 text-sky-600">{testimonial.name}</h3>
-              <p className="text-gray-600 mb-2">{testimonial.title}</p>
-              <p className="text-gray-700 mb-4">{testimonial.text}</p>
+              <h3 className="text-xl font-bold font-spline mb-2 text-sky-600">{testimonial.name}</h3>
+              <p className="text-gray-600 font-spline mb-2">{testimonial.title}</p>
+              <p className="text-gray-700 font-spline mb-4">{testimonial.text}</p>
               <div className="flex justify-center">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <svg key={i} className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
