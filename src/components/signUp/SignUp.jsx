@@ -79,7 +79,7 @@ const SignUp = () => {
   
   return (
     <>
-      <div className="container mx-auto h-screen px-4 py-4 flex flex-col lg:flex-row ">
+      <div className="container mx-auto min-h-screen  px-4 py-4 flex flex-col lg:flex-row ">
       <div className="lg:hidden w-full "><Link to="/">
               <img
                 width={179}
@@ -100,7 +100,7 @@ const SignUp = () => {
                   className="shrink-0 self-start w-12 aspect-[0.94]"
                 />
                 <div className="flex flex-col">
-                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Individual User</div>
+                  <div className="text-2xl sm:text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Individual User</div>
                   <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
                     I am a candidate and want to test my skills through mock
                     interviews.
@@ -119,7 +119,7 @@ const SignUp = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Organization</div>
+                  <div className="text-2xl sm:text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Organization</div>
                   <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
                     I am an organization and want to outsource my interviews
                   </div>
@@ -137,7 +137,7 @@ const SignUp = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
+                  <div className="text-2xl sm:text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
                     Educational Institution
                   </div>
                   <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
@@ -161,21 +161,21 @@ const SignUp = () => {
               />
             </Link></div> 
             {activeTab === "individual" && (
-              <div className="self-center font-spline mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline mt-5 text-xl sm:text-2xl text-slate-800">
                 Signup as Individual Users
               </div>
             )}
             {activeTab === "organization" && (
-              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-xl sm:text-2xl text-slate-800">
                 Signup as Organization
               </div>
             )}
             {activeTab === "educational" && (
-              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-xl sm:text-2xl text-slate-800">
                 Signup as Student
               </div>
             )}
-            <form onSubmit={handleSubmit} className="flex flex-col max-sm:w-full  max-lg:w-8/12 xl:7/12" >
+            <form onSubmit={handleSubmit}  className="flex-flex-col w-full   sm:w-96" >
               <div>
                 <input
                   type="text"
@@ -256,7 +256,7 @@ const SignUp = () => {
                 </div>
               </button>
 
-              <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center text-gray-600 w-[381px]">
+              <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center text-gray-600 w-full">
                 <div>
                   <span className="font-light font-sans ">Already have an account?</span>{" "}
                   <br />

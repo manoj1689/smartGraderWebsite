@@ -130,16 +130,19 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="container mx-auto h-screen px-4 py-4 flex flex-col lg:flex-row ">
+      <div className="container mx-auto min-h-screen px-4 py-4 flex flex-col lg:flex-row ">
         <div className="lg:hidden w-full ">
           <Link to="/">
-            <img width={179} height={43} src={smartLogo} alt="smart Grader" />
+            <div className="w-1/4">
+            <img src={smartLogo} alt="smart Grader" />
+            </div>
+            
           </Link>
         </div>
         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center">
           {activeTab !== "organization" && activeTab !== "educational" && (
             <div className="flex flex-col justify-center px-8 py-7 mt-5 bg-white rounded-md">
-              <div className="flex flex-row gap-5 max-md:flex-wrap">
+              <div className="flex flex-row gap-5 max-md:flex-wrap ">
                 <img
                   loading="lazy"
                   alt="individual"
@@ -147,7 +150,7 @@ const SignIn = () => {
                   className="shrink-0 self-start w-12 aspect-[0.94]"
                 />
                 <div className="flex flex-col">
-                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
+                  <div className="text-2xl sm:text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
                     Individual User
                   </div>
                   <div className="  font-sans text-lg font-light text-gray-600 my-1.5 ">
@@ -168,7 +171,7 @@ const SignIn = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
+                  <div className="text-2xl sm:text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
                     Organization
                   </div>
                   <div className="  font-sans text-lg  font-light text-gray-600 my-1.5 ">
@@ -188,7 +191,7 @@ const SignIn = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
+                  <div className="text-2xl sm:text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
                     Educational Institution
                   </div>
                   <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
@@ -214,23 +217,23 @@ const SignIn = () => {
               </Link>
             </div>
             {activeTab === "individual" && (
-              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-xl sm:text-2xl text-slate-800">
                 Log In as Candidate
               </div>
             )}
             {activeTab === "organization" && (
-              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-xl sm:text-2xl text-slate-800">
                 Log In as Organization
               </div>
             )}
             {activeTab === "educational" && (
-              <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
+              <div className="self-center font-spline  mt-5 text-xl sm:text-2xl text-slate-800">
                 Log In as Student
               </div>
             )}
             <form
               onSubmit={handleSubmit}
-              className="flex-flex-col w-full  md:w-3/5"
+              className="flex-flex-col w-full sm:w-96"
             >
               <div>
                 <input
@@ -283,7 +286,7 @@ const SignIn = () => {
                 type="submit"
               >
                 <div className="flex gap-2.5 px-3 font-spline ">
-                  <span>Login</span>
+                  <span className="font-spline  text-sm sm:text-lg">Login</span>
                 </div>
               </button>
 
@@ -304,19 +307,26 @@ const SignIn = () => {
             </form>
           </div>
           <div className="flex  px-5   py-20 md:py-24 text-sm  font-light leading-5 justify-center text-center text-neutral-500">
-            <div className="flex px-1 md:gap-5 font-spline  ">
+            <div className="flex flex-col sm:flex-row">
+          
+            <div className="flex mx-5 my-5">
+            <div className="flex px-2 sm:px-4 md:gap-5 font-spline max-sm:text-[12px]  ">
               Legal information
             </div>
-            <div className="flex">
-              <div className="flex px-1 md:gap-5 font-spline  ">
+              <div className="flex px-2 sm:px-4 md:gap-5 font-spline max-sm:text-[12px]  ">
                 Help Resources
               </div>
-              <img
+            </div>
+            <img
                 loading="lazy"
                 alt="socialIcon"
                 src={socialIcon}
-                className="shrink-0  md:mx-5 aspect-[4.35] max-sm:w-[63px] sm:w-[93px]"
+                className="shrink-0 self-center mx-5 my-5 aspect-[4.35] w-[93px]"
               />
+           <div>
+           
+           </div>
+           
             </div>
           </div>
         </div>

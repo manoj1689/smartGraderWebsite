@@ -150,13 +150,13 @@ function Password() {
 
   return (
     <>
-      <div className="container mx-auto h-screen px-4 py-4 flex flex-col lg:flex-row">
+      <div className="container mx-auto min-h-screen  px-4 py-4 flex flex-col lg:flex-row">
         <div className="lg:hidden w-full ">
           <Link to="/">
             <img width={179} height={43} src={smartLogo} alt="smart Grader" />
           </Link>
         </div>
-        <div className="w-full lg:w-1/2 flex flex-row h-full justify-start items-center">
+        <div className="w-full lg:w-1/2 flex flex-row px-4 py-7 my-5 sm:my-20 justify-start items-center">
           <div>
             <img
               src={passwordIcon}
@@ -166,14 +166,14 @@ function Password() {
             />
           </div>
           <div className="flex flex-col gap-3 ">
-            <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Forgot Password</div>
-            <div className=" font-sans text-lg  font-light text-gray-600 my-1.5 ">
+            <div className="text-2xl sm:3xl md:text-4xl text-slate-800 font-medium  font-spline">Forgot Password</div>
+            <div className=" font-sans text-sm sm:text-lg  font-light text-gray-600 my-1.5 ">
               Reset your SmaratGrader Password for account access
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-1/2  flex  flex-col mx-auto justify-center items-center">
-        <div className="max-lg:hidden w-full mx-auto flex justify-center items-center">
+        <div className="w-full lg:w-1/2 flex  flex-col mx-auto justify-center items-center">
+        <div className="max-lg:hidden ">
   <Link to="/">
     <img width={179} height={43} src={smartLogo} alt="Smart Grader" />
   </Link>
@@ -181,12 +181,12 @@ function Password() {
 
           {recover && (
             <>
-              <div className="self-center mt-5 text-2xl w-full mx-auto flex justify-center items-center  font-spline text-slate-800">
+              <div className="self-center mt-5 text:xl sm:text-2xl  w-full mx-auto flex justify-center items-center  font-spline text-slate-800">
                 Recover Password
               </div>
               
              
-                <form onSubmit={handleRecoverSubmit} className="flex-flex-col max-sm:w-full max-md:w-4/5 mt-5 md:mt-10  md:w-3/5">
+                <form onSubmit={handleRecoverSubmit} className="flex-flex-col w-full sm:w-96">
                   
                     <input
                       type="email"
@@ -195,12 +195,12 @@ function Password() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
+                      className="justify-center items-start p-5 mt-5 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                     />
                   
 
                   <button
-                    className={`flex justify-center items-center px-4 py-5 mt-8 text-white bg-sky-500 rounded-md border border-sky-500 border-solid w-full ${
+                    className={`flex justify-center items-center  px-4 py-5 mt-8 text-white bg-sky-500 rounded-md border border-sky-500 border-solid w-full ${
                       isPressed ? "bg-sky-600" : "bg-sky-500"
                     }`}
                     onMouseDown={handleMouseDown}
@@ -208,7 +208,7 @@ function Password() {
                     type="submit"
                   >
                     <div className="flex gap-2.5 px-px">
-                      <span className="font-spline">Send Recovery Link</span>
+                      <span className="font-spline text-sm sm:text-lg">Send Recovery Link</span>
                     </div>
                   </button>
 
@@ -231,11 +231,11 @@ function Password() {
 
  {reset && (
   <>
-    <div className="self-center mt-5 text-2xl font-spline text-slate-800">
+    <div className="self-center mt-5 text:xl sm:text-2xl font-spline text-slate-800">
       Enter OTP
     </div>
   
-      <form onSubmit={handleOtpSubmit} className="flex-flex-col max-sm:w-full max-md:w-4/5 mt-5  md:mt-10  md:w-3/5">
+      <form onSubmit={handleOtpSubmit} className="flex-flex-col w-full sm:w-96">
         <div className="flex flex-row gap-4 justify-center ">
           {otp.map((data, index) => {
             return (
@@ -244,7 +244,7 @@ function Password() {
                 name="otp"
                 placeholder="*"
                 maxLength={1}
-                className="text-center max-sm:w-12 sm:w-16 rounded-md border border-solid border-neutral-400  focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none max-sm:h-12 sm:h-16"
+                className="text-center mt-5 max-sm:w-12 sm:w-16 rounded-md border border-solid border-neutral-400  focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none max-sm:h-12 sm:h-16"
                 key={index}
                 value={data}
                 onChange={(e) => handleOtp(e.target, index)}
@@ -263,7 +263,7 @@ function Password() {
           type="submit"
         >
           <div className="flex gap-2.5 px-px">
-            <span className="font-spline">Continue</span>
+            <span className="font-spline  text-sm sm:text-lg">Continue</span>
           </div>
         </button>
         <div className="flex flex-col self-end mt-8 max-w-full leading-5 text-center ">
@@ -297,11 +297,11 @@ function Password() {
 )} 
           {newPassword && (
             <>
-              <div className="self-center my-10 text-2xl text-slate-800">
+              <div className="self-center my-10 text:xl sm:text-2xl text-slate-800">
                 Set New Password
               </div>
              
-                <form className="flex-flex-col max-sm:w-full max-md:w-4/5  md:mt-20  md:w-3/5">
+                <form className="flex-flex-col w-full sm:w-96">
                   <div>
                     <input
                       type="text"
@@ -310,7 +310,7 @@ function Password() {
                       required
                       value={formData.newPassword}
                       onChange={handleChange}
-                      className="justify-center items-start p-5 mt-10 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
+                      className="justify-center items-start p-5 mt-5 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -335,7 +335,7 @@ function Password() {
                     onClick={() => toast.success("New Password Updated")}
                   >
                     <div className="flex gap-2.5 px-px">
-                      <span className="font-spline">Set Password</span>
+                      <span className="font-spline  text-sm sm:text-lg">Set Password</span>
                     </div>
                   </button>
 
