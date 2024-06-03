@@ -4,9 +4,9 @@ import smartLogo from "../../assets/images/smart-logo.png";
 import educationSticker from "../../assets/persons/education-sticker.png";
 import organisationSticker from "../../assets/persons/organisation-sticker.png";
 import individualSticker from "../../assets/persons/individul-sticker.png";
-import socialIcon from '../../assets/images/social-icon.png';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import socialIcon from "../../assets/images/social-icon.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ const SignIn = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          "accept": "application/json",
+          accept: "application/json",
         },
         body: new URLSearchParams({
           grant_type: "",
@@ -64,28 +64,26 @@ const SignIn = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData)
-        const { status, msg,email, access_token, is_onboard, is_verified  } = responseData;
+        console.log(responseData);
+        const { status, msg, email, access_token, is_onboard, is_verified } =
+          responseData;
 
-        if (status === 1 ) {
+        if (status === 1) {
           localStorage.setItem("accessToken", access_token);
-          localStorage.setItem("emailId",email)
+          localStorage.setItem("emailId", email);
           localStorage.setItem("loggedIn", true);
-          if (is_verified===1 && is_onboard===1){
-      
+          if (is_verified === 1 && is_onboard === 1) {
             if (formData.agreedToTerms) {
               localStorage.setItem("rememberedEmail", formData.email);
               localStorage.setItem("rememberedPassword", formData.password);
-             
             } else {
               localStorage.removeItem("rememberedEmail");
               localStorage.removeItem("rememberedPassword");
             }
             navigate("/signIn/dashboard");
-          }else if(is_verified===1 && is_onboard===0) {
-            navigate('/signUp/selectInterest', { state: { activeTab } });
+          } else if (is_verified === 1 && is_onboard === 0) {
+            navigate("/signUp/selectInterest", { state: { activeTab } });
           }
-         
         } else if (status === 404 && msg === "User Not Found") {
           toast.error("Email ID is incorrect");
         } else if (status === 401 && msg === "Invalid credentials") {
@@ -100,7 +98,9 @@ const SignIn = () => {
       }
     } catch (error) {
       console.error("Error signing in:", error);
-      toast.error("An error occurred while signing in. Please try again later.");
+      toast.error(
+        "An error occurred while signing in. Please try again later."
+      );
     }
   };
 
@@ -128,31 +128,28 @@ const SignIn = () => {
     }
   };
 
-
   return (
     <>
-      <div className="container mx-auto h-screen px-4 py-4 flex flex-col lg:flex-row">
-         <div className="lg:hidden w-full "><Link to="/">
-              <img
-                width={179}
-                height={43}
-                src={smartLogo}
-                alt="smart Grader"
-              />
-            </Link></div>
+      <div className="container mx-auto h-screen px-4 py-4 flex flex-col lg:flex-row ">
+        <div className="lg:hidden w-full ">
+          <Link to="/">
+            <img width={179} height={43} src={smartLogo} alt="smart Grader" />
+          </Link>
+        </div>
         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center">
-       
           {activeTab !== "organization" && activeTab !== "educational" && (
-            <div className="flex flex-col justify-center px-8 py-7 mt-8 bg-white rounded-md">
+            <div className="flex flex-col justify-center px-8 py-7 mt-5 bg-white rounded-md">
               <div className="flex flex-row gap-5 max-md:flex-wrap">
                 <img
                   loading="lazy"
                   alt="individual"
-                 src={individualSticker}
+                  src={individualSticker}
                   className="shrink-0 self-start w-12 aspect-[0.94]"
                 />
                 <div className="flex flex-col">
-                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Individual User</div>
+                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
+                    Individual User
+                  </div>
                   <div className="  font-sans text-lg font-light text-gray-600 my-1.5 ">
                     I am a candidate and want to test my skills through mock
                     interviews.
@@ -171,7 +168,9 @@ const SignIn = () => {
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
-                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">Organization</div>
+                  <div className="text-3xl md:text-4xl text-slate-800 font-medium  font-spline">
+                    Organization
+                  </div>
                   <div className="  font-sans text-lg  font-light text-gray-600 my-1.5 ">
                     I am an organization and want to outsource my interviews
                   </div>
@@ -185,7 +184,7 @@ const SignIn = () => {
                 <img
                   loading="lazy"
                   alt="eductional"
-                 src={educationSticker}
+                  src={educationSticker}
                   className="shrink-0 self-start w-12 aspect-square"
                 />
                 <div className="flex flex-col">
@@ -201,17 +200,19 @@ const SignIn = () => {
             </div>
           )}
         </div>
-        <div className="w-full lg:w-1/2">
-        <ToastContainer />
-          <div className="flex flex-col grow px-5 mt-36 text-sm max-md:mt-10 max-md:max-w-full justify-center items-center">
-          <div className="max-lg:hidden  "><Link to="/">
-              <img
-                width={179}
-                height={43}
-                src={smartLogo}
-                alt="smart Grader"
-              />
-            </Link></div>
+        <div className="w-full  lg:w-1/2">
+          <ToastContainer />
+          <div className="flex flex-col h-full text-sm max-md:max-w-full justify-center items-center">
+            <div className="max-lg:hidden  ">
+              <Link to="/">
+                <img
+                  width={179}
+                  height={43}
+                  src={smartLogo}
+                  alt="smart Grader"
+                />
+              </Link>
+            </div>
             {activeTab === "individual" && (
               <div className="self-center font-spline  mt-5 text-2xl text-slate-800">
                 Log In as Candidate
@@ -227,7 +228,10 @@ const SignIn = () => {
                 Log In as Student
               </div>
             )}
-            <form onSubmit={handleSubmit} className="flex-flex-col w-full  md:mt-20  md:w-3/5">
+            <form
+              onSubmit={handleSubmit}
+              className="flex-flex-col w-full  md:w-3/5"
+            >
               <div>
                 <input
                   type="email"
@@ -236,7 +240,7 @@ const SignIn = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="justify-center items-start p-5 mt-5 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10"
+                  className="justify-center items-start p-5 mt-10 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                   autoFocus={localStorage.getItem("rememberedEmail") === null}
                 />
               </div>
@@ -249,7 +253,7 @@ const SignIn = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10"
+                  className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                 />
               </div>
 
@@ -260,11 +264,15 @@ const SignIn = () => {
                     name="agreedToTerms"
                     checked={formData.agreedToTerms}
                     onChange={handleCheckboxChange}
-                    className="shrink-0 self-start rounded-md border border-solid border-neutral-500 h-[18px] w-[18px]"
+                    className="shrink-0 self-start rounded-md border border-solid border-neutral-500 h-[18px] w-[18px] focus:border-orange-300 focus:ring-orange-300"
                   />
                   <div className="text-gray-600 font-spline ">Remember Me </div>
                 </div>
-                <Link to='password'><div className="text-cyan-600 font-spline ">Forget Password?</div></Link>
+                <Link to="password">
+                  <div className="text-cyan-600 font-spline ">
+                    Forget Password?
+                  </div>
+                </Link>
               </div>
               <button
                 className={`flex justify-center items-center px-4 py-5 mt-8 text-white bg-sky-500 rounded-md border border-sky-500 border-solid w-full ${
@@ -281,26 +289,36 @@ const SignIn = () => {
 
               <div className="flex flex-col self-end mt-8 leading-5 text-center">
                 <div>
-                  <span className="font-light text-gray-600 font-sans ">Don't have an account?</span>{" "}
+                  <span className="font-light text-gray-600 font-sans ">
+                    Don't have an account?
+                  </span>{" "}
                   <br />
-                  <div className="text-cyan-600 cursor-pointer font-spline " onClick={() => navigate("/createAccount")}>Signup</div>
+                  <div
+                    className="text-cyan-600 cursor-pointer font-spline "
+                    onClick={() => navigate("/createAccount")}
+                  >
+                    Signup
+                  </div>
                 </div>
               </div>
             </form>
           </div>
-          <div className="flex  px-5 mt-10 pt-20 pb-5 md:mt-20 md:pt-40 text-sm font-light leading-5 justify-center text-center text-neutral-500">
-            <div className="flex pl-1 md:gap-5 font-spline ">Legal information</div>
+          <div className="flex  px-5   py-20 md:py-24 text-sm  font-light leading-5 justify-center text-center text-neutral-500">
+            <div className="flex px-1 md:gap-5 font-spline  ">
+              Legal information
+            </div>
             <div className="flex">
-              <div className="flex pl-1 md:gap-5 font-spline ">Help Resources</div>
+              <div className="flex px-1 md:gap-5 font-spline  ">
+                Help Resources
+              </div>
               <img
                 loading="lazy"
                 alt="socialIcon"
-               src={socialIcon}
-                className="shrink-0  md:mx-5 aspect-[4.35] w-[93px]"
+                src={socialIcon}
+                className="shrink-0  md:mx-5 aspect-[4.35] max-sm:w-[63px] sm:w-[93px]"
               />
             </div>
           </div>
-        
         </div>
       </div>
     </>
@@ -308,4 +326,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-

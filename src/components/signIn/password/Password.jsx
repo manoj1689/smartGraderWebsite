@@ -156,7 +156,7 @@ function Password() {
             <img width={179} height={43} src={smartLogo} alt="smart Grader" />
           </Link>
         </div>
-        <div className="w-full lg:w-1/2 flex flex-row max-lg:my-10 justify-start items-center">
+        <div className="w-full lg:w-1/2 flex flex-row h-full justify-start items-center">
           <div>
             <img
               src={passwordIcon}
@@ -181,12 +181,12 @@ function Password() {
 
           {recover && (
             <>
-              <div className="self-center my-10 text-2xl w-full mx-auto flex justify-center items-center  font-spline text-slate-800">
+              <div className="self-center mt-5 text-2xl w-full mx-auto flex justify-center items-center  font-spline text-slate-800">
                 Recover Password
               </div>
               
              
-                <form onSubmit={handleRecoverSubmit} className="flex-flex-col max-sm:w-full max-md:w-4/5  md:mt-20  md:w-3/5">
+                <form onSubmit={handleRecoverSubmit} className="flex-flex-col max-sm:w-full max-md:w-4/5 mt-5 md:mt-10  md:w-3/5">
                   
                     <input
                       type="email"
@@ -195,7 +195,7 @@ function Password() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-500 w-full  pr-10 "
+                      className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                     />
                   
 
@@ -231,11 +231,11 @@ function Password() {
 
  {reset && (
   <>
-    <div className="self-center my-10 text-2xl font-spline text-slate-800">
+    <div className="self-center mt-5 text-2xl font-spline text-slate-800">
       Enter OTP
     </div>
   
-      <form onSubmit={handleOtpSubmit} className="flex-flex-col max-sm:w-full max-md:w-4/5  md:mt-20  md:w-3/5">
+      <form onSubmit={handleOtpSubmit} className="flex-flex-col max-sm:w-full max-md:w-4/5 mt-5  md:mt-10  md:w-3/5">
         <div className="flex flex-row gap-4 justify-center ">
           {otp.map((data, index) => {
             return (
@@ -244,7 +244,7 @@ function Password() {
                 name="otp"
                 placeholder="*"
                 maxLength={1}
-                className="text-center max-sm:w-12 sm:w-16 rounded-md border border-solid border-neutral-500  max-sm:h-12 sm:h-16"
+                className="text-center max-sm:w-12 sm:w-16 rounded-md border border-solid border-neutral-400  focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none max-sm:h-12 sm:h-16"
                 key={index}
                 value={data}
                 onChange={(e) => handleOtp(e.target, index)}
@@ -310,7 +310,7 @@ function Password() {
                       required
                       value={formData.newPassword}
                       onChange={handleChange}
-                      className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10 "
+                      className="justify-center items-start p-5 mt-10 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -321,7 +321,7 @@ function Password() {
                       required
                       value={formData.ConfirmPassword}
                       onChange={handleChange}
-                      className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10 "
+                      className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                     />
                   </div>
 

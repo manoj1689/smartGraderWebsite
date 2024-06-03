@@ -6,8 +6,8 @@ import MobileBar from './MobileBar';
 function ProtectedRoute() {
     const auth = localStorage.getItem("loggedIn");
     return auth ? (
-        <div className="flex min-h-screen">
-            <div className="lg:hidden"> {/* Hide on md and above */}
+        <div >
+            <div className="lg:hidden "> {/* Hide on md and above */}
                 <MobileBar />
             </div>
             <div className="hidden lg:block"> {/* Show only on lg and above */}

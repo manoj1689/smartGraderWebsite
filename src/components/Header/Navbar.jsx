@@ -19,12 +19,12 @@ const Navbar = () => {
           </Link>
         </div>
         
-        <nav className="hidden lg:flex basis-1/2  space-x-3 lg:space-x-6 justify-center items-center">
+        <nav className="hidden lg:flex basis-1/2  space-x-4 lg:space-x-6 justify-center items-center">
   <a href="#home" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">Home</a>
   <a href="#how-it-works" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">How It Works</a>
   <a href="#pricing" className="text-gray-900 hover:text-blue-700 transition  font-spline duration-300">Pricing</a>
   <a href="#partners" className="text-gray-900 hover:text-blue-700 transition  font-spline duration-300">Partners</a>
-   <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a>
+   {/* <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a> */}
   {/* <a href="#contact" className="text-gray-900 hover:text-blue-700 transition duration-300">Contact Us</a>  */}
 </nav>  
 <div className="hidden lg:flex flex-row basis-1/4 space-x-6 justify-end items-center">

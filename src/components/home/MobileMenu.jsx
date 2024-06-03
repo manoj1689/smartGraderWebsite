@@ -10,20 +10,22 @@ const MobileMenu = ({ scrollToSection }) => {
   <a href="#how-it-works" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">How It Works</a>
   <a href="#pricing" className="text-gray-900 hover:text-blue-700   font-spline transition duration-300">Pricing</a>
   <a href="#partners" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">Partners</a>
-  <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a>
-  <div className='flex flex-row justify-around w-full'>
+  {/* <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a> */}
+  <div className=' flex flex-col w-full justify-center items-center' >
   <button
-  className="bg-sky-500 hover:bg-sky-700 text-white font-medium  font-spline py-2 px-4 rounded-[2px] transition duration-300 ease-in-out"
+  className="bg-white border border-sky-500 max-sm:w-11/12 sm:w-7/12 my-3  text-sky-500 hover:bg-sky-500 hover:text-white font-medium font-spline py-2 px-4 rounded-[1px] transition duration-300 ease-in-out"
   onClick={() => navigate("signIn")}
 >
-  Login
+  <span className="text-sky-500">Sign In</span>
 </button>
+
 <button
-  className="bg-green-500 hover:bg-green-700 text-white font-medium  font-spline py-2 px-4 rounded-[2px] transition duration-300 ease-in-out ml-4"
+  className="bg-sky-500 text-white font-medium font-spline py-2 px-4 max-sm:w-11/12 sm:w-7/12 my-3 rounded-[1px] transition duration-300 ease-in-out  "
   onClick={() => navigate("createAccount")}
 >
-  Signup
+  <span>Sign Up</span>
 </button>
+
 
 
   </div>

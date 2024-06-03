@@ -10,7 +10,7 @@ import PersonaSection from '../components/home/PersonaSection';
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="min-h-screen w-full">
       <Hero />
       <Features />
       <PersonaSection />
@@ -24,3 +24,4 @@ const HomePage = () => {
 }
 
 export default HomePage;
+

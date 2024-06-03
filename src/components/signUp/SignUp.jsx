@@ -150,7 +150,7 @@ const SignUp = () => {
           )}
         </div>
         <div className="w-full lg:w-1/2">
-          <div className="flex flex-col grow px-5 mt-36 text-sm max-md:mt-10 max-md:max-w-full justify-center items-center">
+          <div className="flex flex-col h-full text-sm max-md:max-w-full justify-center items-center">
            
            <div className="max-lg:hidden"><Link to="/">
               <img
@@ -175,7 +175,7 @@ const SignUp = () => {
                 Signup as Student
               </div>
             )}
-            <form onSubmit={handleSubmit} className="flex flex-col max-sm:w-full md:mt-10 max-lg:w-8/12 xl:7/12" >
+            <form onSubmit={handleSubmit} className="flex flex-col max-sm:w-full  max-lg:w-8/12 xl:7/12" >
               <div>
                 <input
                   type="text"
@@ -184,7 +184,8 @@ const SignUp = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="justify-center items-start p-5 mt-5 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10 "
+                  className="justify-center items-start p-5 mt-10 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
+
                 />
               </div>
               <div>
@@ -195,7 +196,7 @@ const SignUp = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10 "
+                  className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                 />
               </div>
 
@@ -207,7 +208,7 @@ const SignUp = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-500 w-full pr-10 "
+                  className="justify-center items-start p-5 mt-2 leading-4 rounded-md border border-solid border-neutral-400 w-full pr-10 focus:border-neutral-500 focus:ring-neutral-500 focus:outline-none"
                 />
               </div>
               {/* <div>
