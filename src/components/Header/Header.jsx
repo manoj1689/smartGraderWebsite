@@ -24,6 +24,17 @@ function Header() {
           <a href="works" className="text-gray-900 hover:text-blue-700 transition duration-300">How It Works</a>
           <a href="pricing" className="text-gray-900 hover:text-blue-700 transition duration-300">Pricing</a>
           <a href="partners" className="text-gray-900 hover:text-blue-700 transition duration-300">Partners</a>
+          <a href="/Evaluate"
+  className="text-gray-900 hover:text-blue-700 transition duration-300"
+>
+  Interview
+</a>
+          <a
+  href="Evaluate"
+  className="text-gray-900 hover:text-blue-700 transition duration-300"
+>
+  Interview
+</a>
           {/* <a href="FAQ" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a>
           <a href="contactUs" className="text-gray-900 hover:text-blue-700 transition duration-300">Contact Us</a> */}
           <a href="signIn" className="text-gray-900 hover:text-blue-700 transition duration-300 flex items-center">

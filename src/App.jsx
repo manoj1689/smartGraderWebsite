@@ -18,7 +18,7 @@ import SelectQuestion from "./components/dashboards/organizationDashBoard/Select
 import QuestionPage from "./components/dashboards/userDashBoard/QuestionPage";
 import EditJobs from "./components/dashboards/organizationDashBoard/EditJobs";
 import NotFound from "./components/NotFound/NotFound";
-
+import EvaluateStudentAnswer from "./pages/EvaluateStudentAnswer";
 function App() {
   return (
     <div>
@@ -29,6 +29,7 @@ function App() {
 
         <Routes>
           <Route exact path="/" element={<HomePage/>} />
+          <Route  path="evaluate" element={<EvaluateStudentAnswer/>} />
           <Route path="signIn" element={<SignIn />} />
           <Route path="signUp" element={<SignUp />} />
           <Route path="/signUp/selectInterest" element={<SelectInterest />} />

@@ -175,7 +175,7 @@ function UserDashBoard() {
                 onFocus={handleOnFocus}
                 autoFocus
                 formatResult={formatResult}
-                styling={{ border: "1.5px solid #C0C0C0", borderRadius: "5px" ,zIndex:"50" }}
+                styling={{ border: "1.5px solid #C0C0C0", borderRadius: "5px" ,zIndex:"40" }}
               />
             </div>
           </div>

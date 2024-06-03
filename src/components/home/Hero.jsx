@@ -4,10 +4,11 @@ import heroImage from '../../assets/home/hero-image.png'; // Importing the hero 
 import { motion } from 'framer-motion'; // Importing framer-motion for animations
 import { useNavigate } from "react-router-dom";
 import HomeLine from "../../assets/home/HomeLine.png"
+
 const Hero = () => {
   const navigate=useNavigate()
   return (
-    <section className=" my-20 pt-16">
+    <section className=" my-10 pt-16">
       <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center">
         <div className="w-full lg:w-5/12 mb-8 lg:mb-0 px-4 ">
           <motion.div 
@@ -52,6 +53,8 @@ const Hero = () => {
           <img src={heroImage} alt="Designed For Interview" className="w-full md:w-3/4" />
         </motion.div>
       </div>
+
+
     </section>
   );
 };

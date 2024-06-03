@@ -3,6 +3,7 @@ import MobileMenu from "../home/MobileMenu";
 import { FaUser, FaSignInAlt } from 'react-icons/fa'; // Importing icons from react-icons
 import logoImage from '../../assets/images/smart-logo.png';
 import { Link } from "react-router-dom";
+import { MdArrowOutward } from "react-icons/md";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,6 +25,11 @@ const Navbar = () => {
   <a href="#how-it-works" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">How It Works</a>
   <a href="#pricing" className="text-gray-900 hover:text-blue-700 transition  font-spline duration-300">Pricing</a>
   <a href="#partners" className="text-gray-900 hover:text-blue-700 transition  font-spline duration-300">Partners</a>
+  <a href="/evaluate"
+  className="text-gray-900 flex items-center hover:text-blue-700 transition duration-300"
+>
+  Interview <span className="px-2"><MdArrowOutward /></span>
+</a>
    {/* <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a> */}
   {/* <a href="#contact" className="text-gray-900 hover:text-blue-700 transition duration-300">Contact Us</a>  */}
 </nav>  
