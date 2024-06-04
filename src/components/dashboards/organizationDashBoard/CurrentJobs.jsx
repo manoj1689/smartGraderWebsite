@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import ReactPaginate from 'react-paginate';
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import axiosInstance from "../../../axiosInstance";
+import axiosInstance from "../../../services/api/axiosInstance";
 import { FaLaptopCode } from "react-icons/fa6";
 import Select from 'react-select';
 import { HiDotsHorizontal } from "react-icons/hi";

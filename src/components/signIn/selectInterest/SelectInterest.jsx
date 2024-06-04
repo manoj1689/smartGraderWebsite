@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../../axiosInstance';
+import axiosInstance from "../../../services/api/axiosInstance";
 import { FiArrowUpRight } from "react-icons/fi";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -77,7 +77,7 @@ function SelectInterest() {
         console.log(response)
         if (response.data.status ===1 && response.data.msg==="success") {
           console.log("Proceeding with selected categories:", selectedCategories);
-          navigate("/signIn/dashboard");
+          navigate("/dashboard");
         } else {
           toast.error('Failed to save selected categories.');
         }

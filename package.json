@@ -13,6 +13,7 @@
   "dependencies": {
     "@headlessui/react": "^2.0.3",
     "@heroicons/react": "^2.1.3",
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "bowser": "^2.11.0",
@@ -22,6 +23,7 @@
     "framer-motion": "^11.2.3",
     "install": "^0.13.0",
     "lodash": "^4.17.21",
+    "nprogress": "^0.2.0",
     "react": "^18.2.0",
     "react-autosuggest": "^10.1.0",
     "react-awesome-slider": "^4.1.0",
@@ -48,8 +50,9 @@
     "swiper": "^11.1.3"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
+    "@types/nprogress": "^0.2.3",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",

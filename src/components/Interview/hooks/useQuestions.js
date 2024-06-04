@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axiosInstance from '../../../axiosInstance';
+import axiosInstance from "../../../services/api/axiosInstance";
 
 export const useQuestions = (setId) => {
     const [questions, setQuestions] = useState([]);

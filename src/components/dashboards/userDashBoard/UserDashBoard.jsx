@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../../axiosInstance";
+import axiosInstance from "../../../services/api/axiosInstance";
 import codingDev from "../../../assets/individual/codingdeveloper.png";
 import star from "../../../assets/individual/Star.png";
 import graderLogo from "../../../assets/individual/graderIcon.png";
@@ -82,7 +82,7 @@ function UserDashBoard() {
         const token = localStorage.getItem("accessToken"); // Retrieve the token from local storage
 
         const response = await axiosInstance.get(
-          "/sets/all?sub_category_id=10",
+          "/sets/all?sub_category_id=11",
           {
             headers: {
               Accept: "application/json",
@@ -126,7 +126,7 @@ function UserDashBoard() {
   //  console.log("categories Data top Bar",selectedCategories)
 
   const handleCardClick = (id) => {
-    navigate(`/signIn/dashboard/question/${id}`);
+    navigate(`/dashboard/question/${id}`);
   };
   const handleOnSearch = (string, results) => {
     setQuery(string); // Set the query state with the searched string
@@ -354,7 +354,7 @@ function UserDashBoard() {
 
             <div className="md:basis-1/6 flex mx-auto justify-center items-center lg:pt-10 w-full h-full">
               <button
-                onClick={() => navigate("/signIn/dashboard/generatequestion")}
+                onClick={() => navigate("/dashboard/generatequestion")}
                 type="button"
                 className="flex flex-row items-center justify-center bg-blue-400 w-50 md:w-60 my-5 text-white px-4 py-2 mt-4 rounded-sm hover:bg-blue-500 transition duration-300"
               >
@@ -376,7 +376,7 @@ function UserDashBoard() {
       <div className="flex flex-col mb-10 md:flex-row gap-3  max-md:flex-col max-md:gap-0">
         <div
           className="w-full md:w-1/2 cursor-pointer"
-          onClick={() => navigate("/signIn/dashboard/result")}
+          onClick={() => navigate("/dashboard/result")}
         >
           <LineScoreCard />
         </div>

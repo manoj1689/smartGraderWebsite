@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../axiosInstance';
+import axiosInstance from '../services/api/axiosInstance';
 import ProgressBar from './ProgressBar';
 import ErrorAlert from './ErrorAlert';
 

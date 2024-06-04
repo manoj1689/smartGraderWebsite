@@ -80,7 +80,7 @@ const SignIn = () => {
               localStorage.removeItem("rememberedEmail");
               localStorage.removeItem("rememberedPassword");
             }
-            navigate("/signIn/dashboard");
+            navigate("/dashboard");
           } else if (is_verified === 1 && is_onboard === 0) {
             navigate("/signUp/selectInterest", { state: { activeTab } });
           }
@@ -205,7 +205,7 @@ const SignIn = () => {
         </div>
         <div className="w-full  lg:w-1/2">
           <ToastContainer />
-          <div className="flex flex-col h-full text-sm max-md:max-w-full justify-center items-center">
+          <div className="flex flex-col h-[70%] my-20 text-sm max-md:max-w-full justify-center items-center">
             <div className="max-lg:hidden  ">
               <Link to="/">
                 <img
@@ -306,10 +306,10 @@ const SignIn = () => {
               </div>
             </form>
           </div>
-          <div className="flex  px-5   py-20 md:py-24 text-sm  font-light leading-5 justify-center text-center text-neutral-500">
+          <div className="flex  px-5   text-sm  font-light leading-5 justify-center text-center text-neutral-500">
             <div className="flex flex-col sm:flex-row">
           
-            <div className="flex mx-5 my-5">
+            <div className="flex mx-5 ">
             <div className="flex px-2 sm:px-4 md:gap-5 font-spline max-sm:text-[12px]  ">
               Legal information
             </div>
@@ -321,7 +321,7 @@ const SignIn = () => {
                 loading="lazy"
                 alt="socialIcon"
                 src={socialIcon}
-                className="shrink-0 self-center mx-5 my-5 aspect-[4.35] w-[93px]"
+                className="shrink-0 self-center mx-5  aspect-[4.35] w-[93px]"
               />
            <div>
            

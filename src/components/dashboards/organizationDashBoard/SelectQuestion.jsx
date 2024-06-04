@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../../axiosInstance";
+import axiosInstance from "../../../services/api/axiosInstance";
 import codingDev from "../../../assets/individual/codingdeveloper.png";
 import star from "../../../assets/individual/Star.png";
 import graderLogo from "../../../assets/individual/graderIcon.png";
@@ -62,7 +62,7 @@ const SelectQuestion = () => {
       try {
         const token = localStorage.getItem("accessToken");
         const response = await axiosInstance.get(
-          "/sets/all?sub_category_id=10",
+          "/sets/all?sub_category_id=11",
           {
             headers: {
               Accept: "application/json",

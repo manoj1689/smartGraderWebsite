@@ -35,8 +35,8 @@ function ResultPage() {
   };
 
   return (
-    <div className=" flex flex-col justify-center bg-white">
-      <div >
+    <div className="container mx-auto w-full   justify-center bg-white">
+     
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">
           <div >
             <div >
@@ -205,7 +205,7 @@ function ResultPage() {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 }
 

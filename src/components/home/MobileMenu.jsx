@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { MdArrowOutward } from "react-icons/md";
 const MobileMenu = ({ scrollToSection }) => {
   const navigate=useNavigate()
   return (
@@ -10,11 +10,10 @@ const MobileMenu = ({ scrollToSection }) => {
   <a href="#how-it-works" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">How It Works</a>
   <a href="#pricing" className="text-gray-900 hover:text-blue-700   font-spline transition duration-300">Pricing</a>
   <a href="#partners" className="text-gray-900 hover:text-blue-700  font-spline transition duration-300">Partners</a>
-  <a
-  href="/Evaluate"
-  className="text-gray-900 hover:text-blue-700 transition duration-300"
+  <a href="/evaluate"
+  className="text-gray-900 flex items-center hover:text-blue-700 transition duration-300"
 >
-  Interview
+  Interview <span className="px-2"><MdArrowOutward /></span>
 </a>
   {/* <a href="#faq" className="text-gray-900 hover:text-blue-700 transition duration-300">FAQ</a> */}
   <div className=' flex flex-col w-full justify-center items-center' >

@@ -4,7 +4,7 @@ import passwordIcon from "../../../assets/images/password-icon.png";
 import smartLogo from "../../../assets/images/smart-logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axiosInstance from "../../../axiosInstance";
+import axiosInstance from "../../../services/api/axiosInstance";
 function Password() {
   const [isPressed, setIsPressed] = useState(false);
   const [recover, setRecover] = useState(true);

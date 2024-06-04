@@ -7,7 +7,7 @@ import QuestionDisplay from "../components/Interview/QuestionDisplay";
 import SpeechToText from "../components/Interview/SpeechToText";
 import AnswerField from "../components/Interview/AnswerField";
 import SubmitButton from "../components/Interview/SubmitButton";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../services/api/axiosInstance";
 import useFullscreen from "../components/Interview/CheatingPrevention/useFullscreen";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

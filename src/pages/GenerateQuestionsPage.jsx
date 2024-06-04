@@ -5,7 +5,7 @@ import JDQuestionsForm from "../components/GenerateQuestions/JDQuestionsForm";
 import OwnQuestionsForm from "../components/GenerateQuestions/OwnQuestionsForm";
 import GeneratedQuestionsList from "../components/GenerateQuestions/GeneratedQuestionsList";
 import ExamSettings from "../components/GenerateQuestions/ExamSettings";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../services/api/axiosInstance";
 import { FaSpinner, FaCheckCircle } from "react-icons/fa";
 import { MdErrorOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
